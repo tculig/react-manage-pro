@@ -5,13 +5,12 @@ import { Provider } from "react-redux";
 import RouterPage from "./pages/RouterPage";
 import store from "./app/store";
 import * as serviceWorker from "./serviceWorker";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <RouterPage />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <RouterPage />
+  </Provider>,
   document.getElementById("root"),
 );
 
