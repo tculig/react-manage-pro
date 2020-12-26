@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavItem, NavIcon, NavText } from "@trendmicro/react-sidenav";
 
 export default function SidebarItem(props) {
-  console.log(props);
   const { eventKey, icon, text, submenu } = props;
   return (
     <NavItem eventKey={eventKey}>

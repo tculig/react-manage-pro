@@ -14,7 +14,7 @@ export default function AppRouter() {
           { name: "Active", url: "/tablica" },
         ]}
       />
-      <main style={{ marginTop: "56px" }}>
+      <main>
         <Switch>
           <Route path="/dijelovi" exact>
             <Placeholder title="dijelovi" />

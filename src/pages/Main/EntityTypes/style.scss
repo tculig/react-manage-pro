@@ -1,0 +1,10 @@
+.gridTable {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 0px;
+  }
+  .gridTable > .rdg {
+    flex: 1;
+  }
+  
