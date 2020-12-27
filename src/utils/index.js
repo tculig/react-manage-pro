@@ -13,4 +13,19 @@ const renameKeys = (object, keyMap) => {
   return resultObject;
 };
 
-export default { renameKeys };
+const modReducer = (state, mutation) => {
+  return { ...state, ...mutation };
+};
+const getToday = () => {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+  const yyyy = today.getFullYear();
+  return `${yyyy}-${mm}-${dd}`;
+};
+
+export {
+  renameKeys,
+  modReducer,
+  getToday
+};

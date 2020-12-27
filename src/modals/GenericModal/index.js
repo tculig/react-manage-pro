@@ -4,7 +4,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import PropTypes from "prop-types";
 import "./style.scss";
 
-export default function ConfirmationModal(props) {
+export default function GenericModal(props) {
   const { header, message, confirm, cancel, isShowing, close } = props;
 
   return isShowing
@@ -21,22 +21,22 @@ export default function ConfirmationModal(props) {
           </Button>
         </ModalFooter>
       </Modal>,
-      document.getElementById("modal-root"),
+      document.getElementById("modal-root")
     )
     : null;
 }
 
-ConfirmationModal.propTypes = {
-  header: PropTypes.string,
-  message: PropTypes.string,
+GenericModal.propTypes = {
+  header: PropTypes.node,
+  message: PropTypes.node,
   confirm: PropTypes.func.isRequired,
   cancel: PropTypes.func,
   close: PropTypes.func.isRequired,
   isShowing: PropTypes.bool.isRequired
 };
 
-ConfirmationModal.defaultProps = {
-  header: "",
-  message: "",
+GenericModal.defaultProps = {
+  header: <></>,
+  message: <></>,
   cancel: () => {},
 };

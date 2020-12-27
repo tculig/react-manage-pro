@@ -1,10 +1,15 @@
 import { groupBy as rowGrouper } from "lodash";
-import React, { useMemo, useState, useCallback } from "react";
+import React, { useMemo, useState, useCallback, useEffect } from "react";
 import DataGrid, { SelectColumn } from "react-data-grid";
 import "react-data-grid/dist/react-data-grid.css";
 import ZoomControls from "../../../ui/GridUtils/ZoomControls";
 import GroupByControl from "../../../ui/GridUtils/GroupByControl";
-import utils from "../../../utils";
+import ControlWidget from "../../../ui/ControlWidget";
+import { renameKeys } from "../../../utils";
+import "./style.scss";
+import "../../../ui/GridUtils/style.scss";
+import EntityTypeModal from "../../../modals/EntityTypeModal";
+import useModal from "../../../utils/useModal";
 
 export default function EntityTypes() {
   const columnsForGrid = [
@@ -44,7 +49,7 @@ export default function EntityTypes() {
   // mostly things related to GroupByControl, some shared with GridControl
   const [groupByOptions, setGroupByOptions] = useState([]);
   const [expandedGroupIds, setExpandedGroupIds] = useState(() => new Set());
-  const columnsForSort = utils.renameKeys(columnsForGrid, { key: "value", name: "label" });
+  const columnsForSort = renameKeys(columnsForGrid, { key: "value", name: "label" });
   const groupBy = useMemo(
     () => (Array.isArray(groupByOptions)
       ? groupByOptions.map((o) => o.value)
@@ -54,27 +59,35 @@ export default function EntityTypes() {
 
   const sortRowsFunction = useMemo(() => {
     if (sortDirection === "NONE") return state.gridRows;
-    let newSortedRows = [...state.gridRows];
-    switch (sortColumn) {
-      case "entityName":
-        newSortedRows = newSortedRows.sort((a, b) => a[sortColumn].localeCompare(b[sortColumn]));
-        break;
-      case "dateCreated":
-      case "numberOfFields":
-      case "activeEntries":
-        newSortedRows = newSortedRows.sort((a, b) => a[sortColumn] - b[sortColumn]);
-        break;
-      default:
-    }
+    const newSortedRows = [...state.gridRows];
     return sortDirection === "DESC" ? newSortedRows.reverse() : newSortedRows;
-  }, [state.gridRows, sortDirection, sortColumn]);
+  }, [state.gridRows, sortDirection]);
 
   const handleSort = useCallback((columnKey, direction) => {
     setSort([columnKey, direction]);
   }, []);
+  function toggleNewEntityModal() {
+    console.log("OK");
+  }
+  function toggleEditModal() {
+    console.log("OK");
+  }
+  function toggleDeleteModal() {
+    console.log("OK");
+  }
+  const { isShowing, toggleModal } = useModal();
+
+  useEffect(() => {
+    toggleModal();
+  }, []);// eslint-disable-line
 
   return (
-    <>
+    <div style={{ padding: "10px" }}>
+      <ControlWidget
+        onAdd={toggleNewEntityModal}
+        onEdit={toggleEditModal}
+        onDelete={toggleDeleteModal}
+      />
       <GroupByControl
         options={columnsForSort}
         {...{
@@ -113,6 +126,10 @@ export default function EntityTypes() {
           onSort={handleSort}
         />
       </div>
-    </>
+      <EntityTypeModal
+        isShowing={isShowing}
+        close={toggleModal}
+      />
+    </div>
   );
 }

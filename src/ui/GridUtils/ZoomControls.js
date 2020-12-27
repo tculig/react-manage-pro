@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./ZoomControls.scss";
 
 function ZoomControls({ zoom, setZoom }) {
   function setGridZoom(newZoom) {
