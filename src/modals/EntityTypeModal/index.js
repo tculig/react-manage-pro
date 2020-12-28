@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { Button, Input } from "reactstrap";
 import { modReducer } from "../../utils";
 import GenericModal from "../GenericModal";
+import "./style.scss";
 
 export default function EntityTypeModal(props) {
   // values have to be actual MYSQL variable types!
@@ -176,16 +177,16 @@ export default function EntityTypeModal(props) {
       </div>
     </div>
   );
-  const { close, isShowing } = props;
+  const { confirm } = props;
+  const { entityName, fields } = state;
 
   return (
     <GenericModal
+      {...props}
       header={header}
       message={message}
-      confirm={() => {}}
-      cancel={() => {}}
-      close={close}
-      isShowing={isShowing}
+      confirm={() => { confirm(entityName, fields); }}
+      className="modal-120w"
     />
   );
 }
@@ -193,9 +194,12 @@ export default function EntityTypeModal(props) {
 EntityTypeModal.propTypes = {
   loadID: PropTypes.number,
   close: PropTypes.func.isRequired,
-  isShowing: PropTypes.bool.isRequired
+  isShowing: PropTypes.bool.isRequired,
+  confirm: PropTypes.func.isRequired,
+  cancel: PropTypes.func,
 };
 
 EntityTypeModal.defaultProps = {
-  loadID: null
+  loadID: null,
+  cancel: () => {}
 };

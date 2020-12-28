@@ -1,15 +1,16 @@
 import { groupBy as rowGrouper } from "lodash";
-import React, { useMemo, useState, useCallback, useEffect } from "react";
+import React, { useMemo, useState, useCallback } from "react";
 import DataGrid, { SelectColumn } from "react-data-grid";
 import "react-data-grid/dist/react-data-grid.css";
 import ZoomControls from "../../../ui/GridUtils/ZoomControls";
 import GroupByControl from "../../../ui/GridUtils/GroupByControl";
 import ControlWidget from "../../../ui/ControlWidget";
-import { renameKeys } from "../../../utils";
+import { renameKeys, getToday } from "../../../utils";
 import "./style.scss";
 import "../../../ui/GridUtils/style.scss";
 import EntityTypeModal from "../../../modals/EntityTypeModal";
 import useModal from "../../../utils/useModal";
+import { createEntityTypeDB } from "../../../nodeJS/Interface";
 
 export default function EntityTypes() {
   const columnsForGrid = [
@@ -39,6 +40,7 @@ export default function EntityTypes() {
     }],
   });
 
+  const { isShowing, toggleModal } = useModal();
   const [gridZoom, setGridZoom] = useState(1);
   const [selectedRows, setSelectedRows] = useState(() => new Set());
   const [[sortColumn, sortDirection], setSort] = useState([
@@ -67,7 +69,7 @@ export default function EntityTypes() {
     setSort([columnKey, direction]);
   }, []);
   function toggleNewEntityModal() {
-    console.log("OK");
+    toggleModal();
   }
   function toggleEditModal() {
     console.log("OK");
@@ -75,11 +77,16 @@ export default function EntityTypes() {
   function toggleDeleteModal() {
     console.log("OK");
   }
-  const { isShowing, toggleModal } = useModal();
 
-  useEffect(() => {
-    toggleModal();
-  }, []);// eslint-disable-line
+  function createEntityType(name, fields) {
+    const filledFields = fields.filter((item) => item.fieldName !== "");
+    createEntityTypeDB(process.env.REACT_APP_MAIN_DATABASE, "entities", {
+      name,
+      fields: JSON.stringify(filledFields),
+      dateCreated: getToday(),
+      active: 1,
+    });
+  }
 
   return (
     <div style={{ padding: "10px" }}>
@@ -127,6 +134,7 @@ export default function EntityTypes() {
         />
       </div>
       <EntityTypeModal
+        confirm={createEntityType}
         isShowing={isShowing}
         close={toggleModal}
       />

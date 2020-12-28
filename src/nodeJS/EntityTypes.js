@@ -1,8 +1,8 @@
 module.exports = function (app, connection) {
-  app.post("/createEntityTable", function (req, res) {
+  app.post("/createEntityTypeTable", function (req, res) {
     getPostData(req, (entityData) => {
       let query =
-        "CREATE TABLE `hsvisumentities2`.`" +
+        "CREATE TABLE `"+process.env.REACT_APP_ENTITIES_DATABASE+"`.`" +
         entityData.data.entityName +
         "` (`id` INT NOT NULL AUTO_INCREMENT";
       const fields = JSON.parse(entityData.data.fields);

@@ -10,7 +10,7 @@ module.exports = function (app, connection) {
                 connection,
                 "CREATE TABLE `hsvisum2`.`entities` (" +
                   " `id` int(11) NOT NULL AUTO_INCREMENT," +
-                  " `entityName` varchar(50) NOT NULL," +
+                  " `name` varchar(50) NOT NULL," +
                   " `fields` text NOT NULL," +
                   " `active` tinyint(1) NOT NULL," +
                   " `dateCreated` date DEFAULT NULL," +
