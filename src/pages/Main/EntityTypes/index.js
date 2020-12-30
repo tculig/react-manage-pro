@@ -78,7 +78,7 @@ export default function EntityTypes() {
     console.log("OK");
   }
 
-  function createEntityType(name, fields) {
+  async function createEntityType(name, fields) {
     const filledFields = fields.filter((item) => item.fieldName !== "");
     createEntityTypeDB(process.env.REACT_APP_MAIN_DATABASE, "entities", {
       name,

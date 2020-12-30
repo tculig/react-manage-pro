@@ -1,12 +1,16 @@
+const utils = require("./utils");
+
 module.exports = function (app, connection) {
   app.post("/addElement", function (req, res) {
-    getPostData(req, (newElement) => {
-      runQueryFromObject(
+    console.log("OK")
+    utils.getPostData(req, (newElement) => {
+      console.log(newElement)
+      utils.runQueryFromObject(
         connection,
         newElement.databaseID,
         newElement.tableID,
         newElement.data,
-        true,
+        utils.QUERY_ACTIONS.INSERT,
         (results) => {
           res.send(results);
         }
@@ -15,13 +19,28 @@ module.exports = function (app, connection) {
   });
 
   app.post("/updateElement", function (req, res) {
-    getPostData(req, (updatedElement) => {
-      runQueryFromObject(
+    utils.getPostData(req, (updatedElement) => {
+      utils.runQueryFromObject(
         connection,
         updatedElement.databaseID,
         updatedElement.tableID,
         updatedElement.data,
-        false,
+        utils.QUERY_ACTIONS.UPDATE,
+        (results) => {
+          res.send(results);
+        }
+      );
+    });
+  });
+
+  app.post("/selectElement", function (req, res) {
+    utils.getPostData(req, (updatedElement) => {
+      utils.runQueryFromObject(
+        connection,
+        updatedElement.databaseID,
+        updatedElement.tableID,
+        updatedElement.data,
+        utils.QUERY_ACTIONS.SELECT,
         (results) => {
           res.send(results);
         }
@@ -30,7 +49,7 @@ module.exports = function (app, connection) {
   });
 
   app.post("/removeElement", function (req, res) {
-    getPostData(req, (data) => {
+    utils.getPostData(req, (data) => {
       const key = Object.keys(data.data)[0];
       let query =
         "DELETE FROM `" +
