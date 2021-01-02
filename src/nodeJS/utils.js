@@ -1,5 +1,7 @@
+const debug = true;
+
 function daisyChainGet(connectionObj, query, callback) {
-  console.log(query);
+  if(debug) console.log(query);
   connectionObj.query(query, function (error, results, fields) {
     if (error) console.log(error);
     if (callback) {
@@ -16,79 +18,104 @@ const QUERY_ACTIONS = {
   SELECT: 2
 }
 
-function runQueryFromObject(connection, databaseID, tableID, object, action, callback) {
-  let query = "SHOW COLUMNS FROM `" + databaseID + "`.`" + tableID + "`";
-  connection.query(query, [object], function (error, results, fields) {
-    if (error) console.log(error);
-    let query2 = "";
-    switch(action){
-      case QUERY_ACTIONS.INSERT: query2 = "INSERT INTO `" + databaseID + "`.`" + tableID + "` ";break;
-      case QUERY_ACTIONS.UPDATE: query2 = "UPDATE `" + databaseID + "`.`" + tableID + "` SET ";break;
-      case QUERY_ACTIONS.SELECT: query2 = "SELECT * FROM `" + databaseID + "`.`" + tableID + "` WHERE ";break;
-    }
-    let querySegment1 = "";
-    let querySegment2 = "";
-    let zarez = "",
-      zarezSelect = "",
-      zagrada1 = "(",
-      zagreda2 = " VALUES ";
-    for (var key in object) {
-      if (object.hasOwnProperty(key)) {
-        let contains = false;
-        for (let k = 0; k < results.length; k++) {
-          if (results[k].Field == key) contains = true;
-        }
-        if (!contains) continue;
-
-        switch (action) {
-          case QUERY_ACTIONS.INSERT:
-            querySegment1 += zagrada1 + zarez + "`" + key + "`";
-            querySegment2 += zagreda2 + zagrada1 + zarez;
-            break;
-          case QUERY_ACTIONS.UPDATE:
-            querySegment2 += zarez + "`" + key + "`=";
-            break;
-          case QUERY_ACTIONS.SELECT:
-            querySegment2 += zarezSelect + "`" + key + "`=";
-            break;
-        }
-        if (object[key] == null) {
-          querySegment2 += "null";
-        } else if (typeof object[key] == "object") {
-          querySegment2 += "'" + JSON.stringify(object[key]) + "'";
-        } else if (typeof object[key] == "boolean") {
-          querySegment2 += object[key];
-        } else {
-          querySegment2 += "'" + object[key] + "'";
-        }
-
-        zarez = ",";
-        zagrada1 = "";
-        zagreda2 = "";
-        zarezSelect = " AND ";
+function constructQuery(databaseID, tableID, availableFields, object, action) {
+  let query = "";
+  switch(action){
+    case QUERY_ACTIONS.INSERT: query = "INSERT INTO `" + databaseID + "`.`" + tableID + "` ";break;
+    case QUERY_ACTIONS.UPDATE: query = "UPDATE `" + databaseID + "`.`" + tableID + "` SET ";break;
+    case QUERY_ACTIONS.SELECT: query = "SELECT * FROM `" + databaseID + "`.`" + tableID + "` WHERE ";break;
+  }
+  let querySegment1 = "";
+  let querySegment2 = "";
+  let zarez = "",
+    zarezSelect = "",
+    zagrada1 = "(",
+    zagreda2 = " VALUES ";
+  for (var key in object) {
+    if (object.hasOwnProperty(key)) {
+      let contains = false;
+      for (let k = 0; k < availableFields.length; k++) {
+        if (availableFields[k].Field == key) contains = true;
       }
-    }
-    switch (action) {
-      case QUERY_ACTIONS.INSERT:
-        querySegment1 += ")";
-        querySegment2 += ")";
-        query2 += querySegment1;
-        query2 += querySegment2;
-        break;
-      case QUERY_ACTIONS.UPDATE:
-        query2 += querySegment2;
-        query2 += " WHERE `id`='" + object.id + "'";
-        break;
-      case QUERY_ACTIONS.SELECT:
-        query2 += querySegment2;
-        break;
-    }
-    console.log(query2);
-    connection.query(query2, function (error2, results2, fields) {
-      if (error2) {
-        if (callback) callback(error2);
+      if (!contains) continue;
+
+      switch (action) {
+        case QUERY_ACTIONS.INSERT:
+          querySegment1 += zagrada1 + zarez + "`" + key + "`";
+          querySegment2 += zagreda2 + zagrada1 + zarez;
+          break;
+        case QUERY_ACTIONS.UPDATE:
+          querySegment2 += zarez + "`" + key + "`=";
+          break;
+        case QUERY_ACTIONS.SELECT:
+          querySegment2 += zarezSelect + "`" + key + "`=";
+          break;
+      }
+      if (object[key] == null) {
+        querySegment2 += "null";
+      } else if (typeof object[key] == "object") {
+        querySegment2 += "'" + JSON.stringify(object[key]) + "'";
+      } else if (typeof object[key] == "boolean") {
+        querySegment2 += object[key];
       } else {
-        if (callback) callback(results2);
+        querySegment2 += "'" + object[key] + "'";
+      }
+
+      zarez = ",";
+      zagrada1 = "";
+      zagreda2 = "";
+      zarezSelect = " AND ";
+    }
+  }
+  switch (action) {
+    case QUERY_ACTIONS.INSERT:
+      querySegment1 += ")";
+      querySegment2 += ")";
+      query += querySegment1;
+      query += querySegment2;
+      break;
+    case QUERY_ACTIONS.UPDATE:
+      query += querySegment2;
+      query += " WHERE `id`='" + object.id + "'";
+      break;
+    case QUERY_ACTIONS.SELECT:
+      query += querySegment2;
+      break;
+  }
+  query+=";";  
+  return query;
+}
+
+function runMultiQueryFromObject(connection, databaseID, tableID, objectArray, action, callback){
+  let queryAvailableFields = "SHOW COLUMNS FROM `" + databaseID + "`.`" + tableID + "`";
+  connection.query(queryAvailableFields, [objectArray], function (errorAvailableFields, availableFields) {
+    if (errorAvailableFields) console.log(errorAvailableFields);
+    let query = "";
+    for(let i=0; i<objectArray.length; i++ ){
+      query += constructQuery(databaseID, tableID, availableFields, objectArray[i], action); 
+    }
+    if(debug) console.log(query);
+    connection.query(query, function (error, results, fields) {
+      if (error) {
+        if (callback) callback(error);
+      } else {
+        if (callback) callback(results);
+      }
+    });
+  });
+}
+
+function runQueryFromObject(connection, databaseID, tableID, object, action, callback) {
+  let queryAvailableFields = "SHOW COLUMNS FROM `" + databaseID + "`.`" + tableID + "`";
+  connection.query(queryAvailableFields, [object], function (errorAvailableFields, availableFields) {
+    if (errorAvailableFields) console.log(errorAvailableFields);
+    const query = constructQuery(databaseID, tableID, availableFields, object, action); 
+    if(debug) console.log(query);
+    connection.query(query, function (error, results, fields) {
+      if (error) {
+        if (callback) callback(error);
+      } else {
+        if (callback) callback(results);
       }
     });
   });
@@ -109,6 +136,7 @@ function getPostData(req, callback) {
 
 module.exports = {
     daisyChainGet,
+    runMultiQueryFromObject,
     runQueryFromObject,
     getPostData,
     QUERY_ACTIONS

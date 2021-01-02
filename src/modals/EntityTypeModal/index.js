@@ -1,11 +1,12 @@
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import Select from "react-select";
 import PropTypes from "prop-types";
 import { Button, Input } from "reactstrap";
 import { modReducer } from "../../utils";
 import GenericModal from "../GenericModal";
+import { getEntityType } from "./dbcalls";
 import "./style.scss";
 
 export default function EntityTypeModal(props) {
@@ -21,7 +22,7 @@ export default function EntityTypeModal(props) {
   const { loadID } = props;
 
   const [state, setState] = useReducer(modReducer, {
-    entityName: "",
+    name: "",
     fields: (() => {
       const initValues = [];
       if (loadID !== null) return initValues;
@@ -40,6 +41,21 @@ export default function EntityTypeModal(props) {
       return initValues;
     })(),
   });
+
+  useEffect(() => {
+    async function asyncCall() {
+      const entityTypeData = await getEntityType(loadID);
+      if (entityTypeData !== null) {
+        setState({
+          ...entityTypeData,
+          originalValues: entityTypeData
+        });
+      }
+    }
+    if (loadID != null) {
+      asyncCall();
+    }
+  }, [loadID]);
 
   function removeField(i) {
     const newFields = [...state.fields];
@@ -138,8 +154,8 @@ export default function EntityTypeModal(props) {
       </div>
       <div style={{ width: "70%" }}>
         <Input
-          value={state.entityName}
-          onChange={(evt) => setState({ entityName: evt.currentTarget.value })}
+          value={state.name}
+          onChange={(evt) => setState({ name: evt.currentTarget.value })}
         />
       </div>
     </div>
@@ -178,14 +194,13 @@ export default function EntityTypeModal(props) {
     </div>
   );
   const { confirm } = props;
-  const { entityName, fields } = state;
 
   return (
     <GenericModal
       {...props}
       header={header}
       message={message}
-      confirm={() => { confirm(entityName, fields); }}
+      confirm={() => { confirm(state); }}
       className="modal-120w"
     />
   );

@@ -1,52 +1,85 @@
 import { groupBy as rowGrouper } from "lodash";
-import React, { useMemo, useState, useCallback } from "react";
+import React, { useMemo, useReducer, useCallback, useEffect, useState } from "react";
 import DataGrid, { SelectColumn } from "react-data-grid";
-import "react-data-grid/dist/react-data-grid.css";
 import ZoomControls from "../../../ui/GridUtils/ZoomControls";
 import GroupByControl from "../../../ui/GridUtils/GroupByControl";
 import ControlWidget from "../../../ui/ControlWidget";
-import { renameKeys, getToday } from "../../../utils";
-import "./style.scss";
-import "../../../ui/GridUtils/style.scss";
+import { renameKeys, modReducer } from "../../../utils";
 import EntityTypeModal from "../../../modals/EntityTypeModal";
-import useModal from "../../../utils/useModal";
-import { createEntityTypeDB } from "../../../nodeJS/Interface";
+import InfoModal from "../../../modals/InfoModal";
+import { createEntityTypeDB, updateEntityTypeDB, getAvailableEntities } from "./dbcalls";
+import "react-data-grid/dist/react-data-grid.css";
+import "../../../ui/GridUtils/style.scss";
+import "./style.scss";
 
 export default function EntityTypes() {
   const columnsForGrid = [
-    { key: "entityName", name: "Entity name" },
+    { key: "name", name: "Entity name" },
     { key: "numberOfFields", name: "Number of fields" },
     { key: "activeEntries", name: "Active entries" },
     { key: "dateCreated", name: "Date created" },
   ];
 
-  const [state, setState] = useState({// eslint-disable-line
+  const [state, setState] = useReducer(modReducer, {
     gridColumns: [
       SelectColumn,
       ...columnsForGrid
     ],
-    gridRows: [{
-      id: 1,
-      entityName: "test",
-      numberOfFields: 3,
-      activeEntries: 1,
-      dateCreated: "2020-11-20"
-    }, {
-      id: 2,
-      entityName: "test2",
-      numberOfFields: 5,
-      activeEntries: 4,
-      dateCreated: "2020-14-20"
-    }],
+    gridRows: []
   });
 
-  const { isShowing, toggleModal } = useModal();
+  async function loadDataFromDB() {
+    const availableEntities = await getAvailableEntities();
+    console.log(availableEntities);
+    setState({
+      gridRows: []
+    });
+  }
+
+  // DB FUNCTIONS
+  async function createEntityType(modalState) {
+    const filledFields = modalState.fields.filter((item) => item.fieldName !== "");
+    await createEntityTypeDB(modalState.name, filledFields);
+    loadDataFromDB();
+  }
+
+  async function updateEntityType(modalState) {
+    const filledFields = modalState.fields.filter((item) => item.fieldName !== "");
+    updateEntityTypeDB(modalState.name, filledFields, modalState.originalValues);
+  }
+
+  useEffect(() => {
+    loadDataFromDB();
+  }, []);
+
+  const [modalState, setModalState] = useState({
+    isShowing: false,
+    loadID: null,
+    confirm: () => {}
+  });
+  const [infoModalState, setInfoModalState] = useState({
+    isShowing: false,
+    message: ""
+  });
   const [gridZoom, setGridZoom] = useState(1);
   const [selectedRows, setSelectedRows] = useState(() => new Set());
   const [[sortColumn, sortDirection], setSort] = useState([
     "entityName",
     "NONE",
   ]);
+  function closeModal() {
+    setModalState({
+      isShowing: false,
+      loadID: null,
+      confirm: () => {}
+    });
+  }
+  function closeInfoModal() {
+    setInfoModalState({
+      isShowing: false,
+      message: ""
+    });
+  }
 
   // mostly things related to GroupByControl, some shared with GridControl
   const [groupByOptions, setGroupByOptions] = useState([]);
@@ -68,25 +101,37 @@ export default function EntityTypes() {
   const handleSort = useCallback((columnKey, direction) => {
     setSort([columnKey, direction]);
   }, []);
+
+  // MODAL FUNCTIONS
   function toggleNewEntityModal() {
-    toggleModal();
+    setModalState({
+      isShowing: true,
+      loadID: null,
+      confirm: createEntityType
+    });
   }
   function toggleEditModal() {
-    console.log("OK");
+    const selectedRowsArray = Array.from(selectedRows);
+    if (selectedRowsArray.length === 0) {
+      setInfoModalState({
+        isShowing: true,
+        message: "Please select an entity type first."
+      });
+    } else {
+      setModalState({
+        isShowing: true,
+        loadID: selectedRowsArray[0],
+        confirm: updateEntityType
+      });
+    }
   }
+
   function toggleDeleteModal() {
     console.log("OK");
   }
 
-  async function createEntityType(name, fields) {
-    const filledFields = fields.filter((item) => item.fieldName !== "");
-    createEntityTypeDB(process.env.REACT_APP_MAIN_DATABASE, "entities", {
-      name,
-      fields: JSON.stringify(filledFields),
-      dateCreated: getToday(),
-      active: 1,
-    });
-  }
+  const isShowingEntityModal = modalState.isShowing;
+  const isShowingInfoModal = infoModalState.isShowing;
 
   return (
     <div style={{ padding: "10px" }}>
@@ -103,10 +148,7 @@ export default function EntityTypes() {
           setExpandedGroupIds,
         }}
       />
-      <ZoomControls
-        zoom={gridZoom}
-        setZoom={setGridZoom}
-      />
+      <ZoomControls zoom={gridZoom} setZoom={setGridZoom} />
       <div className="gridTable" style={{ zoom: gridZoom }}>
         <DataGrid
           rowKey="id"
@@ -133,11 +175,12 @@ export default function EntityTypes() {
           onSort={handleSort}
         />
       </div>
-      <EntityTypeModal
-        confirm={createEntityType}
-        isShowing={isShowing}
-        close={toggleModal}
-      />
+      {isShowingEntityModal && (
+        <EntityTypeModal {...modalState} close={closeModal} />
+      )}
+      {isShowingInfoModal && (
+        <InfoModal {...infoModalState} close={closeInfoModal} />
+      )}
     </div>
   );
 }

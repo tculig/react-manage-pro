@@ -1,6 +1,7 @@
-const host = "http://localhost:3009";
+export const REACT_APP_MAIN_DATABASE = "hsvisum2";
 
-async function forwardPost(databaseID, tableID, url, data) {
+export async function forwardPost(databaseID, tableID, url, data) {
+  const host = "http://localhost:3009";
   const obj = {
     method: "POST",
     body: JSON.stringify({
@@ -10,7 +11,11 @@ async function forwardPost(databaseID, tableID, url, data) {
     }),
   };
   try {
-    const result = await fetch(url, obj).then((res) => res.json());
+    const result = await fetch(`${host}${url}`, obj).then((res) => res.json());
+    if (result.errno) {
+      console.log("ERROR in forwardPost");
+      console.log(result);
+    }
     return result;
   } catch (e) {
     console.log(e);
@@ -19,25 +24,26 @@ async function forwardPost(databaseID, tableID, url, data) {
 }
 
 export async function addElementDB(database, table, data) {
-  return forwardPost(database, table, `${host}/addElement`, data);
+  return forwardPost(database, table, "/addElement", data);
+}
+export async function addElementsDB(database, table, data) {
+  return forwardPost(database, table, "/addElements", data);
 }
 export async function updateElementDB(database, table, data) {
-  return forwardPost(database, table, `${host}/updateElement`, data);
+  return forwardPost(database, table, "/updateElement", data);
 }
 export async function removeElementDB(database, table, data) {
-  return forwardPost(database, table, `${host}/removeElement`, data);
+  return forwardPost(database, table, "/removeElement", data);
 }
 export async function selectElementDB(database, table, data) {
-  return forwardPost(database, table, `${host}/selectElement`, data);
+  return forwardPost(database, table, "/selectElement", data);
 }
-export async function createEntityTypeDB(database, table, data) {
-  const response = await forwardPost(database, table, `${host}/createEntityTypeTable`, data);
-  let result = null;
-  if (response.errno) {
-    result = ({ error: "Entity could not be created." });
-  } else {
-    result = response;
-    // forwardPost(database, table, `${host}/addElement`, data);
-  }
-  return result;
+export async function selectAllDB(database, table, data) {
+  return forwardPost(database, table, "/selectAll", data);
+}
+export async function createTableDB(database, table, data) {
+  return forwardPost(database, table, "/createTable", data);
+}
+export async function dropTableDB(database, table, data) {
+  return forwardPost(database, table, "/dropTable", data);
 }
