@@ -1,0 +1,13 @@
+//removes the select-all checkbox from react-data-grid
+.rdg-header-row .rdg-checkbox-label {
+    display: none;
+  }
+  
+  .rdg-group-row .rdg-checkbox-label {
+    display: none;
+  }
+  //manually center the checkbox in the container
+  .rdg-checkbox-label {
+    top: 6px !important;
+  }
+  

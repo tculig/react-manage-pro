@@ -44,11 +44,12 @@ GenericModal.propTypes = {
   confirm: PropTypes.func.isRequired,
   cancel: PropTypes.func,
   close: PropTypes.func.isRequired,
-  isShowing: PropTypes.bool.isRequired,
+  isShowing: PropTypes.bool,
   className: PropTypes.string
 };
 
 GenericModal.defaultProps = {
+  isShowing: true,
   header: <></>,
   message: <></>,
   cancel: () => {},

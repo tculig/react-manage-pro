@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import "./style.scss";
 
 export default function ConfirmationModal(props) {
-  const { header, message, confirm, cancel, isShowing, close } = props;
+  const { header, message, confirm, isShowing, close } = props;
 
   return isShowing
     ? ReactDOM.createPortal(
@@ -13,10 +13,10 @@ export default function ConfirmationModal(props) {
         <ModalHeader>{header}</ModalHeader>
         <ModalBody>{message}</ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={() => close(confirm)}>
+          <Button color="primary" onClick={() => { confirm(); close(); }}>
             Confirm
           </Button>
-          <Button color="danger" onClick={() => close(cancel)}>
+          <Button color="danger" onClick={() => close()}>
             Cancel
           </Button>
         </ModalFooter>
@@ -30,13 +30,12 @@ ConfirmationModal.propTypes = {
   header: PropTypes.string,
   message: PropTypes.string,
   confirm: PropTypes.func.isRequired,
-  cancel: PropTypes.func,
   close: PropTypes.func.isRequired,
-  isShowing: PropTypes.bool.isRequired
+  isShowing: PropTypes.bool
 };
 
 ConfirmationModal.defaultProps = {
+  isShowing: true,
   header: "",
-  message: "",
-  cancel: () => {},
+  message: ""
 };

@@ -1,4 +1,5 @@
 export const REACT_APP_MAIN_DATABASE = "hsvisum2";
+export const fetchURL = "http://localhost:3009";
 
 export async function forwardPost(databaseID, tableID, url, data) {
   const host = "http://localhost:3009";
@@ -38,8 +39,8 @@ export async function removeElementDB(database, table, data) {
 export async function selectElementDB(database, table, data) {
   return forwardPost(database, table, "/selectElement", data);
 }
-export async function selectAllDB(database, table, data) {
-  return forwardPost(database, table, "/selectAll", data);
+export async function selectAllDB(database, table) {
+  return forwardPost(database, table, "/selectAll");
 }
 export async function createTableDB(database, table, data) {
   return forwardPost(database, table, "/createTable", data);

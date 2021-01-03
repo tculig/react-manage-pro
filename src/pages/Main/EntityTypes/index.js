@@ -1,4 +1,4 @@
-import { groupBy as rowGrouper } from "lodash";
+import { groupBy as rowGrouper, first as _first } from "lodash";
 import React, { useMemo, useReducer, useCallback, useEffect, useState } from "react";
 import DataGrid, { SelectColumn } from "react-data-grid";
 import ZoomControls from "../../../ui/GridUtils/ZoomControls";
@@ -6,17 +6,18 @@ import GroupByControl from "../../../ui/GridUtils/GroupByControl";
 import ControlWidget from "../../../ui/ControlWidget";
 import { renameKeys, modReducer } from "../../../utils";
 import EntityTypeModal from "../../../modals/EntityTypeModal";
+import ConfirmationModal from "../../../modals/ConfirmationModal";
 import InfoModal from "../../../modals/InfoModal";
-import { createEntityTypeDB, updateEntityTypeDB, getAvailableEntities } from "./dbcalls";
+import { createEntityTypeDB, updateEntityTypeDB, getAvailableEntityTypes, removeEntityTypeDB } from "./dbcalls";
 import "react-data-grid/dist/react-data-grid.css";
 import "../../../ui/GridUtils/style.scss";
 import "./style.scss";
 
 export default function EntityTypes() {
   const columnsForGrid = [
-    { key: "name", name: "Entity name" },
-    { key: "numberOfFields", name: "Number of fields" },
-    { key: "activeEntries", name: "Active entries" },
+    { key: "name", name: "Entity type name" },
+    { key: "number_of_fields", name: "Number of fields" },
+    { key: "active_entries", name: "Active entries" },
     { key: "dateCreated", name: "Date created" },
   ];
 
@@ -29,10 +30,9 @@ export default function EntityTypes() {
   });
 
   async function loadDataFromDB() {
-    const availableEntities = await getAvailableEntities();
-    console.log(availableEntities);
+    const availableEntities = await getAvailableEntityTypes();
     setState({
-      gridRows: []
+      gridRows: availableEntities
     });
   }
 
@@ -61,8 +61,27 @@ export default function EntityTypes() {
     isShowing: false,
     message: ""
   });
+  const [isShowingDeleteConfirmModal, setIsShowingDeleteConfirmModal] = useState(false);
   const [gridZoom, setGridZoom] = useState(1);
-  const [selectedRows, setSelectedRows] = useState(() => new Set());
+  const [selectedRowIDs, setSelectedRowIDs] = useState(() => new Set());
+
+  function getSelectedRows() {
+    const selectedRowsArray = Array.from(selectedRowIDs);
+    const selectedRows = selectedRowsArray.map((selectedID) => {
+      for (let i = 0; i < state.gridRows.length; i++) {
+        if (state.gridRows[i].id === selectedID) {
+          return state.gridRows[i];
+        }
+      }
+      return null;
+    });
+    return selectedRows;
+  }
+
+  function getSelectedRow() {
+    return _first(getSelectedRows());
+  }
+
   const [[sortColumn, sortDirection], setSort] = useState([
     "entityName",
     "NONE",
@@ -111,7 +130,7 @@ export default function EntityTypes() {
     });
   }
   function toggleEditModal() {
-    const selectedRowsArray = Array.from(selectedRows);
+    const selectedRowsArray = Array.from(selectedRowIDs);
     if (selectedRowsArray.length === 0) {
       setInfoModalState({
         isShowing: true,
@@ -127,11 +146,25 @@ export default function EntityTypes() {
   }
 
   function toggleDeleteModal() {
-    console.log("OK");
+    const selectedRowsArray = Array.from(selectedRowIDs);
+    if (selectedRowsArray.length === 0) {
+      setInfoModalState({
+        isShowing: true,
+        message: "Please select an entity type first."
+      });
+    } else {
+      setIsShowingDeleteConfirmModal(true);
+    }
+  }
+
+  async function deleteEntityType() {
+    console.log("HE");
+    const response = await removeEntityTypeDB(getSelectedRow().id);
+    console.log(response);
+    loadDataFromDB();
   }
 
   const isShowingEntityModal = modalState.isShowing;
-  const isShowingInfoModal = infoModalState.isShowing;
 
   return (
     <div style={{ padding: "10px" }}>
@@ -155,12 +188,12 @@ export default function EntityTypes() {
           rowKeyGetter={(row) => row.id}
           columns={state.gridColumns}
           rows={sortRowsFunction}
-          selectedRows={selectedRows}
+          selectedRows={selectedRowIDs}
           onRowClick={(x, row) => {
             const newSelectedRows = new Set(
-              [row.id].filter((y) => !selectedRows.has(y))
+              [row.id].filter((y) => !selectedRowIDs.has(y))
             );
-            setSelectedRows(newSelectedRows);
+            setSelectedRowIDs(newSelectedRows);
           }}
           defaultColumnOptions={{
             resizable: true,
@@ -176,11 +209,21 @@ export default function EntityTypes() {
         />
       </div>
       {isShowingEntityModal && (
-        <EntityTypeModal {...modalState} close={closeModal} />
+        <EntityTypeModal
+          {...modalState}
+          close={closeModal}
+          entityBasicInfo={getSelectedRow()}
+        />
       )}
-      {isShowingInfoModal && (
-        <InfoModal {...infoModalState} close={closeInfoModal} />
+      {isShowingDeleteConfirmModal && (
+        <ConfirmationModal
+          header="Confirmation"
+          message={`Are you sure you want to delete entity type: ${getSelectedRow().name}`}
+          confirm={deleteEntityType}
+          close={() => setIsShowingDeleteConfirmModal(false)}
+        />
       )}
+      <InfoModal {...infoModalState} close={closeInfoModal} />
     </div>
   );
 }

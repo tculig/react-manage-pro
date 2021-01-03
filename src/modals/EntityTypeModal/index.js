@@ -11,15 +11,27 @@ import "./style.scss";
 
 export default function EntityTypeModal(props) {
   // values have to be actual MYSQL variable types!
-  const fieldTypes = [
+  const propertyTypes = [
     { value: "TEXT", label: "Text" },
     { value: "INT", label: "Integer" },
     { value: "DECIMAL(10,2)", label: "Decimal" },
     { value: "DATE", label: "Date" },
   ];
 
+  function mapPropertyTypes(arrayIn) {
+    const arrayOut = arrayIn.map((el) => {
+      for (let i = 0; i < propertyTypes.length; i++) {
+        if (propertyTypes[i].value === el.property_type) {
+          el.property_type = propertyTypes[i];
+        }
+      }
+      return el;
+    });
+    return arrayOut;
+  }
+
   const initRowsNum = 3;
-  const { loadID } = props;
+  const { loadID, entityBasicInfo } = props;
 
   const [state, setState] = useReducer(modReducer, {
     name: "",
@@ -27,15 +39,15 @@ export default function EntityTypeModal(props) {
       const initValues = [];
       if (loadID !== null) return initValues;
       initValues.push({
-        fieldName: "Name",
-        disabled: true,
-        fieldType: fieldTypes[0],
+        property_name: "Name",
+        editable: false,
+        property_type: propertyTypes[0],
       });
       for (let i = 0; i < initRowsNum; i++) {
         initValues.push({
-          fieldName: "",
-          disabled: false,
-          fieldType: fieldTypes[0],
+          property_name: "",
+          editable: true,
+          property_type: propertyTypes[0],
         });
       }
       return initValues;
@@ -43,19 +55,20 @@ export default function EntityTypeModal(props) {
   });
 
   useEffect(() => {
-    async function asyncCall() {
+    async function loadFromDB() {
       const entityTypeData = await getEntityType(loadID);
       if (entityTypeData !== null) {
         setState({
-          ...entityTypeData,
-          originalValues: entityTypeData
+          name: entityBasicInfo.name,
+          fields: mapPropertyTypes(entityTypeData),
+          originalFields: entityTypeData
         });
       }
     }
     if (loadID != null) {
-      asyncCall();
+      loadFromDB();
     }
-  }, [loadID]);
+  }, [loadID, entityBasicInfo]); // eslint-disable-line
 
   function removeField(i) {
     const newFields = [...state.fields];
@@ -67,49 +80,50 @@ export default function EntityTypeModal(props) {
   function addField() {
     const newFields = [...state.fields];
     newFields.push({
-      fieldName: "",
-      disabled: false,
-      fieldType: fieldTypes[0],
+      property_name: "",
+      editable: true,
+      property_type: propertyTypes[0],
     });
     setState({
       fields: newFields,
     });
   }
-  function handleFieldName(value, i) {
+  function handlePropertyName(value, i) {
     const newFields = [...state.fields];
-    newFields[i].fieldName = value;
+    newFields[i].property_name = value;
     setState({
       fields: newFields,
     });
   }
-  function handleFieldType(selectedOption, i) {
+  function handlePropertyType(selectedOption, i) {
     const newFields = [...state.fields];
-    newFields[i].fieldType = selectedOption;
+    newFields[i].property_type = selectedOption;
     setState({
       fields: newFields,
     });
   }
 
   function generateField(stateObj, i) {
+    const editable = !!stateObj.editable;
     return (
       <tr key={i} className="padding8px">
         <td>
           <Input
-            value={stateObj.fieldName}
-            onChange={(evt) => handleFieldName(evt.currentTarget.value, i)}
-            disabled={stateObj.disabled}
+            value={stateObj.property_name}
+            onChange={(evt) => handlePropertyName(evt.currentTarget.value, i)}
+            disabled={!editable}
           />
         </td>
         <td>
           <Select
-            onChange={(selectedOption) => handleFieldType(selectedOption, i)}
-            value={stateObj.fieldType}
-            options={fieldTypes}
-            isDisabled={stateObj.disabled}
+            onChange={(selectedOption) => handlePropertyType(selectedOption, i)}
+            value={stateObj.property_type}
+            options={propertyTypes}
+            isDisabled={!editable}
           />
         </td>
         <td>
-          {!stateObj.disabled && (
+          {editable && (
             <Button
               color="danger"
               style={{ margin: "0px" }}
@@ -212,9 +226,11 @@ EntityTypeModal.propTypes = {
   isShowing: PropTypes.bool.isRequired,
   confirm: PropTypes.func.isRequired,
   cancel: PropTypes.func,
+  entityBasicInfo: PropTypes.shape({ name: PropTypes.string })
 };
 
 EntityTypeModal.defaultProps = {
+  entityBasicInfo: {},
   loadID: null,
   cancel: () => {}
 };
