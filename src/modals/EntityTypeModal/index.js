@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { Button, Input } from "reactstrap";
 import { modReducer } from "../../utils";
 import GenericModal from "../GenericModal";
-import { getEntityType } from "./dbcalls";
+import { getEntityTypeProperties } from "./dbcalls";
 import "./style.scss";
 
 export default function EntityTypeModal(props) {
@@ -31,10 +31,10 @@ export default function EntityTypeModal(props) {
   }
 
   const initRowsNum = 3;
-  const { loadID, entityBasicInfo } = props;
+  const { loadID, entityTypeBasicInfo } = props;
 
   const [state, setState] = useReducer(modReducer, {
-    name: "",
+    name: entityTypeBasicInfo.name,
     fields: (() => {
       const initValues = [];
       if (loadID !== null) return initValues;
@@ -56,19 +56,18 @@ export default function EntityTypeModal(props) {
 
   useEffect(() => {
     async function loadFromDB() {
-      const entityTypeData = await getEntityType(loadID);
-      if (entityTypeData !== null) {
+      const entityTypeProperties = await getEntityTypeProperties(loadID);
+      if (entityTypeProperties !== null) {
         setState({
-          name: entityBasicInfo.name,
-          fields: mapPropertyTypes(entityTypeData),
-          originalFields: entityTypeData
+          fields: mapPropertyTypes(entityTypeProperties),
+          originalFields: entityTypeProperties
         });
       }
     }
     if (loadID != null) {
       loadFromDB();
     }
-  }, [loadID, entityBasicInfo]); // eslint-disable-line
+  }, [loadID]);// eslint-disable-line
 
   function removeField(i) {
     const newFields = [...state.fields];
@@ -216,6 +215,7 @@ export default function EntityTypeModal(props) {
       message={message}
       confirm={() => { confirm(state); }}
       className="modal-120w"
+      close={null}
     />
   );
 }
@@ -226,11 +226,11 @@ EntityTypeModal.propTypes = {
   isShowing: PropTypes.bool.isRequired,
   confirm: PropTypes.func.isRequired,
   cancel: PropTypes.func,
-  entityBasicInfo: PropTypes.shape({ name: PropTypes.string })
+  entityTypeBasicInfo: PropTypes.shape({ name: PropTypes.string })
 };
 
 EntityTypeModal.defaultProps = {
-  entityBasicInfo: {},
+  entityTypeBasicInfo: {},
   loadID: null,
   cancel: () => {}
 };

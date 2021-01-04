@@ -26,6 +26,7 @@ const connectionRoot = mysql.createConnection(connection_config_root);
 
 require("./utilEndpoints")(app,connectionRoot);
 require("./EntityTypes")(app,connectionRoot);
+require("./EntityInstances")(app,connectionRoot);
 require("./DatabaseSetup")(app,connectionRoot);
 
 app.listen(3009, function () {

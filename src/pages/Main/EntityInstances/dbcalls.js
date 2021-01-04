@@ -35,3 +35,15 @@ export async function getAvailableEntityTypes() {
   const availableEntityTypes = await fetch(`${fetchURL}/getAvailableEntityTypes?databaseID=${REACT_APP_MAIN_DATABASE}`).then(response => { return response.json(); });
   return availableEntityTypes;
 }
+
+export async function getEntityTypeProperties(entityTypeId) {
+  const entityTypeProperties = await fetch(`${fetchURL}/getEntityTypeProperties?databaseID=${REACT_APP_MAIN_DATABASE}&entity_type_id=${entityTypeId}`)
+    .then(response => { return response.json(); });
+  return entityTypeProperties;
+}
+
+export async function getEntityTypeEntries(entityTypeId) {
+  const entityTypeEntries = await fetch(`${fetchURL}/getEntityTypeEntries?databaseID=${REACT_APP_MAIN_DATABASE}&entity_type_id=${entityTypeId}`)
+    .then(response => { return response.json(); });
+  return entityTypeEntries;
+}

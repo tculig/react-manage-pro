@@ -1,56 +1,101 @@
 import { groupBy as rowGrouper, first as _first } from "lodash";
 import React, { useMemo, useReducer, useCallback, useEffect, useState } from "react";
-import DataGrid, { SelectColumn } from "react-data-grid";
+import DataGrid from "react-data-grid";
 import ZoomControls from "../../../ui/GridUtils/ZoomControls";
 import GroupByControl from "../../../ui/GridUtils/GroupByControl";
 import ControlWidget from "../../../ui/ControlWidget";
 import { renameKeys, modReducer } from "../../../utils";
-import EntityTypeModal from "../../../modals/EntityTypeModal";
+import EntityInstanceModal from "../../../modals/EntityInstanceModal";
 import ConfirmationModal from "../../../modals/ConfirmationModal";
 import InfoModal from "../../../modals/InfoModal";
-import { createEntityTypeDB, updateEntityTypeDB, getAvailableEntityTypes, removeEntityTypeDB } from "./dbcalls";
+import { createEntityTypeDB, updateEntityTypeDB, getAvailableEntityTypes, removeEntityTypeDB, getEntityTypeProperties, getEntityTypeEntries } from "./dbcalls";
 import "react-data-grid/dist/react-data-grid.css";
 import "../../../ui/GridUtils/style.scss";
 import "./style.scss";
+import { CustomSelectStyles } from "../../../ui/ControlWidget/CustomSelectStyles";
+import InputEmptyValidator from "../../../utils/InputEmptyValidator";
+
+CustomSelectStyles.control = (provided) => ({
+  ...provided,
+  minHeight: "1px",
+  width: "160px",
+  height: "36px",
+  boxShadow: "none",
+});
 
 export default function EntityInstances() {
-  const columnsForGrid = [
-    { key: "name", name: "Entity type name" },
-    { key: "number_of_fields", name: "Number of fields" },
-    { key: "active_entries", name: "Active entries" },
-    { key: "dateCreated", name: "Date created" },
-  ];
+  const columnsForGrid = [];
 
   const [state, setState] = useReducer(modReducer, {
-    gridColumns: [
-      SelectColumn,
-      ...columnsForGrid
-    ],
-    gridRows: []
+    gridColumns: [],
+    gridRows: [],
   });
 
-  async function loadDataFromDB() {
-    const availableEntities = await getAvailableEntityTypes();
-    setState({
-      gridRows: availableEntities
+  const [selectState, setSelectState] = useReducer(modReducer, {
+    options: [],
+    onChange: updateShowing,// eslint-disable-line
+    styles: CustomSelectStyles,
+    value: null,
+  });
+
+  function updateShowing(newValue) {
+    setSelectState({
+      value: newValue,
     });
   }
 
   // DB FUNCTIONS
-  async function createEntityType(modalState) {
-    const filledFields = modalState.fields.filter((item) => item.fieldName !== "");
-    await createEntityTypeDB(modalState.name, filledFields);
-    loadDataFromDB();
+  async function loadDataEntityTypesDB() {
+    const availableEntities = await getAvailableEntityTypes();
+    const selectRows = availableEntities.map((entry) => {
+      return { value: entry.id, label: entry.name };
+    });
+    setSelectState({
+      options: selectRows,
+      value: selectRows[0]
+    });
   }
 
-  async function updateEntityType(modalState) {
+  async function loadEntityTypePropertiesDB(entityTypeId) {
+    const entityTypeProperties = await getEntityTypeProperties(entityTypeId);
+    const newGridColumns = entityTypeProperties.map((entry) => {
+      return { key: entry.id, name: entry.property_name };
+    });
+    setState({
+      gridColumns: newGridColumns
+    });
+    return true;
+  }
+
+  async function loadEntityTypeEntriesDB(entityTypeId) {
+    const entityTypeEntries = await getEntityTypeEntries(entityTypeId);
+    console.log(entityTypeEntries);
+  }
+
+  async function createEntityInstance(modalState) {
+    const filledFields = modalState.fields.filter((item) => item.fieldName !== "");
+    await createEntityTypeDB(modalState.name, filledFields);
+    loadDataEntityTypesDB();
+  }
+
+  async function updateEntityInstance(modalState) {
     const filledFields = modalState.fields.filter((item) => item.fieldName !== "");
     updateEntityTypeDB(modalState.name, filledFields, modalState.originalValues);
   }
 
   useEffect(() => {
-    loadDataFromDB();
+    loadDataEntityTypesDB();
   }, []);
+
+  useEffect(() => {
+    async function loadColumnsAndEntries(value) {
+      await loadEntityTypePropertiesDB(value);
+      loadEntityTypeEntriesDB(value);
+    }
+    if (selectState.value !== null) {
+      loadColumnsAndEntries(selectState.value.value);
+    }
+  }, [selectState.value]);
 
   const [modalState, setModalState] = useState({
     isShowing: false,
@@ -83,7 +128,7 @@ export default function EntityInstances() {
   }
 
   const [[sortColumn, sortDirection], setSort] = useState([
-    "entityName",
+    "name",
     "NONE",
   ]);
   function closeModal() {
@@ -122,11 +167,11 @@ export default function EntityInstances() {
   }, []);
 
   // MODAL FUNCTIONS
-  function toggleNewEntityModal() {
+  function toggleNewEntityInstanceModal() {
     setModalState({
       isShowing: true,
       loadID: null,
-      confirm: createEntityType
+      confirm: createEntityInstance
     });
   }
   function toggleEditModal() {
@@ -140,7 +185,7 @@ export default function EntityInstances() {
       setModalState({
         isShowing: true,
         loadID: selectedRowsArray[0],
-        confirm: updateEntityType
+        confirm: updateEntityInstance
       });
     }
   }
@@ -161,17 +206,22 @@ export default function EntityInstances() {
     console.log("HE");
     const response = await removeEntityTypeDB(getSelectedRow().id);
     console.log(response);
-    loadDataFromDB();
+    loadDataEntityTypesDB();
   }
 
   const isShowingEntityModal = modalState.isShowing;
+  const entityTypeSelected = {
+    label: selectState.value?.label,
+    id: selectState.value?.value
+  };
 
   return (
     <div style={{ padding: "10px" }}>
       <ControlWidget
-        onAdd={toggleNewEntityModal}
+        onAdd={toggleNewEntityInstanceModal}
         onEdit={toggleEditModal}
         onDelete={toggleDeleteModal}
+        select={selectState}
       />
       <GroupByControl
         options={columnsForSort}
@@ -209,16 +259,18 @@ export default function EntityInstances() {
         />
       </div>
       {isShowingEntityModal && (
-        <EntityTypeModal
+        <EntityInstanceModal
           {...modalState}
           close={closeModal}
-          entityBasicInfo={getSelectedRow()}
+          cancel={closeModal}
+          entityTypeBasicInfo={entityTypeSelected}
+          validator={new InputEmptyValidator()}
         />
       )}
       {isShowingDeleteConfirmModal && (
         <ConfirmationModal
           header="Confirmation"
-          message={`Are you sure you want to delete entity type: ${getSelectedRow().name}`}
+          message={`Are you sure you want to delete entity instance: ${getSelectedRow().name}`}
           confirm={deleteEntityType}
           close={() => setIsShowingDeleteConfirmModal(false)}
         />

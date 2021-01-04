@@ -83,7 +83,7 @@ export default function EntityTypes() {
   }
 
   const [[sortColumn, sortDirection], setSort] = useState([
-    "entityName",
+    "name",
     "NONE",
   ]);
   function closeModal() {
@@ -122,7 +122,7 @@ export default function EntityTypes() {
   }, []);
 
   // MODAL FUNCTIONS
-  function toggleNewEntityModal() {
+  function toggleNewEntityTypeModal() {
     setModalState({
       isShowing: true,
       loadID: null,
@@ -164,12 +164,12 @@ export default function EntityTypes() {
     loadDataFromDB();
   }
 
-  const isShowingEntityModal = modalState.isShowing;
+  const isShowingEntityTypeModal = modalState.isShowing;
 
   return (
     <div style={{ padding: "10px" }}>
       <ControlWidget
-        onAdd={toggleNewEntityModal}
+        onAdd={toggleNewEntityTypeModal}
         onEdit={toggleEditModal}
         onDelete={toggleDeleteModal}
       />
@@ -208,11 +208,12 @@ export default function EntityTypes() {
           onSort={handleSort}
         />
       </div>
-      {isShowingEntityModal && (
+      {isShowingEntityTypeModal && (
         <EntityTypeModal
           {...modalState}
           close={closeModal}
-          entityBasicInfo={getSelectedRow()}
+          cancel={closeModal}
+          entityTypeBasicInfo={getSelectedRow()}
         />
       )}
       {isShowingDeleteConfirmModal && (

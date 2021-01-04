@@ -27,7 +27,12 @@ export default function ControlBar(props) {
             backgroundColor: "lightgray",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "row" }}>
+          <div style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center"
+          }}
+          >
             {onAdd && (
               <Button
                 className="controlButton"
@@ -118,7 +123,7 @@ ControlBar.propTypes = {
   addButtonWidth: PropTypes.string,
   addButtonText: PropTypes.string,
   select: PropTypes.shape({
-    options: PropTypes.arrayOf(PropTypes.string),
+    options: PropTypes.arrayOf(PropTypes.object),
     onChange: PropTypes.func,
     styles: PropTypes.shape({
       control: PropTypes.func,
@@ -126,7 +131,10 @@ ControlBar.propTypes = {
       valueContainer: PropTypes.func,
       option: PropTypes.func,
     }),
-    value: PropTypes.string,
+    value: PropTypes.shape({
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.string
+    }),
   }),
 };
 
