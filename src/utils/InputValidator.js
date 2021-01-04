@@ -14,7 +14,6 @@ export default class InputValidator extends Validator {
   validate(fields) { // eslint-disable-line
     let passed = true;
     let message = "";
-    console.log(fields);
     // field empty check
     const emptyCheckResult = fields.map((el) => {
       if (el.property_value === "") {
@@ -31,7 +30,7 @@ export default class InputValidator extends Validator {
     const fieldTypeResult = emptyCheckResult.map((el) => {
       if (el.property_value === "") return el;
       el.color = "inherit";
-      let passedFields = false;
+      let passedFields = true;
       switch (el.property_type.value) {
         case "TEXT":
           break;

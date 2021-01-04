@@ -33,6 +33,7 @@ export default function EntityInstanceModal(props) {
   const { entityTypeBasicInfo, validator } = props;
 
   const [state, setState] = useReducer(modReducer, {
+    entityTypeId: entityTypeBasicInfo.id,
     name: entityTypeBasicInfo.label,
     fields: [],
     validatorMessage: ""
@@ -159,13 +160,14 @@ export default function EntityInstanceModal(props) {
       </div>
     </div>
   );
-  const { confirm } = props;
+  const { confirm, close } = props;
 
   function validateFields() {
     if (validator !== null) {
       const [passedValidation, validatorMessage, validatedFields] = validator.validate(state.fields);
       if (passedValidation) {
         confirm(state);
+        close();
       } else {
         setState({
           fields: validatedFields,
@@ -174,6 +176,7 @@ export default function EntityInstanceModal(props) {
       }
     } else {
       confirm(state);
+      close();
     }
   }
 

@@ -8,7 +8,7 @@ import { renameKeys, modReducer } from "../../../utils";
 import EntityInstanceModal from "../../../modals/EntityInstanceModal";
 import ConfirmationModal from "../../../modals/ConfirmationModal";
 import InfoModal from "../../../modals/InfoModal";
-import { createEntityTypeDB, updateEntityTypeDB, getAvailableEntityTypes, removeEntityTypeDB, getEntityTypeProperties, getEntityTypeEntries } from "./dbcalls";
+import { createEntityInstanceDB, updateEntityTypeDB, getAvailableEntityTypes, removeEntityTypeDB, getEntityTypeProperties, getEntityTypeEntries } from "./dbcalls";
 import "react-data-grid/dist/react-data-grid.css";
 import "../../../ui/GridUtils/style.scss";
 import "./style.scss";
@@ -73,9 +73,8 @@ export default function EntityInstances() {
   }
 
   async function createEntityInstance(modalState) {
-    const filledFields = modalState.fields.filter((item) => item.fieldName !== "");
-    await createEntityTypeDB(modalState.name, filledFields);
-    loadDataEntityTypesDB();
+    await createEntityInstanceDB(modalState);
+    loadEntityTypeEntriesDB(selectState.value.value);
   }
 
   async function updateEntityInstance(modalState) {
