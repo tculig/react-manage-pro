@@ -24,6 +24,7 @@ export default function EntityInstanceModal(props) {
       }
       el.property_value = "";
       el.placeholder = "";
+      el.color = "inherit";
       return el;
     });
     return arrayOut;
@@ -51,9 +52,22 @@ export default function EntityInstanceModal(props) {
     }
   }, [entityTypeBasicInfo.id]);// eslint-disable-line
 
-  function handlePropertyValue(value, i) {
+  function handleFieldConstraints(originalField, newValue) {
+    // decimal constraint
+    if (originalField.property_type.value === "DECIMAL(10,2)") {
+      const dotIndex = newValue.indexOf(".");
+      if (dotIndex !== -1) {
+        if (newValue.length > (dotIndex + 3)) {
+          return originalField.property_value;
+        }
+      }
+    }
+    return newValue;
+  }
+
+  function handlePropertyValue(newValue, i) {
     const newFields = [...state.fields];
-    newFields[i].property_value = value;
+    newFields[i].property_value = handleFieldConstraints(newFields[i], newValue);
     setState({
       fields: newFields,
     });
@@ -76,6 +90,7 @@ export default function EntityInstanceModal(props) {
         </td>
         <td>
           <Input
+            style={{ color: stateObj.color }}
             className="inputRedPlaceholder"
             value={stateObj.property_value}
             placeholder={stateObj.placeholder}
@@ -148,13 +163,13 @@ export default function EntityInstanceModal(props) {
 
   function validateFields() {
     if (validator !== null) {
-      const [passedValidation, validatedFields] = validator.validate(state.fields);
+      const [passedValidation, validatorMessage, validatedFields] = validator.validate(state.fields);
       if (passedValidation) {
         confirm(state);
       } else {
         setState({
           fields: validatedFields,
-          validatorMessage: "Please fill in all the fileds."
+          validatorMessage
         });
       }
     } else {
