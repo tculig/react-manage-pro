@@ -72,14 +72,14 @@ export default function EntityInstances() {
     console.log(entityTypeEntries);
   }
 
-  async function createEntityInstance(modalState) {
-    await createEntityInstanceDB(modalState);
+  async function createEntityInstance(modalInternalState) {
+    await createEntityInstanceDB(modalInternalState);
     loadEntityTypeEntriesDB(selectState.value.value);
   }
 
-  async function updateEntityInstance(modalState) {
-    const filledFields = modalState.fields.filter((item) => item.fieldName !== "");
-    updateEntityTypeDB(modalState.name, filledFields, modalState.originalValues);
+  async function updateEntityInstance(modalInternalState) {
+    const filledFields = modalInternalState.fields.filter((item) => item.fieldName !== "");
+    updateEntityTypeDB(modalInternalState.name, filledFields, modalInternalState.originalValues);
   }
 
   useEffect(() => {

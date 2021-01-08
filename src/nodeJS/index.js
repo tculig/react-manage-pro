@@ -28,6 +28,7 @@ require("./utilEndpoints")(app,connectionRoot);
 require("./EntityTypes")(app,connectionRoot);
 require("./EntityInstances")(app,connectionRoot);
 require("./DatabaseSetup")(app,connectionRoot);
+require("./Templates")(app,connectionRoot);
 
 app.listen(3009, function () {
   console.log("Listening on port 3009!");

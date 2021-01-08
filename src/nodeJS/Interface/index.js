@@ -24,11 +24,11 @@ export async function forwardPost(databaseID, tableID, url, data) {
   }
 }
 
-export async function addElementDB(database, table, data) {
-  return forwardPost(database, table, "/addElement", data);
+export async function createElementDB(database, table, data) {
+  return forwardPost(database, table, "/createElement", data);
 }
-export async function addElementsDB(database, table, data) {
-  return forwardPost(database, table, "/addElements", data);
+export async function createElementsDB(database, table, data) {
+  return forwardPost(database, table, "/createElements", data);
 }
 export async function updateElementDB(database, table, data) {
   return forwardPost(database, table, "/updateElement", data);

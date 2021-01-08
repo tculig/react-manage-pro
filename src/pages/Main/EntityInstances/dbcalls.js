@@ -1,8 +1,8 @@
-import { REACT_APP_MAIN_DATABASE, fetchURL, addElementsDB, addElementDB, removeElementDB } from "../../../nodeJS/Interface";
+import { REACT_APP_MAIN_DATABASE, fetchURL, createElementsDB, createElementDB, removeElementDB } from "../../../nodeJS/Interface";
 import { getToday } from "../../../utils";
 
 export async function createEntityInstanceDB(entityInstanceData) {
-  const insertEntityInstance = await addElementDB(REACT_APP_MAIN_DATABASE, "entity", {
+  const insertEntityInstance = await createElementDB(REACT_APP_MAIN_DATABASE, "entity", {
     entity_type_id: entityInstanceData.entityTypeId,
     dateCreated: getToday(),
     active: 1
@@ -16,7 +16,7 @@ export async function createEntityInstanceDB(entityInstanceData) {
       property_value: fields[i].property_value,
     });
   }
-  const insertEntityProperties = await addElementsDB(REACT_APP_MAIN_DATABASE, "entity_properties", propertiesArray);
+  const insertEntityProperties = await createElementsDB(REACT_APP_MAIN_DATABASE, "entity_properties", propertiesArray);
   return [insertEntityInstance, insertEntityProperties];
 }
 

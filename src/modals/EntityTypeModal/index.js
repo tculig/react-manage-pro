@@ -7,17 +7,10 @@ import { Button, Input } from "reactstrap";
 import { modReducer } from "../../utils";
 import GenericModal from "../GenericModal";
 import { getEntityTypeProperties } from "./dbcalls";
+import { propertyTypes } from "../Constants";
 import "./style.scss";
 
 export default function EntityTypeModal(props) {
-  // values have to be actual MYSQL variable types!
-  const propertyTypes = [
-    { value: "TEXT", label: "Text" },
-    { value: "INT", label: "Integer" },
-    { value: "DECIMAL(10,2)", label: "Decimal" },
-    { value: "DATE", label: "Date" },
-  ];
-
   function mapPropertyTypes(arrayIn) {
     const arrayOut = arrayIn.map((el) => {
       for (let i = 0; i < propertyTypes.length; i++) {

@@ -5,6 +5,7 @@ import Sidebar from "../../ui/Sidebar";
 import SidebarItem from "../../ui/Sidebar/SidebarItem";
 import EntityTypes from "./EntityTypes";
 import EntityInstances from "./EntityInstances";
+import LayoutItemTemplates from "./LayoutItemTemplates";
 
 const MainContainer = styled.main`
   position: relative;
@@ -16,7 +17,7 @@ const MainContainer = styled.main`
 export default function Main() {
   const [state, setState] = useState({
     sidebarExpanded: false,
-    sidebarSelected: "entityinstances",
+    sidebarSelected: "layoutitemtemplates",
     sidebarItems: [
       <SidebarItem
         eventKey="gridview"
@@ -80,6 +81,7 @@ export default function Main() {
       <MainContainer expanded={sidebarExpanded}>
         {sidebarSelected === "entitytypes" && <EntityTypes />}
         {sidebarSelected === "entityinstances" && <EntityInstances />}
+        {sidebarSelected === "layoutitemtemplates" && <LayoutItemTemplates />}
       </MainContainer>
     </div>
   );
