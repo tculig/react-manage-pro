@@ -3,20 +3,34 @@ import { getToday } from "../../../utils";
 
 export async function getTemplateByID(id) {
   const templateData = await fetch(`${fetchURL}/getTemplateByID?databaseID=${REACT_APP_MAIN_DATABASE}&id=${id}`).then(response => { return response.json(); });
-  let result = null;
   switch (templateData?.length) {
     case 0:
       console.log("getTemplateByID returned no results!");
       break;
     case 1:
-      [result] = templateData;
-      result.static = !!result.static;
+      templateData[0].static = !!templateData[0].static;
       break;
     default:
       console.log("More than one result returned in getTemplateByID!");
       break;
   }
-  return result;
+  return templateData;
+}
+
+export async function getTemplateWithPropertiesByID(id) {
+  const templateData = await fetch(`${fetchURL}/getTemplateWithPropertiesByID?databaseID=${REACT_APP_MAIN_DATABASE}&id=${id}`).then(response => { return response.json(); });
+  switch (templateData?.length) {
+    case 0:
+      console.log("getTemplateWithPropertiesByID returned no results!");
+      break;
+    case 1:
+      templateData[0].static = !!templateData[0].static;
+      break;
+    default:
+      console.log("More than one result returned in getTemplateWithPropertiesByID!");
+      break;
+  }
+  return templateData;
 }
 
 export async function getAvailableTemplates() {
@@ -25,12 +39,12 @@ export async function getAvailableTemplates() {
 }
 
 export async function createTemplateDB(name) {
-  const insertResponse = createElementDB(REACT_APP_MAIN_DATABASE, "template", {
+  const insertResponse = await createElementDB(REACT_APP_MAIN_DATABASE, "template", {
     name,
     dateCreated: getToday(),
     active: 1
   });
-  const insertPropertiesResponse = createElementDB(REACT_APP_MAIN_DATABASE, "template_properties", {
+  const insertPropertiesResponse = await createElementDB(REACT_APP_MAIN_DATABASE, "template_properties", {
     template_id: insertResponse.insertId,
     i: "rootBlock",
     x: 10,

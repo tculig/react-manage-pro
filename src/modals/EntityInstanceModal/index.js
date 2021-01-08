@@ -5,18 +5,18 @@ import { Input } from "reactstrap";
 import { modReducer } from "../../utils";
 import GenericModal from "../GenericModal";
 import { getEntityTypeProperties } from "./dbcalls";
-import Validator from "../../utils/Validator";
-import { propertyTypes } from "../Constants";
+import Validator from "../../validators/Validator";
+import { propertyTypes } from "../../utils/Constants";
 import "./style.scss";
 
 export default function EntityInstanceModal(props) {
   function mapPropertyTypes(arrayIn) {
     const arrayOut = arrayIn.map((el) => {
-      for (let i = 0; i < propertyTypes.length; i++) {
-        if (propertyTypes[i].value === el.property_type) {
-          el.property_type = propertyTypes[i];
+      Object.entries(propertyTypes).forEach(([, propValue]) => {
+        if (propValue.value === el.property_type) {
+          el.property_type = propValue;
         }
-      }
+      });
       el.property_value = "";
       el.placeholder = "";
       el.color = "inherit";
@@ -25,7 +25,7 @@ export default function EntityInstanceModal(props) {
     return arrayOut;
   }
 
-  const { entityTypeBasicInfo, validator } = props;
+  const { entityTypeBasicInfo, validators } = props;
 
   const [state, setState] = useReducer(modReducer, {
     entityTypeId: entityTypeBasicInfo.id,
@@ -158,8 +158,13 @@ export default function EntityInstanceModal(props) {
   const { confirm, close } = props;
 
   function validateFields() {
-    if (validator !== null) {
-      const [passedValidation, validatorMessage, validatedFields] = validator.validate(state.fields);
+    if (validators !== null) {
+      let passedValidation;
+      let validatorMessage;
+      let validatedFields = state.fields;
+      for (let i = 0; i < validators.length; i++) {
+        [passedValidation, validatorMessage, validatedFields] = validators[i].validate(validatedFields, passedValidation, validatorMessage);
+      }
       if (passedValidation) {
         confirm(state);
         close();
@@ -200,11 +205,11 @@ EntityInstanceModal.propTypes = {
     label: PropTypes.string,
     id: PropTypes.number
   }),
-  validator: PropTypes.instanceOf(Validator)
+  validators: PropTypes.arrayOf(PropTypes.instanceOf(Validator))
 };
 
 EntityInstanceModal.defaultProps = {
-  validator: null,
+  validators: null,
   entityTypeBasicInfo: {},
   loadID: null,
   cancel: () => {}

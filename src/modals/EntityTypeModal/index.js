@@ -7,17 +7,17 @@ import { Button, Input } from "reactstrap";
 import { modReducer } from "../../utils";
 import GenericModal from "../GenericModal";
 import { getEntityTypeProperties } from "./dbcalls";
-import { propertyTypes } from "../Constants";
+import { propertyTypes } from "../../utils/Constants";
 import "./style.scss";
 
 export default function EntityTypeModal(props) {
   function mapPropertyTypes(arrayIn) {
     const arrayOut = arrayIn.map((el) => {
-      for (let i = 0; i < propertyTypes.length; i++) {
-        if (propertyTypes[i].value === el.property_type) {
-          el.property_type = propertyTypes[i];
+      Object.entries(propertyTypes).forEach(([, propValue]) => {
+        if (propValue.value === el.property_type) {
+          el.property_type = propValue;
         }
-      }
+      });
       return el;
     });
     return arrayOut;
@@ -34,13 +34,13 @@ export default function EntityTypeModal(props) {
       initValues.push({
         property_name: "Name",
         editable: false,
-        property_type: propertyTypes[0],
+        property_type: propertyTypes.TEXT,
       });
       for (let i = 0; i < initRowsNum; i++) {
         initValues.push({
           property_name: "",
           editable: true,
-          property_type: propertyTypes[0],
+          property_type: propertyTypes.TEXT,
         });
       }
       return initValues;
@@ -74,7 +74,7 @@ export default function EntityTypeModal(props) {
     newFields.push({
       property_name: "",
       editable: true,
-      property_type: propertyTypes[0],
+      property_type: propertyTypes.TEXT,
     });
     setState({
       fields: newFields,
@@ -110,7 +110,7 @@ export default function EntityTypeModal(props) {
           <Select
             onChange={(selectedOption) => handlePropertyType(selectedOption, i)}
             value={stateObj.property_type}
-            options={propertyTypes}
+            options={Object.values(propertyTypes)}
             isDisabled={!editable}
           />
         </td>

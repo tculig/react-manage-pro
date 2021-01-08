@@ -2,7 +2,7 @@ const utils = require("./utils");
 const debug = false;
 
 module.exports = function (app, connection) {
-  app.post("/addElement", function (req, res) {
+  app.post("/createElement", function (req, res) {
     utils.getPostData(req, (element) => {
       utils.runQueryFromObject(
         connection,
@@ -17,7 +17,7 @@ module.exports = function (app, connection) {
     });
   });
 
-  app.post("/addElements", function (req, res) {
+  app.post("/createElements", function (req, res) {
     utils.getPostData(req, (element) => {
       utils.runMultiQueryFromObject(
         connection,

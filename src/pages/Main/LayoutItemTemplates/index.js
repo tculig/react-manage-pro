@@ -1,18 +1,20 @@
-import React, { useEffect, useRef, useReducer, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { first as _first } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 import { selectLayout, storeLayout } from "../../../redux/templatesSlice";
-import { getTemplateByID, getAvailableTemplates, removeTemplateDB, createTemplateDB, updateTemplateDB } from "./dbcalls";
+import { getTemplateWithPropertiesByID, getAvailableTemplates, removeTemplateDB, createTemplateDB, updateTemplateDB } from "./dbcalls";
 import Gridlet from "../../../components/Gridlet";
 import ControlWidget from "../../../ui/ControlWidget";
-import { modReducer } from "../../../utils";
-import InputValidator from "../../../utils/InputValidator";
+import DuplicateValidator from "../../../validators/DuplicateValidator";
+import EmptyFieldsValidator from "../../../validators/EmptyFieldsValidator";
 import TemplateModal from "../../../modals/TemplateModal";
 import ConfirmationModal from "../../../modals/ConfirmationModal";
+import { propertyTypes } from "../../../utils/Constants";
 
 export default function LayoutItemTemplates() {
   const dispatch = useDispatch();
   // STATE DECLARATIONS
-  const [selectState, setSelectState] = useReducer(modReducer, {
+  const [selectState, setSelectState] = useState({
     options: [],
     onChange: updateShowing, // eslint-disable-line
     value: null,
@@ -26,6 +28,7 @@ export default function LayoutItemTemplates() {
 
   function updateShowing(newValue) {
     setSelectState({
+      ...selectState,
       value: newValue,
     });
   }
@@ -34,28 +37,38 @@ export default function LayoutItemTemplates() {
   async function loadAvailableTemplatesDB() {
     const availableTemplates = await getAvailableTemplates();
     const selectRows = availableTemplates.map((entry) => {
-      return { value: entry.id, label: entry.i };
+      return { value: entry.id, label: entry.name };
     });
     setSelectState({
+      ...selectState,
       options: selectRows,
       value: selectRows[0],
     });
   }
 
   async function loadTemplateDB(id) {
-    const showingTemplate = await getTemplateByID(id);
+    const showingTemplate = await getTemplateWithPropertiesByID(id);
     dispatch(storeLayout(showingTemplate));
   }
   // UI FUNCTIONS
   function selectTemplateID(id) {
-    console.log(id);
+    setSelectState((oldState) => {
+      const newSelectValue = _first(
+        oldState.options.filter((option) => option.value === id)
+      );
+      return {
+        ...oldState,
+        value: newSelectValue,
+      };
+    });
   }
 
   // CRUD FUNCTIONS
   async function createTemplate(modalInternalState) {
-    const createResponse = await createTemplateDB(modalInternalState);
+    const name = modalInternalState.fields[0].property_value;
+    const [createResponse] = await createTemplateDB(name);
     await loadAvailableTemplatesDB();
-    selectTemplateID(createResponse.insertID);
+    selectTemplateID(createResponse.insertId);
   }
 
   async function updateTemplate(modalInternalState) {
@@ -71,6 +84,11 @@ export default function LayoutItemTemplates() {
       isShowing: true,
       loadID: null,
       confirm: createTemplate,
+      fields: [{
+        property_name: "Name:",
+        property_type: propertyTypes.TEXT,
+        property_value: ""
+      }]
     });
   }
   function toggleEditModal() {
@@ -109,7 +127,7 @@ export default function LayoutItemTemplates() {
     }
   }, [selectState.value]);
 
-  // RENDER VARIABLES
+  // VARIABLES
   const rootRef = useRef();
   const layout = useSelector(selectLayout);
   const [width, height] = [
@@ -119,11 +137,8 @@ export default function LayoutItemTemplates() {
   const cols = width / 10;
   const rows = height / 10;
   const isShowingTemplateModal = modalState.isShowing;
-  const templateTypeSelected = {
-    label: selectState.value?.label,
-    id: selectState.value?.value
-  };
   const selectedTemplateID = selectState.value?.value;
+  const selectOptionValues = selectState.options.map(el => el.label);
 
   return (
     <div
@@ -156,8 +171,10 @@ export default function LayoutItemTemplates() {
           {...modalState}
           close={closeModal}
           cancel={closeModal}
-          templateBasicInfo={templateTypeSelected}
-          validator={new InputValidator()}
+          validators={[
+            new EmptyFieldsValidator(),
+            new DuplicateValidator(selectOptionValues)
+          ]}
         />
       )}
       {isShowingDeleteConfirmModal && (

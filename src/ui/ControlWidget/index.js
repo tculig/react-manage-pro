@@ -8,7 +8,7 @@ import { Button } from "reactstrap";
 import { CustomSelectStyles } from "./CustomSelectStyles";
 import "./style.scss";
 
-export default function ControlBar(props) {
+export default function ControlWidget(props) {
   const { right, left, top, onAdd, addButtonWidth, addButtonText, onEdit, onDelete, onView, select } = props;
   return (
     <Draggable>
@@ -112,7 +112,7 @@ export default function ControlBar(props) {
   );
 }
 
-ControlBar.propTypes = {
+ControlWidget.propTypes = {
   onAdd: PropTypes.func,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
@@ -138,7 +138,7 @@ ControlBar.propTypes = {
   }),
 };
 
-ControlBar.defaultProps = {
+ControlWidget.defaultProps = {
   onAdd: null,
   onEdit: null,
   onDelete: null,

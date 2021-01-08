@@ -18,4 +18,22 @@ module.exports = function (app, connection) {
       res.send(results);
     });
   });
+
+  app.get("/getTemplateWithPropertiesByID", function (req, res) {
+    let arrayTemplate = ["id","name","dateCreated","active"];
+    let arrayTemplateProperties = ["i","x","y","w","h","static","parent","text","bgcolor","scaleFactor","fontConfiguration"];
+    const query = `SELECT 
+    ${arrayTemplate.map(el => `et.${el}`).join(",")}
+    ,
+    ${arrayTemplateProperties.map(el => `etp.${el}`).join(",")} 
+    FROM ${req.query.databaseID}.template 
+    et LEFT JOIN ${req.query.databaseID}.template_properties etp on etp.template_id=et.id WHERE et.id = ${req.query.id}`;
+    if (debug) console.log(query);
+    connection.query(query, function (error, results, fields) {
+      if (error) console.log(error);
+      res.send(results);
+    });
+  });
+
+ 
 };

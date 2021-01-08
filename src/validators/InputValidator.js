@@ -11,23 +11,10 @@ function isDate(value) {
 }
 
 export default class InputValidator extends Validator {
-  validate(fields) { // eslint-disable-line
-    let passed = true;
-    let message = "";
-    // field empty check
-    const emptyCheckResult = fields.map((el) => {
-      if (el.property_value === "") {
-        el.placeholder = "!";
-        passed = false;
-      } else {
-        el.placeholder = "";
-      }
-      return el;
-    });
-    if (!passed) message += "Please fill in all the fileds.\n";
-
+  validate(fields, passed, message) { // eslint-disable-line
+    [fields, passed, message] = this.checkArguments(fields, passed, message);
     // field type check
-    const fieldTypeResult = emptyCheckResult.map((el) => {
+    const fieldTypeResult = fields.map((el) => {
       if (el.property_value === "") return el;
       el.color = "inherit";
       let passedFields = true;

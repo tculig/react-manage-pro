@@ -3,16 +3,16 @@ import PropTypes from "prop-types";
 import { Input } from "reactstrap";
 import { modReducer } from "../../utils";
 import GenericModal from "../GenericModal";
-import Validator from "../../utils/Validator";
-import { propertyTypes } from "../Constants";
+import Validator from "../../validators/Validator";
+import { propertyTypes } from "../../utils/Constants";
 import { getTemplateData } from "./dbcalls";
 import "./style.scss";
 
 export default function TemplateModal(props) {
-  const { entityTypeBasicInfo, validator, loadID } = props;
+  const { validators, loadID, fields } = props;
 
   const [state, setState] = useReducer(modReducer, {
-    fields: [],
+    fields,
     validatorMessage: "",
   });
 
@@ -41,8 +41,8 @@ export default function TemplateModal(props) {
 
   function generateField(stateObj, i) {
     return (
-      <div key={i} className="padding8px">
-        <div style={{ width: "25%" }}>
+      <div key={i} className="padding8px" style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+        <div style={{ minWidth: "100px", textAlign: "right", paddingRight: "10px" }}>
           {stateObj.property_name}
         </div>
         <div style={{ width: "75%" }}>
@@ -98,8 +98,13 @@ export default function TemplateModal(props) {
   const { confirm, close } = props;
 
   function validateFields() {
-    if (validator !== null) {
-      const [passedValidation, validatorMessage, validatedFields] = validator.validate(state.fields);
+    if (validators !== null) {
+      let passedValidation;
+      let validatorMessage;
+      let validatedFields = state.fields;
+      for (let i = 0; i < validators.length; i++) {
+        [passedValidation, validatorMessage, validatedFields] = validators[i].validate(validatedFields, passedValidation, validatorMessage);
+      }
       if (passedValidation) {
         confirm(state);
         close();
@@ -136,15 +141,11 @@ TemplateModal.propTypes = {
   isShowing: PropTypes.bool.isRequired,
   confirm: PropTypes.func.isRequired,
   cancel: PropTypes.func,
-  templateBasicInfo: PropTypes.shape({
-    label: PropTypes.string,
-    id: PropTypes.number,
-  }),
-  validator: PropTypes.instanceOf(Validator),
+  validators: PropTypes.arrayOf(PropTypes.instanceOf(Validator)),
   fields: PropTypes.arrayOf(
     PropTypes.shape({
       property_name: PropTypes.string,
-      property_type: PropTypes.oneOf(propertyTypes),
+      property_type: PropTypes.oneOf(Object.values(propertyTypes)),
       property_value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       placeholder: PropTypes.string,
       color: PropTypes.string,
@@ -154,8 +155,7 @@ TemplateModal.propTypes = {
 };
 
 TemplateModal.defaultProps = {
-  validator: null,
-  templateBasicInfo: {},
+  validators: null,
   loadID: null,
   cancel: () => {},
   fields: []

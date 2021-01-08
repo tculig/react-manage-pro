@@ -13,7 +13,8 @@ import "react-data-grid/dist/react-data-grid.css";
 import "../../../ui/GridUtils/style.scss";
 import "./style.scss";
 import { CustomSelectStyles } from "../../../ui/ControlWidget/CustomSelectStyles";
-import InputValidator from "../../../utils/InputValidator";
+import InputValidator from "../../../validators/InputValidator";
+import EmptyFieldsValidator from "../../../validators/EmptyFieldsValidator";
 
 CustomSelectStyles.control = (provided) => ({
   ...provided,
@@ -263,7 +264,10 @@ export default function EntityInstances() {
           close={closeModal}
           cancel={closeModal}
           entityTypeBasicInfo={entityTypeSelected}
-          validator={new InputValidator()}
+          validators={[
+            new EmptyFieldsValidator(),
+            new InputValidator()
+          ]}
         />
       )}
       {isShowingDeleteConfirmModal && (
