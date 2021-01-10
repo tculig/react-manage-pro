@@ -117,9 +117,9 @@ ControlWidget.propTypes = {
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
   onView: PropTypes.func,
-  right: PropTypes.string,
-  left: PropTypes.string,
-  top: PropTypes.string,
+  right: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  left: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  top: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   addButtonWidth: PropTypes.string,
   addButtonText: PropTypes.string,
   select: PropTypes.shape({

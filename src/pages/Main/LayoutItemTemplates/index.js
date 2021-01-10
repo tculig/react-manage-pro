@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { first as _first } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
-import { selectLayout, storeLayout } from "../../../redux/templatesSlice";
+import { selectLayoutRedux, storeLayoutRedux } from "../../../redux/templatesSlice";
 import { getTemplateWithPropertiesByID, getAvailableTemplates, removeTemplateDB, createTemplateDB, updateTemplateDB } from "./dbcalls";
 import Gridlet from "../../../components/Gridlet";
 import ControlWidget from "../../../ui/ControlWidget";
@@ -27,9 +27,11 @@ export default function LayoutItemTemplates() {
   const [isShowingDeleteConfirmModal, setIsShowingDeleteConfirmModal] = useState(false);
 
   function updateShowing(newValue) {
-    setSelectState({
-      ...selectState,
-      value: newValue,
+    setSelectState((oldState) => {
+      return {
+        ...oldState,
+        value: newValue,
+      };
     });
   }
 
@@ -39,16 +41,18 @@ export default function LayoutItemTemplates() {
     const selectRows = availableTemplates.map((entry) => {
       return { value: entry.id, label: entry.name };
     });
-    setSelectState({
-      ...selectState,
-      options: selectRows,
-      value: selectRows[0],
+    setSelectState((oldState) => {
+      return {
+        ...oldState,
+        options: selectRows,
+        value: selectRows[0],
+      };
     });
   }
 
   async function loadTemplateDB(id) {
     const showingTemplate = await getTemplateWithPropertiesByID(id);
-    dispatch(storeLayout(showingTemplate));
+    dispatch(storeLayoutRedux(showingTemplate));
   }
   // UI FUNCTIONS
   function selectTemplateID(id) {
@@ -72,10 +76,9 @@ export default function LayoutItemTemplates() {
   }
 
   async function updateTemplate(modalInternalState) {
-    const updateResponse = await updateTemplateDB(modalInternalState);
-    console.log(updateResponse);
+    await updateTemplateDB(modalInternalState);
     await loadAvailableTemplatesDB();
-    selectTemplateID(modalInternalState.id);
+    selectTemplateID(modalInternalState.loadID);
   }
 
   // MODAL FUNCTIONS
@@ -94,8 +97,13 @@ export default function LayoutItemTemplates() {
   function toggleEditModal() {
     setModalState({
       isShowing: true,
-      loadID: null,
+      loadID: selectState.value.value,
       confirm: updateTemplate,
+      fields: [{
+        property_name: "Name:",
+        property_type: propertyTypes.TEXT,
+        property_value: selectState.value.label
+      }]
     });
   }
 
@@ -125,11 +133,11 @@ export default function LayoutItemTemplates() {
     if (selectState.value) {
       loadTemplateDB(selectState.value.value);
     }
-  }, [selectState.value]);
+  }, [selectState.value]);// eslint-disable-line
 
   // VARIABLES
   const rootRef = useRef();
-  const layout = useSelector(selectLayout);
+  const layout = useSelector(selectLayoutRedux);
   const [width, height] = [
     rootRef.current?.offsetWidth,
     rootRef.current?.offsetHeight,
@@ -138,6 +146,7 @@ export default function LayoutItemTemplates() {
   const rows = height / 10;
   const isShowingTemplateModal = modalState.isShowing;
   const selectedTemplateID = selectState.value?.value;
+  const selectedTemplateLabel = selectState.value?.label;
   const selectOptionValues = selectState.options.map(el => el.label);
 
   return (
@@ -145,7 +154,7 @@ export default function LayoutItemTemplates() {
       ref={rootRef}
       style={{
         height: "calc(100vh - 56px)",
-        border: "1px solid red",
+        border: "0px solid red",
         position: "relative",
         overflow: "hidden",
       }}
@@ -155,8 +164,11 @@ export default function LayoutItemTemplates() {
         onEdit={toggleEditModal}
         onDelete={toggleDeleteModal}
         select={selectState}
+        right={20}
       />
       <Gridlet
+        showColorEditor
+        showFontEditor
         name="root"
         level={0}
         scale={1}
@@ -180,7 +192,7 @@ export default function LayoutItemTemplates() {
       {isShowingDeleteConfirmModal && (
         <ConfirmationModal
           header="Confirmation"
-          message={`Are you sure you want to delete template: ${2}`}
+          message={`Are you sure you want to delete template: ${selectedTemplateLabel}`}
           confirm={() => deleteEntityType(selectedTemplateID)}
           close={() => setIsShowingDeleteConfirmModal(false)}
         />

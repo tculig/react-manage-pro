@@ -1,35 +1,20 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer } from "react";
 import PropTypes from "prop-types";
 import { Input } from "reactstrap";
 import { modReducer } from "../../utils";
 import GenericModal from "../GenericModal";
 import Validator from "../../validators/Validator";
 import { propertyTypes } from "../../utils/Constants";
-import { getTemplateData } from "./dbcalls";
 import "./style.scss";
 
 export default function TemplateModal(props) {
   const { validators, loadID, fields } = props;
 
   const [state, setState] = useReducer(modReducer, {
+    loadID,
     fields,
     validatorMessage: "",
   });
-
-  useEffect(() => {
-    async function loadFromDB() {
-      const templateData = await getTemplateData(loadID);
-      console.log(templateData);
-      if (templateData !== null) {
-        setState({
-          fields: templateData,
-        });
-      }
-    }
-    if (loadID != null) {
-      loadFromDB();
-    }
-  }, [loadID]); // eslint-disable-line
 
   function handlePropertyValue(newValue, i) {
     const newFields = [...state.fields];

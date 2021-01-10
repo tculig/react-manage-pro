@@ -1,47 +1,19 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import FontPicker from "font-picker-react";
 import Draggable from "react-draggable";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBold,
-  faItalic,
-  faUnderline,
-  faAlignCenter,
-  faAlignLeft,
-  faAlignRight,
-  faAlignJustify,
-} from "@fortawesome/free-solid-svg-icons";
-import { CustomNumericBox } from "../CustomNumericBox";
+import PropTypes from "prop-types";
 import { CompactPicker } from "react-color";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBold, faItalic, faUnderline, faAlignCenter, faAlignLeft, faAlignRight, faAlignJustify } from "@fortawesome/free-solid-svg-icons";
+import CustomNumericBox from "../CustomNumericBox";
+import "./style.scss";
 
-export function FontEditor(props) {
-  const [state, setState] = useState({
-    fontFamily: props.fontConfiguration.fontFamily || "Open Sans",
-    fontWeight: props.fontConfiguration.fontWeight || "400",
-    fontStyle: props.fontConfiguration.fontStyle || "normal",
-    textDecoration: props.fontConfiguration.textDecoration || "none",
-    textAlign: props.fontConfiguration.textAlign || "left",
-    fontSize: props.fontConfiguration.fontSize || 24,
-    color: props.fontConfiguration.color || "red",
-    textJustify: props.fontConfiguration.textJustify || "inter-character", //firefox only! bot not even there QQ
-  });
-  const updateFromProps = useRef(false);
+export default function FontEditor(props) {
+  const { onCommit, onCommitCancel, gridletName, scale, positionOffset, fontWeight, fontStyle, textDecoration, fontSize, color, textAlign, fontFamily } = props;
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    updateFromProps.current = true;
-    setState(() => ({
-      ...state,
-      ...props.fontConfiguration,
-    }));
-  }, [props.fontConfiguration]);
-
-  useEffect(() => {
-    if (props.onChange && !updateFromProps.current) {
-      props.onChange(props.gridletName, state);
-    } else {
-      updateFromProps.current = false;
-    }
-  }, [state]);
+  
 
   const [internalState, setInternalState] = useState({
     showColorPicker: false,
@@ -49,9 +21,9 @@ export function FontEditor(props) {
   });
 
   useEffect(() => {
-    let optionsArray = [];
+    const optionsArray = [];
     for (let i = 4; i <= 72; i++) {
-      if (i % 4 == 0) {
+      if (i % 4 === 0) {
         optionsArray.push(
           <option value={i} key={i}>
             {i}
@@ -65,78 +37,73 @@ export function FontEditor(props) {
         );
       }
     }
-    setInternalState({
-      ...internalState,
+    setInternalState((oldInternalState) => ({
+      ...oldInternalState,
       fontSizeOptions: optionsArray,
-    });
+    }));
   }, []);
 
   function toggleBold() {
-    setState(() => ({
-      ...state,
-      fontWeight: state.fontWeight == "400" ? "800" : "400",
-    }));
+    setState({
+      fontWeight: state.fontWeight === "400" ? "800" : "400",
+    });
   }
   function toggleItalic() {
-    setState(() => ({
-      ...state,
-      fontStyle: state.fontStyle == "normal" ? "italic" : "normal",
-    }));
+    setState({
+      fontStyle: state.fontStyle === "normal" ? "italic" : "normal",
+    });
   }
   function toggleUnderline() {
-    setState(() => ({
-      ...state,
-      textDecoration: state.textDecoration == "none" ? "underline" : "none",
-    }));
+    setState({
+      textDecoration: state.textDecoration === "none" ? "underline" : "none",
+    });
   }
   function toggleColorPicker() {
-    setInternalState(() => ({
-      ...internalState,
-      showColorPicker: !internalState.showColorPicker,
+    setInternalState((oldInternalState) => ({
+      ...oldInternalState,
+      showColorPicker: !oldInternalState.showColorPicker,
     }));
   }
   function updateFontSize(newFontSize) {
     setState({
-      ...state,
       fontSize: newFontSize,
     });
   }
-  function updateFontColor(color, event) {
-    setInternalState(() => ({
-      ...internalState,
+  function updateFontColor(color) {
+    setInternalState((oldInternalState) => ({
+      ...oldInternalState,
       showColorPicker: false,
     }));
     setState({
-      ...state,
       color: color.hex,
     });
   }
   function updateFontFamily(nextFont) {
     setState({
-      ...state,
       fontFamily: nextFont.family,
     });
   }
-  function toggleAlign(where) {
+  function toggleAlign(alignWhere) {
     setState({
-      ...state,
-      textAlign: where,
+      textAlign: alignWhere,
     });
   }
 
-  function handleChangeComplete(color, event) {
-    props.onCommit(props.gridletName);
+  function handleChangeComplete() {
+    onCommit(gridletName);
   }
   function handleCancel() {
-    props.onCommitCancel(props.gridletName);
+    onCommitCancel(gridletName);
   }
+
+  const { showColorPicker, fontSizeOptions } = internalState;
 
   return (
     <div style={{ position: "absolute", zIndex: "100" }}>
       <Draggable
         handle=".handle"
-        scale={props.scale}
-        positionOffset={props.positionOffset}
+        scale={scale}
+        positionOffset={positionOffset}
       >
         <div style={{ margin: "2px" }}>
           <div
@@ -150,7 +117,7 @@ export function FontEditor(props) {
               cursor: "move",
             }}
             className="handle"
-          ></div>
+          />
           <div style={{ position: "absolute" }}>
             <div
               className="photoshop-picker"
@@ -203,10 +170,8 @@ export function FontEditor(props) {
                     }}
                   >
                     <button
-                      className={
-                        "myToggleButton" +
-                        (state.textAlign == "left" ? " myToggleDown" : "")
-                      }
+                      type="button"
+                      className={`myToggleButton ${(textAlign === "left" ? " myToggleDown" : "")}`}
                       onClick={() => toggleAlign("left")}
                       style={{ margin: "4px", marginLeft: "0px" }}
                     >
@@ -214,10 +179,8 @@ export function FontEditor(props) {
                     </button>
 
                     <button
-                      className={
-                        "myToggleButton" +
-                        (state.textAlign == "center" ? " myToggleDown" : "")
-                      }
+                      type="button"
+                      className={`myToggleButton ${(textAlign === "center" ? " myToggleDown" : "")}`}
                       onClick={() => toggleAlign("center")}
                       style={{ margin: "4px" }}
                     >
@@ -225,10 +188,8 @@ export function FontEditor(props) {
                     </button>
 
                     <button
-                      className={
-                        "myToggleButton" +
-                        (state.textAlign == "right" ? " myToggleDown" : "")
-                      }
+                      type="button"
+                      className={`myToggleButton ${(textAlign === "right" ? " myToggleDown" : "")}`}
                       onClick={() => toggleAlign("right")}
                       style={{ margin: "4px" }}
                     >
@@ -236,10 +197,8 @@ export function FontEditor(props) {
                     </button>
 
                     <button
-                      className={
-                        "myToggleButton" +
-                        (state.textAlign == "justify" ? " myToggleDown" : "")
-                      }
+                      type="button"
+                      className={`myToggleButton ${(textAlign === "justify" ? " myToggleDown" : "")}`}
                       onClick={() => toggleAlign("justify")}
                       style={{ margin: "4px" }}
                     >
@@ -248,13 +207,13 @@ export function FontEditor(props) {
                   </div>
                   <FontPicker
                     apiKey="AIzaSyCH4ssHDe9Cd6iqYtvlzX9s75Qd6JCijM4"
-                    activeFontFamily={state.fontFamily}
-                    pickerId={props.gridletName}
+                    activeFontFamily={fontFamily}
+                    pickerId={gridletName}
                     style={{ width: "100px" }}
                     onChange={updateFontFamily}
                   />
                   <div
-                    className={"apply-font-" + props.gridletName}
+                    className={`apply-font-${gridletName}`}
                     style={{
                       marginTop: "10px",
                       marginLeft: "0px",
@@ -262,12 +221,12 @@ export function FontEditor(props) {
                       borderRadius: "2px",
                       padding: "2px",
                       marginRight: "6px",
-                      fontWeight: state.fontWeight,
-                      fontStyle: state.fontStyle,
-                      textDecoration: state.textDecoration,
-                      fontSize: state.fontSize,
-                      color: state.color,
-                      textAlign: state.textAlign,
+                      fontWeight,
+                      fontStyle,
+                      textDecoration,
+                      fontSize,
+                      color,
+                      textAlign
                     }}
                   >
                     The quick brown fox jumps over the lazy dog.
@@ -282,44 +241,41 @@ export function FontEditor(props) {
                 >
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <button
+                      type="button"
                       className="myOKCancelButton"
                       onClick={handleChangeComplete}
                     >
                       OK
                     </button>
-                    <button className="myOKCancelButton" onClick={handleCancel}>
+                    <button
+                      type="button"
+                      className="myOKCancelButton"
+                      onClick={handleCancel}
+                    >
                       Cancel
                     </button>
                   </div>
 
                   <div style={{ display: "flex", flexDirection: "row" }}>
                     <button
-                      className={
-                        "myToggleButton" +
-                        (state.fontWeight == "800" ? " myToggleDown" : "")
-                      }
+                      type="button"
+                      className={`myToggleButton${(fontWeight === "800" ? " myToggleDown" : "")}`}
                       onClick={toggleBold}
                       style={{ margin: "4px" }}
                     >
                       <FontAwesomeIcon icon={faBold} />
                     </button>
                     <button
-                      className={
-                        "myToggleButton" +
-                        (state.fontStyle == "italic" ? " myToggleDown" : "")
-                      }
+                      type="button"
+                      className={`myToggleButton${(fontStyle === "italic" ? " myToggleDown" : "")}`}
                       onClick={toggleItalic}
                       style={{ margin: "4px" }}
                     >
                       <FontAwesomeIcon icon={faItalic} />
                     </button>
                     <button
-                      className={
-                        "myToggleButton" +
-                        (state.textDecoration == "underline"
-                          ? " myToggleDown"
-                          : "")
-                      }
+                      type="button"
+                      className={`myToggleButton${(textDecoration === "underline" ? " myToggleDown" : "")}`}
                       onClick={toggleUnderline}
                       style={{ margin: "4px" }}
                     >
@@ -334,22 +290,22 @@ export function FontEditor(props) {
                         height: "36px",
                         border: "1px solid black",
                         cursor: "pointer",
-                        background: state.color,
+                        background: color,
                       }}
                       onClick={toggleColorPicker}
-                    ></div>
-                    {internalState.showColorPicker && (
+                    />
+                    {showColorPicker && (
                       <div style={{ position: "absolute", zIndex: "200" }}>
                         <CompactPicker
-                          color={state.color}
+                          color={color}
                           onChange={updateFontColor}
                         />
                       </div>
                     )}
                     <CustomNumericBox
                       updateParent={updateFontSize}
-                      options={internalState.fontSizeOptions}
-                      defaultValue={state.fontSize}
+                      options={fontSizeOptions}
+                      defaultValue={fontSize}
                     />
                   </div>
                 </div>
@@ -361,3 +317,35 @@ export function FontEditor(props) {
     </div>
   );
 }
+
+FontEditor.propTypes = {
+  gridletName: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  onCommit: PropTypes.func.isRequired,
+  onCommitCancel: PropTypes.func.isRequired,
+  scale: PropTypes.number,
+  positionOffset: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+  }),
+  fontFamily: PropTypes.string,
+  fontWeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  fontStyle: PropTypes.string,
+  textDecoration: PropTypes.string,
+  textAlign: PropTypes.string,
+  fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  color: PropTypes.string,
+};
+
+FontEditor.defaultProps = {
+  gridletName: null,
+  scale: 1,
+  positionOffset: { x: 0, y: 0 },
+  fontFamily: "Open Sans",
+  fontWeight: 400,
+  fontStyle: "normal",
+  textDecoration: "none",
+  textAlign: "left",
+  fontSize: 24,
+  color: "black",
+};

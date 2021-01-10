@@ -1,4 +1,4 @@
-import { REACT_APP_MAIN_DATABASE, fetchURL, removeElementDB, createElementDB } from "../../../nodeJS/Interface";
+import { REACT_APP_MAIN_DATABASE, fetchURL, removeElementDB, createElementDB, updateElementDB } from "../../../nodeJS/Interface";
 import { getToday } from "../../../utils";
 
 export async function getTemplateByID(id) {
@@ -58,9 +58,13 @@ export async function createTemplateDB(name) {
 }
 
 export async function removeTemplateDB(templateID) {
-  return removeElementDB(REACT_APP_MAIN_DATABASE, "template_data", { id: templateID });
+  return removeElementDB(REACT_APP_MAIN_DATABASE, "template", { id: templateID });
 }
 
-export async function updateTemplateDB(templateID) {
-  console.log(templateID);
+export async function updateTemplateDB(modalState) {
+  const updateResponse = await updateElementDB(REACT_APP_MAIN_DATABASE, "template", {
+    id: modalState.loadID,
+    name: modalState.fields[0].property_value
+  });
+  return updateResponse;
 }

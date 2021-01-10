@@ -6,27 +6,40 @@ export const templatesSlice = createSlice({
     layout: [],
   },
   reducers: {
-    storeLayout: (state, action) => {
+    storeLayoutRedux: (state, action) => {
       state.layout = action.payload;
     },
+    changeColorRedux: (state, action) => {
+      const { layout } = state;
+      for (let i = 0; i < layout.length; i++) {
+        if (layout[i].i === action.payload.gridletName) {
+          layout[i].bgcolor = action.payload.color;
+          layout[i].modified = true;
+        }
+      }
+      state.layout = layout;
+    },
+    commitLayoutToDBRedux: () => {
+      console.log("save");
+    }
   },
 });
 
-export const { storeLayout } = templatesSlice.actions;
+export const { storeLayoutRedux, changeColorRedux, commitLayoutToDBRedux } = templatesSlice.actions;
+
+// The function below is called a selector and allows us to select a value from
+// the state. Selectors can also be defined inline where they're used instead of
+// in the slice file. For example: `useSelector((state) => state.counter.value)`
+export const selectLayoutRedux = (state) => state.templates.layout;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched
-export const incrementAsync = layout => dispatch => {
+export const incrementAsync = (layout) => (dispatch) => {
   setTimeout(() => {
-    dispatch(storeLayout(layout));
+    dispatch(selectLayoutRedux(layout));
   }, 1000);
 };
-
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state) => state.counter.value)`
-export const selectLayout = state => state.templates.layout;
 
 export default templatesSlice.reducer;

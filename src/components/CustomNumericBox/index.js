@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 
-export function CustomNumericBox(props) {
-  const { defaultValue, min, max, options } = props;
+export default function CustomNumericBox(props) {
+  const { defaultValue, min, max, options, updateParent } = props;
   const [state, setState] = useState({
     value: defaultValue,
   });
@@ -57,7 +57,7 @@ export function CustomNumericBox(props) {
     });
   }
   useEffect(() => {
-    if (state.value) props.updateParent(state.value);
+    if (state.value) updateParent(state.value);
   }, [state.value]);
 
   return (
@@ -110,6 +110,7 @@ CustomNumericBox.propTypes = {
   options: PropTypes.arrayOf(PropTypes.number).isRequired,
   min: PropTypes.number,
   max: PropTypes.number,
+  updateParent: PropTypes.func.isRequired
 };
 
 CustomNumericBox.defaultProps = {

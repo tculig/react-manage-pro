@@ -7,17 +7,8 @@ export default class InputValidator extends Validator {
   }
 
   validate(fields, passed, message) { // eslint-disable-line
-    console.log(fields);
-    console.log(passed);
-    console.log(message);
     [fields, passed, message] = this.checkArguments(fields, passed, message);
-    console.log(fields);
-    console.log(passed);
-    console.log(message);
-    console.log(fields);
-    console.log(this.namesArray);
-    // field type check
-    const fieldTypeResult = fields.map((el) => {
+    const duplicateFieldResult = fields.map((el) => {
       if (el.property_value === "") return el;
       el.color = "inherit";
       let passedFields = true;
@@ -33,6 +24,6 @@ export default class InputValidator extends Validator {
       }
       return el;
     });
-    return [passed, message, fieldTypeResult];
+    return [passed, message, duplicateFieldResult];
   }
 }
