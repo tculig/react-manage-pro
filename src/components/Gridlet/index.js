@@ -5,7 +5,8 @@ import PropTypes from "prop-types";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import ColorEditor from "../ColorEditor";
-import { changeColorRedux, commitLayoutToDBRedux } from "../../redux/templatesSlice";
+import FontEditor from "../FontEditor";
+import { changeAttributeRedux, commitLayoutToDBRedux } from "../../redux/templatesSlice";
 import { modReducer } from "../../utils";
 
 /* eslint-disable */
@@ -15,14 +16,27 @@ export default function Gridlet(props) {
   const rowHeight = height / rows;
   const scaleFactor = 1;
   const layoutCurrent =  layout.filter((el)=>{return el.parent===name});
+  const templateElement = layoutCurrent[0];
+  const templateFontConfiguration = layoutCurrent[0]?.fontConfiguration;
+  const templateGridletName = layoutCurrent[0]?.i;
+  const templateGridletColor = layoutCurrent[0]?.bgcolor;
   const [state] = useReducer(modReducer, {
     showColorEditorState: showColorEditor,
     showFontEditorState: showFontEditor
   });
 
+  function updateElementColor(color) {
+    dispatch(changeAttributeRedux({gridletName: templateGridletName, value: color, attributeName: "bgcolor"}));
+  }
 
-  function updateElementColor(gridletName, color) {
-    dispatch(changeColorRedux({gridletName, color}));
+  function updateElementFontConfiguration(updatedAttribute) {
+    if(templateElement !== undefined){
+      const newFontConfiguration = {
+        ...templateFontConfiguration,
+        ...updatedAttribute
+      }
+      dispatch(changeAttributeRedux({gridletName: templateGridletName, value: newFontConfiguration, attributeName: "fontConfiguration"}));
+    }
   }
 
   function commitLayoutToDB() {
@@ -30,6 +44,10 @@ export default function Gridlet(props) {
   }
 
   function cancelColorChange() {
+    console.log("cancel");
+  }
+
+  function cancelFontConfigurationChange() {
     console.log("cancel");
   }
 
@@ -54,9 +72,7 @@ export default function Gridlet(props) {
   }
 
   const { showColorEditorState, showFontEditorState } = state;
-  const templateGridletName = layoutCurrent[0]?.i;
-  const templateGridletColor = layoutCurrent[0]?.bgcolor;
-
+ 
   return (
     <div style={{ position:"relative" }}>
       { showColorEditorState && 
@@ -64,8 +80,18 @@ export default function Gridlet(props) {
         onChange={updateElementColor}
         onCommit={commitLayoutToDB}
         onCommitCancel={cancelColorChange}
-        gridletName={templateGridletName}
+        positionOffset={{x:6,y:6}}
         color={templateGridletColor || undefined}
+      />
+      }
+      { showFontEditorState && 
+      <FontEditor
+        onChange={updateElementFontConfiguration}
+        onCommit={commitLayoutToDB}
+        onCommitCancel={cancelFontConfigurationChange}
+        gridletName={templateGridletName}
+        positionOffset={{x:6,y:324}}
+        {...templateFontConfiguration}
       />
       }
       <GridLayout

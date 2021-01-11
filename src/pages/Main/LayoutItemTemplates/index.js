@@ -10,6 +10,7 @@ import EmptyFieldsValidator from "../../../validators/EmptyFieldsValidator";
 import TemplateModal from "../../../modals/TemplateModal";
 import ConfirmationModal from "../../../modals/ConfirmationModal";
 import { propertyTypes } from "../../../utils/Constants";
+import { nullToUndefinedArray } from "../../../utils";
 
 export default function LayoutItemTemplates() {
   const dispatch = useDispatch();
@@ -51,7 +52,8 @@ export default function LayoutItemTemplates() {
   }
 
   async function loadTemplateDB(id) {
-    const showingTemplate = await getTemplateWithPropertiesByID(id);
+    let showingTemplate = await getTemplateWithPropertiesByID(id);
+    showingTemplate = nullToUndefinedArray(showingTemplate);
     dispatch(storeLayoutRedux(showingTemplate));
   }
   // UI FUNCTIONS

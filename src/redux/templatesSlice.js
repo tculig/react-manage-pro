@@ -1,5 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+function modifyLayout(layout, gridletName, property, value) {
+  for (let i = 0; i < layout.length; i++) {
+    if (layout[i].i === gridletName) {
+      layout[i][property] = value;
+      layout[i].modified = true;
+    }
+  }
+  return layout;
+}
+
 export const templatesSlice = createSlice({
   name: "templates",
   initialState: {
@@ -9,14 +19,9 @@ export const templatesSlice = createSlice({
     storeLayoutRedux: (state, action) => {
       state.layout = action.payload;
     },
-    changeColorRedux: (state, action) => {
-      const { layout } = state;
-      for (let i = 0; i < layout.length; i++) {
-        if (layout[i].i === action.payload.gridletName) {
-          layout[i].bgcolor = action.payload.color;
-          layout[i].modified = true;
-        }
-      }
+    changeAttributeRedux: (state, action) => {
+      let { layout } = state;
+      layout = modifyLayout(layout, action.payload.gridletName, action.payload.attributeName, action.payload.value);
       state.layout = layout;
     },
     commitLayoutToDBRedux: () => {
@@ -25,7 +30,7 @@ export const templatesSlice = createSlice({
   },
 });
 
-export const { storeLayoutRedux, changeColorRedux, commitLayoutToDBRedux } = templatesSlice.actions;
+export const { storeLayoutRedux, changeAttributeRedux, commitLayoutToDBRedux } = templatesSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

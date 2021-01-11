@@ -1,64 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 
 export default function CustomNumericBox(props) {
-  const { defaultValue, min, max, options, updateParent } = props;
-  const [state, setState] = useState({
-    value: defaultValue,
-  });
-
-  const [optionsState, setOptions] = useState({
-    options: [
-      <option value={defaultValue} key={defaultValue}>
-        {defaultValue}
-      </option>,
-    ],
-    min,
-    max,
-  });
-
-  useEffect(() => {
-    if (options && options.length > 0) {
-      setOptions({
-        ...optionsState,
-        options,
-      });
-    }
-  }, [options]);
-
-  useEffect(() => {
-    if (defaultValue) {
-      setState({
-        ...state,
-        value: defaultValue,
-      });
-    }
-  }, [defaultValue]);
+  const { value, min, max, options, onChange } = props;
 
   function increment() {
-    setState({
-      ...state,
-      value: Math.min(state.value + 1, optionsState.max),
+    onChange({
+      value: Math.min(value + 1, max),
     });
   }
   function decrement() {
-    setState({
-      ...state,
-      value: Math.max(state.value - 1, optionsState.min),
+    onChange({
+      value: Math.max(value - 1, min),
     });
   }
 
   function change(event) {
-    setState({
-      ...state,
+    onChange({
       value: parseInt(event.target.value, 10),
     });
   }
-  useEffect(() => {
-    if (state.value) updateParent(state.value);
-  }, [state.value]);
 
   return (
     <div
@@ -73,9 +36,9 @@ export default function CustomNumericBox(props) {
       <select
         style={{ outline: "none", margin: "0px" }}
         onChange={change}
-        value={state.value}
+        value={value}
       >
-        {optionsState.options}
+        {options}
       </select>
       <div style={{ display: "flex", flexDirection: "column", margin: "0px" }}>
         <FontAwesomeIcon
@@ -106,11 +69,11 @@ export default function CustomNumericBox(props) {
 }
 
 CustomNumericBox.propTypes = {
-  defaultValue: PropTypes.number.isRequired,
-  options: PropTypes.arrayOf(PropTypes.number).isRequired,
+  value: PropTypes.number.isRequired,
+  options: PropTypes.arrayOf(PropTypes.object).isRequired,
   min: PropTypes.number,
   max: PropTypes.number,
-  updateParent: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired
 };
 
 CustomNumericBox.defaultProps = {

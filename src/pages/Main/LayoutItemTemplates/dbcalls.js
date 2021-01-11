@@ -25,6 +25,7 @@ export async function getTemplateWithPropertiesByID(id) {
       break;
     case 1:
       templateData[0].static = !!templateData[0].static;
+      templateData[0].fontConfiguration = JSON.parse(templateData[0].fontConfiguration);
       break;
     default:
       console.log("More than one result returned in getTemplateWithPropertiesByID!");
@@ -44,15 +45,25 @@ export async function createTemplateDB(name) {
     dateCreated: getToday(),
     active: 1
   });
+  const defaultFontConfiguration = {
+    fontFamily: "Open Sans",
+    fontWeight: 400,
+    fontStyle: "normal",
+    textDecoration: "none",
+    textAlign: "left",
+    fontSize: 24,
+    color: "black"
+  };
   const insertPropertiesResponse = await createElementDB(REACT_APP_MAIN_DATABASE, "template_properties", {
     template_id: insertResponse.insertId,
     i: "rootBlock",
-    x: 10,
-    y: 10,
+    x: 60,
+    y: 20,
     w: 10,
     h: 10,
     static: 0,
     parent: "root",
+    fontConfiguration: JSON.stringify(defaultFontConfiguration)
   });
   return [insertResponse, insertPropertiesResponse];
 }

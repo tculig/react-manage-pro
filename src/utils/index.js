@@ -24,8 +24,28 @@ const getToday = () => {
   return `${yyyy}-${mm}-${dd}`;
 };
 
+const nullToUndefined = (dbObj) => {
+  const entries = Object.entries(dbObj);
+  for (let i = 0; i < entries.length; i++) {
+    const [key, value] = entries[i];
+    if (value === null) {
+      dbObj[key] = undefined;
+    }
+  }
+  return dbObj;
+};
+
+const nullToUndefinedArray = (dbObjArray) => {
+  for (let i = 0; i < dbObjArray.length; i++) {
+    dbObjArray[i] = nullToUndefined(dbObjArray[i]);
+  }
+  return dbObjArray;
+};
+
 export {
   renameKeys,
   modReducer,
-  getToday
+  getToday,
+  nullToUndefined,
+  nullToUndefinedArray,
 };

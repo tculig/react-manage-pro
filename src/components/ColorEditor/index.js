@@ -4,7 +4,7 @@ import Draggable from "react-draggable";
 import PropTypes from "prop-types";
 
 export default function ColorEditor(props) {
-  const { color, gridletName, onChange, onCommit, onCommitCancel, scale, positionOffset } = props;
+  const { color, onChange, onCommit, onCommitCancel, scale, positionOffset } = props;
   const [state, setState] = useState({
     color,
   });
@@ -17,10 +17,10 @@ export default function ColorEditor(props) {
   }, [color]);
 
   function handleChangeComplete() {
-    onCommit(gridletName);
+    onCommit();
   }
   function handleCancel() {
-    onCommitCancel(gridletName);
+    onCommitCancel();
   }
 
   function handleChange(newColor) {
@@ -28,7 +28,7 @@ export default function ColorEditor(props) {
       ...state,
       color: newColor.hex,
     }));
-    onChange(gridletName, newColor.hex);
+    onChange(newColor.hex);
   }
 
   return (
@@ -67,7 +67,6 @@ export default function ColorEditor(props) {
 
 ColorEditor.propTypes = {
   color: PropTypes.string,
-  gridletName: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onCommit: PropTypes.func.isRequired,
   onCommitCancel: PropTypes.func.isRequired,
@@ -81,6 +80,5 @@ ColorEditor.propTypes = {
 ColorEditor.defaultProps = {
   scale: 1,
   positionOffset: { x: 0, y: 0 },
-  gridletName: null,
   color: "white"
 };
