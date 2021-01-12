@@ -4,7 +4,14 @@ import Draggable from "react-draggable";
 import PropTypes from "prop-types";
 
 export default function ColorEditor(props) {
-  const { color, onChange, onCommit, onCommitCancel, scale, positionOffset } = props;
+  const {
+    color,
+    onChange,
+    onCommit,
+    onCommitCancel,
+    scale,
+    positionOffset,
+  } = props;
   const [state, setState] = useState({
     color,
   });
@@ -32,12 +39,14 @@ export default function ColorEditor(props) {
   }
 
   return (
-    <div style={{ position: "absolute", zIndex: "100" }}>
-      <Draggable
-        handle=".handle"
-        scale={scale}
-        positionOffset={positionOffset}
-      >
+    <div
+      style={{
+        position: "absolute",
+        zIndex: "100",
+        transform: `scale(${scale})`,
+      }}
+    >
+      <Draggable handle=".handle" positionOffset={positionOffset}>
         <div style={{ margin: "2px" }}>
           <div
             style={{
@@ -80,5 +89,5 @@ ColorEditor.propTypes = {
 ColorEditor.defaultProps = {
   scale: 1,
   positionOffset: { x: 0, y: 0 },
-  color: "white"
+  color: "white",
 };

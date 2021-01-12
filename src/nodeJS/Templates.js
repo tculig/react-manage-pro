@@ -20,8 +20,8 @@ module.exports = function (app, connection) {
   });
 
   app.get("/getTemplateWithPropertiesByID", function (req, res) {
-    let arrayTemplate = ["id","name","dateCreated","active"];
-    let arrayTemplateProperties = ["i","x","y","w","h","static","parent","text","bgcolor","scaleFactor","fontConfiguration"];
+    let arrayTemplate = ["id","entityTypeId","name","dateCreated","active"];
+    let arrayTemplateProperties = ["i","x","y","w","h","static","parent","text","bgcolor","scaleFactor","fontConfiguration","entityDataConfiguration"];
     const query = `SELECT 
     ${arrayTemplate.map(el => `et.${el}`).join(",")}
     ,

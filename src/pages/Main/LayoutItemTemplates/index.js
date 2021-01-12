@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { first as _first } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 import { selectLayoutRedux, storeLayoutRedux } from "../../../redux/templatesSlice";
-import { getTemplateWithPropertiesByID, getAvailableTemplates, removeTemplateDB, createTemplateDB, updateTemplateDB } from "./dbcalls";
+import { getTemplateWithPropertiesByID, getAvailableTemplates, removeTemplateDB, createTemplateDB, updateTemplateDB, getAvailableEntityTypes } from "./dbcalls";
 import Gridlet from "../../../components/Gridlet";
 import ControlWidget from "../../../ui/ControlWidget";
 import DuplicateValidator from "../../../validators/DuplicateValidator";
@@ -26,6 +26,7 @@ export default function LayoutItemTemplates() {
     confirm: () => {},
   });
   const [isShowingDeleteConfirmModal, setIsShowingDeleteConfirmModal] = useState(false);
+  const [availableEntityTypes, setAvailableEntityTypes] = useState([]);
 
   function updateShowing(newValue) {
     setSelectState((oldState) => {
@@ -50,6 +51,10 @@ export default function LayoutItemTemplates() {
       };
     });
   }
+  async function loadAvailableEntityTypes() {
+    const availableEntities = await getAvailableEntityTypes();
+    setAvailableEntityTypes(availableEntities);
+  }
 
   async function loadTemplateDB(id) {
     let showingTemplate = await getTemplateWithPropertiesByID(id);
@@ -72,7 +77,7 @@ export default function LayoutItemTemplates() {
   // CRUD FUNCTIONS
   async function createTemplate(modalInternalState) {
     const name = modalInternalState.fields[0].property_value;
-    const [createResponse] = await createTemplateDB(name);
+    const [createResponse] = await createTemplateDB(name, modalInternalState.selectValue.value);
     await loadAvailableTemplatesDB();
     selectTemplateID(createResponse.insertId);
   }
@@ -129,6 +134,7 @@ export default function LayoutItemTemplates() {
   // USE EFFECT FUNCTIONS
   useEffect(() => {
     loadAvailableTemplatesDB();
+    loadAvailableEntityTypes();
   }, []);
 
   useEffect(() => {
@@ -169,8 +175,9 @@ export default function LayoutItemTemplates() {
         right={20}
       />
       <Gridlet
-        showColorEditor
-        showFontEditor
+        showColorEditor={false}
+        showFontEditor={false}
+        showActiveFieldsEditor
         name="root"
         level={0}
         scale={1}
@@ -185,6 +192,7 @@ export default function LayoutItemTemplates() {
           {...modalState}
           close={closeModal}
           cancel={closeModal}
+          availableEntityTypes={availableEntityTypes}
           validators={[
             new EmptyFieldsValidator(),
             new DuplicateValidator(selectOptionValues)

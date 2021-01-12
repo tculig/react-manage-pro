@@ -1,4 +1,4 @@
-import { REACT_APP_MAIN_DATABASE, fetchURL, removeElementDB, createElementDB, updateElementDB } from "../../../nodeJS/Interface";
+import { REACT_APP_MAIN_DATABASE, fetchURL, removeElementDB, createElementDB, updateElementDB, selectAllDB, selectElementsDB } from "../../../nodeJS/Interface";
 import { getToday } from "../../../utils";
 
 export async function getTemplateByID(id) {
@@ -26,6 +26,7 @@ export async function getTemplateWithPropertiesByID(id) {
     case 1:
       templateData[0].static = !!templateData[0].static;
       templateData[0].fontConfiguration = JSON.parse(templateData[0].fontConfiguration);
+      templateData[0].entityDataConfiguration = JSON.parse(templateData[0].entityDataConfiguration);
       break;
     default:
       console.log("More than one result returned in getTemplateWithPropertiesByID!");
@@ -39,11 +40,12 @@ export async function getAvailableTemplates() {
   return templateData;
 }
 
-export async function createTemplateDB(name) {
+export async function createTemplateDB(name, entityTypeId) {
   const insertResponse = await createElementDB(REACT_APP_MAIN_DATABASE, "template", {
     name,
     dateCreated: getToday(),
-    active: 1
+    active: 1,
+    entityTypeId
   });
   const defaultFontConfiguration = {
     fontFamily: "Open Sans",
@@ -54,6 +56,9 @@ export async function createTemplateDB(name) {
     fontSize: 24,
     color: "black"
   };
+  const entityTypeProperties = await selectElementsDB(REACT_APP_MAIN_DATABASE, "entity_type_properties", {
+    entity_type_id: entityTypeId
+  });
   const insertPropertiesResponse = await createElementDB(REACT_APP_MAIN_DATABASE, "template_properties", {
     template_id: insertResponse.insertId,
     i: "rootBlock",
@@ -63,7 +68,8 @@ export async function createTemplateDB(name) {
     h: 10,
     static: 0,
     parent: "root",
-    fontConfiguration: JSON.stringify(defaultFontConfiguration)
+    fontConfiguration: JSON.stringify(defaultFontConfiguration),
+    entityDataConfiguration: JSON.stringify(entityTypeProperties.map(el => el.id))
   });
   return [insertResponse, insertPropertiesResponse];
 }
@@ -78,4 +84,14 @@ export async function updateTemplateDB(modalState) {
     name: modalState.fields[0].property_value
   });
   return updateResponse;
+}
+
+export async function getEntityTypesWithProperties(id) {
+  const entityTypeData = await fetch(`${fetchURL}/getEntityTypesWithProperties?databaseID=${REACT_APP_MAIN_DATABASE}&id=${id}`)
+    .then(response => { return response.json(); });
+  return entityTypeData;
+}
+
+export async function getAvailableEntityTypes() {
+  return selectAllDB(REACT_APP_MAIN_DATABASE, "entity_type");
 }

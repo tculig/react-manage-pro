@@ -36,8 +36,8 @@ export async function updateElementDB(database, table, data) {
 export async function removeElementDB(database, table, data) {
   return forwardPost(database, table, "/removeElement", data);
 }
-export async function selectElementDB(database, table, data) {
-  return forwardPost(database, table, "/selectElement", data);
+export async function selectElementsDB(database, table, data) {
+  return forwardPost(database, table, "/selectElements", data);
 }
 export async function selectAllDB(database, table) {
   return forwardPost(database, table, "/selectAll");

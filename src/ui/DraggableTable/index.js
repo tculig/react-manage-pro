@@ -1,46 +1,41 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import Draggable from "react-draggable";
 
 export default function MyDraggableTable(props) {
+  const {
+    onChange,
+    rowHeight,
+    transitionSpeed,
+    showRowCount,
+    tableRows,
+  } = props;
+  console.log(tableRows);
   const [state, setState] = useState({
-    entityName: "",
     hiddenRowExpanded: -99,
     shownRowHidden: -99,
     snapToGrid: null,
-    fields: props.fields,
+    resetDraggable: false,
+    lastDraggableState: false,
+    draggedRow: null,
+    direction: null,
+    isOverCell: null,
   });
 
-  useEffect(() => {
-    setState({
-      ...state,
-      fields: props.fields,
-    });
-  }, [props.fields]);
-
-  useEffect(() => {
-    if (props.onFieldsChange) {
-      if (state.fields != props.fields) {
-        props.onFieldsChange(state.fields);
-      }
-    }
-  }, [state.fields]);
-
   function handleDrag(x, e) {
-    // const rowID = e.node.attributes.rowid.value;
-    const rowHeight = props.rowHeight;
-    const rowID = parseInt(e.node.childNodes[0].attributes.rowid.value);
+    const rowID = parseInt(e.node.childNodes[0].attributes.rowid.value, 10);
     const isOverCell = rowID + Math.round(e.lastY / rowHeight);
-    if (isOverCell < 0 || isOverCell > state.fields.length - 1) return;
+    if (isOverCell < 0 || isOverCell > tableRows.length - 1) return;
     if (
-      isOverCell != state.isOverCell &&
-      state.hiddenRowExpanded != isOverCell
+      isOverCell !== state.isOverCell
+      && state.hiddenRowExpanded !== isOverCell
     ) {
       setState({
         ...state,
         draggedRow: rowID,
-        isOverCell: isOverCell,
-        hiddenRowExpanded: isOverCell != rowID ? isOverCell : -99,
-        shownRowHidden: isOverCell != rowID ? rowID : -99,
+        isOverCell,
+        hiddenRowExpanded: isOverCell !== rowID ? isOverCell : -99,
+        shownRowHidden: isOverCell !== rowID ? rowID : -99,
         direction: isOverCell < rowID ? "up" : "down",
         snapToGrid: null,
         lastDraggableState: state.resetDraggable,
@@ -59,11 +54,6 @@ export default function MyDraggableTable(props) {
     setTimeout(() => {
       setState({
         ...state,
-        fields: moveArrayElement(
-          state.fields,
-          state.draggedRow,
-          state.isOverCell
-        ),
         draggedRow: null,
         isOverCell: null,
         hiddenRowExpanded: -99,
@@ -73,46 +63,34 @@ export default function MyDraggableTable(props) {
         resetDraggable: !state.resetDraggable,
         lastDraggableState: state.resetDraggable,
       });
-    }, props.transitionSpeed);
+      onChange();
+    }, transitionSpeed);
   }
 
-  function moveArrayElement(arrayIn, fromIndex, toIndex) {
-    const newRows = [...arrayIn];
-    newRows.splice(toIndex, 0, newRows.splice(fromIndex, 1)[0]);
-    return newRows;
-  }
-
-  function generateField(stateObj, i) {
-    let trans =
-      state.draggedRow == i && state.snapToGrid != null
-        ? "transform " + props.transitionSpeed + "ms"
-        : "transform 0s";
+  function generateField(i) {
+    const trans = (state.draggedRow === i && state.snapToGrid !== null
+      ? `transform ${transitionSpeed}ms`
+      : "transform 0s");
     return (
       <Draggable
         onDrag={handleDrag}
         onStop={onDragEnd}
-        position={state.draggedRow == i ? state.snapToGrid : null}
+        position={state.draggedRow === i ? state.snapToGrid : null}
         handle=".handle"
-        key={state.resetDraggable ? "reset" + i : i}
+        key={state.resetDraggable ? `reset${i}` : i}
       >
         <div
           className="handle"
           style={{
             top:
-              state.shownRowHidden == i
-                ? state.direction == "up"
-                  ? -props.rowHeight
+              state.shownRowHidden === i
+                ? state.direction === "up"
+                  ? -rowHeight
                   : "0"
-                : "0", //this is hacky but works well
-            transition:
-              "height " +
-              props.transitionSpeed +
-              "ms, top " +
-              props.transitionSpeed +
-              "ms," +
-              trans,
+                : "0", // this is hacky but works well
+            transition: `height ${transitionSpeed}ms, top ${transitionSpeed}ms,${trans}`,
             position: "relative",
-            height: state.shownRowHidden == i ? "0" : props.rowHeight, //this is hacky but works well
+            height: state.shownRowHidden === i ? "0" : rowHeight, // this is hacky but works well
           }}
         >
           <div
@@ -127,7 +105,7 @@ export default function MyDraggableTable(props) {
               width: "100%",
             }}
           >
-            {props.showRowCount && (
+            {showRowCount && (
               <div
                 className="myTd"
                 style={{
@@ -145,7 +123,7 @@ export default function MyDraggableTable(props) {
                 {i + 1}
               </div>
             )}
-            {props.tableRows[i]}
+            {tableRows[i]}
           </div>
         </div>
       </Draggable>
@@ -153,38 +131,35 @@ export default function MyDraggableTable(props) {
   }
 
   function calcHeight(i) {
-    if (state.direction == undefined) return "0";
-    if (state.direction == "up") {
-      if (state.hiddenRowExpanded == i) {
+    if (state.direction === undefined) return "0";
+    if (state.direction === "up") {
+      if (state.hiddenRowExpanded === i) {
         return props.rowHeight;
-      } else {
-        return "0";
       }
-    } else {
-      if (state.hiddenRowExpanded + 1 == i) {
-        return props.rowHeight;
-      } else {
-        return "0";
-      }
+      return "0";
     }
+    if (state.hiddenRowExpanded + 1 === i) {
+      return props.rowHeight;
+    }
+    return "0";
   }
+
   function generateFields() {
-    let fieldsHTML = [];
+    const fieldsHTML = [];
     fieldsHTML.push(
       <div
-        key={"fake0"}
-        id={"fake0"}
+        key="fake0"
+        id="fake0"
         className="myTr"
         style={{
           transition:
-            state.lastDraggableState != state.resetDraggable
+            state.lastDraggableState !== state.resetDraggable
               ? "height 0s"
-              : "height " + props.transitionSpeed + "ms",
+              : `height ${transitionSpeed}ms`,
           padding: "0px",
           margin: "0px",
           lineHeight: "0",
           width: "100%",
-          //border:"1px solid #dee2e6",
           overflow: "hidden",
           height: calcHeight(0),
         }}
@@ -201,26 +176,25 @@ export default function MyDraggableTable(props) {
             overflow: "hidden",
             height: "0",
           }}
-        ></div>
+        />
       </div>
     );
-    for (let i = 0; i < state.fields.length; i++) {
-      fieldsHTML.push(generateField(state.fields[i], i));
+    for (let i = 0; i < tableRows.length; i++) {
+      fieldsHTML.push(generateField(i));
       fieldsHTML.push(
         <div
-          key={"fake" + (i + 1)}
-          id={"fake" + (i + 1)}
+          key={`fake${(i + 1)}`}
+          id={`fake${(i + 1)}`}
           className="myTr"
           style={{
             transition:
-              state.lastDraggableState != state.resetDraggable
+              state.lastDraggableState !== state.resetDraggable
                 ? "height 0s"
-                : "height " + props.transitionSpeed + "ms",
+                : `height ${transitionSpeed}ms`,
             padding: "0px",
             margin: "0px",
             lineHeight: "0",
             width: "100%",
-            //border:"1px solid #dee2e6",
             overflow: "hidden",
             height: calcHeight(i + 1),
           }}
@@ -237,7 +211,7 @@ export default function MyDraggableTable(props) {
               overflow: "hidden",
               height: "0",
             }}
-          ></div>
+          />
         </div>
       );
     }
@@ -246,3 +220,18 @@ export default function MyDraggableTable(props) {
   const html = generateFields();
   return html;
 }
+
+MyDraggableTable.propTypes = {
+  transitionSpeed: PropTypes.number,
+  rowHeight: PropTypes.number,
+  showRowCount: PropTypes.bool,
+  tableRows: PropTypes.arrayOf(PropTypes.object),
+  onChange: PropTypes.func.isRequired,
+};
+
+MyDraggableTable.defaultProps = {
+  transitionSpeed: 600,
+  rowHeight: 55,
+  showRowCount: true,
+  tableRows: []
+};

@@ -59,7 +59,7 @@ export default function FontEditor(props) {
   }
   function updateFontColor(newColor) {
     setInternalState({
-      showColorPicker: false
+      showColorPicker: false,
     });
     onChange({
       color: newColor.hex,
@@ -86,8 +86,14 @@ export default function FontEditor(props) {
   const { showColorPicker } = internalState;
 
   return (
-    <div style={{ position: "absolute", zIndex: "100" }}>
-      <Draggable handle=".handle" scale={scale} positionOffset={positionOffset}>
+    <div
+      style={{
+        position: "absolute",
+        zIndex: "100",
+        transform: `scale(${scale})`,
+      }}
+    >
+      <Draggable handle=".handle" positionOffset={positionOffset}>
         <div style={{ margin: "2px" }}>
           <div
             style={{

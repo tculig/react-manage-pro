@@ -47,7 +47,7 @@ module.exports = function (app, connection) {
     });
   });
 
-  app.post("/selectElement", function (req, res) {
+  app.post("/selectElements", function (req, res) {
     utils.getPostData(req, (element) => {
       utils.runQueryFromObject(
         connection,

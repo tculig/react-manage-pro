@@ -1,0 +1,23 @@
+
+.myTableMock .myTh{
+    padding: 12px;
+    font-size: 18px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+
+}
+
+.myTableMock .myTd{
+    padding: 8px;
+    font-size: 18px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-bottom: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+}
+
+.myTableMock .myTd:first-child {
+    border-left: 1px solid #dee2e6;
+}
+

@@ -6,36 +6,40 @@ import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import ColorEditor from "../ColorEditor";
 import FontEditor from "../FontEditor";
+import ActiveFieldsEditor from "../ActiveFieldsEditor";
 import { changeAttributeRedux, commitLayoutToDBRedux } from "../../redux/templatesSlice";
 import { modReducer } from "../../utils";
 
 /* eslint-disable */
 export default function Gridlet(props) {
   const dispatch = useDispatch();
-  const { layout, cols, rows, scale, width, height, name, level, showColorEditor, showFontEditor } = props;
+  const { layout, cols, rows, scale, width, height, name, level, showColorEditor, showFontEditor, showActiveFieldsEditor } = props;
   const rowHeight = height / rows;
   const scaleFactor = 1;
   const layoutCurrent =  layout.filter((el)=>{return el.parent===name});
   const templateElement = layoutCurrent[0];
   const templateFontConfiguration = layoutCurrent[0]?.fontConfiguration;
+  const templateEntityDataConfiguration = layoutCurrent[0]?.entityDataConfiguration;
+  const templateEntityTypeId = layoutCurrent[0]?.entityTypeId;
   const templateGridletName = layoutCurrent[0]?.i;
   const templateGridletColor = layoutCurrent[0]?.bgcolor;
   const [state] = useReducer(modReducer, {
     showColorEditorState: showColorEditor,
-    showFontEditorState: showFontEditor
+    showFontEditorState: showFontEditor,
+    showActiveFieldsEditorState: showActiveFieldsEditor
   });
 
   function updateElementColor(color) {
     dispatch(changeAttributeRedux({gridletName: templateGridletName, value: color, attributeName: "bgcolor"}));
   }
 
-  function updateElementFontConfiguration(updatedAttribute) {
+  function updateReduxElement(attributeName, updatedAttribute) {
     if(templateElement !== undefined){
       const newFontConfiguration = {
         ...templateFontConfiguration,
         ...updatedAttribute
       }
-      dispatch(changeAttributeRedux({gridletName: templateGridletName, value: newFontConfiguration, attributeName: "fontConfiguration"}));
+      dispatch(changeAttributeRedux({gridletName: templateGridletName, value: newFontConfiguration, attributeName: attributeName}));
     }
   }
 
@@ -43,11 +47,7 @@ export default function Gridlet(props) {
     dispatch(commitLayoutToDBRedux());
   }
 
-  function cancelColorChange() {
-    console.log("cancel");
-  }
-
-  function cancelFontConfigurationChange() {
+  function cancelLayoutChange() {
     console.log("cancel");
   }
 
@@ -71,7 +71,7 @@ export default function Gridlet(props) {
     );
   }
 
-  const { showColorEditorState, showFontEditorState } = state;
+  const { showColorEditorState, showFontEditorState, showActiveFieldsEditorState } = state;
  
   return (
     <div style={{ position:"relative" }}>
@@ -79,19 +79,31 @@ export default function Gridlet(props) {
       <ColorEditor
         onChange={updateElementColor}
         onCommit={commitLayoutToDB}
-        onCommitCancel={cancelColorChange}
+        onCommitCancel={cancelLayoutChange}
         positionOffset={{x:6,y:6}}
+        scale={0.8}
         color={templateGridletColor || undefined}
       />
       }
       { showFontEditorState && 
       <FontEditor
-        onChange={updateElementFontConfiguration}
+        onChange={(updatedAttribute) => {updateReduxElement("fontConfiguration",updatedAttribute)}}
         onCommit={commitLayoutToDB}
-        onCommitCancel={cancelFontConfigurationChange}
+        onCommitCancel={cancelLayoutChange}
         gridletName={templateGridletName}
         positionOffset={{x:6,y:324}}
+        scale={0.8}
         {...templateFontConfiguration}
+      />
+      }
+      { showActiveFieldsEditorState && 
+      <ActiveFieldsEditor
+        onChange={(updatedAttribute) => {updateReduxElement("entityDataConfiguration",updatedAttribute)}}
+        onCommit={commitLayoutToDB}
+        onCommitCancel={cancelLayoutChange}
+        positionOffset={{x:6,y:6}}
+        entityDataConfiguration={templateEntityDataConfiguration}
+        entityTypeId={templateEntityTypeId}
       />
       }
       <GridLayout
@@ -126,7 +138,8 @@ Gridlet.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   showColorEditor: PropTypes.bool,
-  showFontEditor: PropTypes.bool
+  showFontEditor: PropTypes.bool,
+  showActiveFieldsEditor: PropTypes.bool
 };
 
 Gridlet.defaultProps = {
@@ -136,5 +149,6 @@ Gridlet.defaultProps = {
   width: 1000,
   height: 1000,
   showColorEditor: false,
-  showFontEditor: false
+  showFontEditor: false,
+  showActiveFieldsEditor: false
 };

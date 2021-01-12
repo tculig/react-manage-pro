@@ -8,7 +8,7 @@ import { renameKeys, modReducer } from "../../../utils";
 import EntityTypeModal from "../../../modals/EntityTypeModal";
 import ConfirmationModal from "../../../modals/ConfirmationModal";
 import InfoModal from "../../../modals/InfoModal";
-import { createEntityTypeDB, updateEntityTypeDB, getAvailableEntityTypes, removeEntityTypeDB } from "./dbcalls";
+import { createEntityTypeDB, updateEntityTypeDB, getAvailableEntityTypesWithFieldCount, removeEntityTypeDB } from "./dbcalls";
 import "react-data-grid/dist/react-data-grid.css";
 import "../../../ui/GridUtils/style.scss";
 import "./style.scss";
@@ -30,7 +30,7 @@ export default function EntityTypes() {
   });
 
   async function loadDataFromDB() {
-    const availableEntities = await getAvailableEntityTypes();
+    const availableEntities = await getAvailableEntityTypesWithFieldCount();
     setState({
       gridRows: availableEntities
     });

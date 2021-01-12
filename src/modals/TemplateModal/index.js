@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import PropTypes from "prop-types";
 import { Input } from "reactstrap";
+import Select from "react-select";
 import { modReducer } from "../../utils";
 import GenericModal from "../GenericModal";
 import Validator from "../../validators/Validator";
@@ -8,12 +9,13 @@ import { propertyTypes } from "../../utils/Constants";
 import "./style.scss";
 
 export default function TemplateModal(props) {
-  const { validators, loadID, fields } = props;
-
+  const { validators, loadID, fields, availableEntityTypes } = props;
   const [state, setState] = useReducer(modReducer, {
     loadID,
     fields,
     validatorMessage: "",
+    selectValue: { value: availableEntityTypes[0]?.id, label: availableEntityTypes[0]?.name },
+    selectOptions: availableEntityTypes.map(el => ({ value: el.id, label: el.name }))
   });
 
   function handlePropertyValue(newValue, i) {
@@ -26,7 +28,7 @@ export default function TemplateModal(props) {
 
   function generateField(stateObj, i) {
     return (
-      <div key={i} className="padding8px" style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+      <div key={i} className="paddingdiv8px" style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
         <div style={{ minWidth: "100px", textAlign: "right", paddingRight: "10px" }}>
           {stateObj.property_name}
         </div>
@@ -66,17 +68,22 @@ export default function TemplateModal(props) {
     </div>
   );
 
+  const { selectValue, selectOptions } = state;
+
   const message = (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          margin: "4px",
-        }}
-      >
-        {generateFields()}
+      {generateFields()}
+      <div className="paddingdiv8px" style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+        <div style={{ minWidth: "100px", textAlign: "right", paddingRight: "10px" }}>
+          Entity type:
+        </div>
+        <div style={{ width: "75%" }}>
+          <Select
+            onChange={(selectedOption) => setState({ selectValue: selectedOption })}
+            value={selectValue}
+            options={selectOptions}
+          />
+        </div>
       </div>
     </div>
   );
@@ -137,11 +144,13 @@ TemplateModal.propTypes = {
       editable: PropTypes.bool
     })
   ),
+  availableEntityTypes: PropTypes.arrayOf(PropTypes.object)
 };
 
 TemplateModal.defaultProps = {
   validators: null,
   loadID: null,
   cancel: () => {},
-  fields: []
+  fields: [],
+  availableEntityTypes: []
 };
