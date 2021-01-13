@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { first as _first } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 import { selectLayoutRedux, storeLayoutRedux } from "../../../redux/templatesSlice";
-import { getTemplateWithPropertiesByID, getAvailableTemplates, removeTemplateDB, createTemplateDB, updateTemplateDB, getAvailableEntityTypes } from "./dbcalls";
+import { getTemplateWithPropertiesByID, getAvailableTemplates, removeTemplateDB, fillEntityDataConfiguration,
+  createTemplateDB, updateTemplateDB, getAvailableEntityTypes } from "./dbcalls";
 import Gridlet from "../../../components/Gridlet";
 import ControlWidget from "../../../ui/ControlWidget";
 import DuplicateValidator from "../../../validators/DuplicateValidator";
@@ -59,6 +60,7 @@ export default function LayoutItemTemplates() {
   async function loadTemplateDB(id) {
     let showingTemplate = await getTemplateWithPropertiesByID(id);
     showingTemplate = nullToUndefinedArray(showingTemplate);
+    showingTemplate = await fillEntityDataConfiguration(showingTemplate);
     dispatch(storeLayoutRedux(showingTemplate));
   }
   // UI FUNCTIONS

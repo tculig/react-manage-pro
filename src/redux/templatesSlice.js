@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-function modifyLayout(layout, gridletName, property, value) {
+function modifyLayout(layout, gridletId, value) {
   for (let i = 0; i < layout.length; i++) {
-    if (layout[i].i === gridletName) {
-      layout[i][property] = value;
+    if (layout[i].gridletId === gridletId) {
+      layout[i] = {
+        ...layout[i],
+        ...value
+      };
       layout[i].modified = true;
     }
   }
@@ -21,11 +24,12 @@ export const templatesSlice = createSlice({
     },
     changeAttributeRedux: (state, action) => {
       let { layout } = state;
-      layout = modifyLayout(layout, action.payload.gridletName, action.payload.attributeName, action.payload.value);
+      layout = modifyLayout(layout, action.payload.gridletId, action.payload.value);
       state.layout = layout;
     },
     commitLayoutToDBRedux: () => {
       console.log("save");
+      // const newConfig = entityDataConfiguration.filter(el => el.checked).map(el => el.id);
     }
   },
 });

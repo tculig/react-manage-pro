@@ -1,5 +1,6 @@
-import { REACT_APP_MAIN_DATABASE, fetchURL, removeElementDB, createElementDB, updateElementDB, selectAllDB, selectElementsDB } from "../../../nodeJS/Interface";
+import { REACT_APP_MAIN_DATABASE, fetchURL, getBatchJoinedEntities, removeElementDB, createElementDB, updateElementDB, selectAllDB, selectElementsDB } from "../../../nodeJS/Interface";
 import { getToday } from "../../../utils";
+import { propertyTypes } from "../../../utils/Constants";
 
 export async function getTemplateByID(id) {
   const templateData = await fetch(`${fetchURL}/getTemplateByID?databaseID=${REACT_APP_MAIN_DATABASE}&id=${id}`).then(response => { return response.json(); });
@@ -33,6 +34,43 @@ export async function getTemplateWithPropertiesByID(id) {
       break;
   }
   return templateData;
+}
+// Normally this would be handled by an ORM, but this project is too small for that
+export async function fillEntityDataConfiguration(layout) {
+  const entityIds = [];
+  for (let i = 0; i < layout.length; i++) {
+    if (!entityIds.includes(layout[i].entityTypeId)) {
+      entityIds.push(layout[i].entityTypeId);
+    }
+  }
+  const result = await getBatchJoinedEntities(
+    REACT_APP_MAIN_DATABASE,
+    entityIds
+  );
+  const groupedResult = {};
+  entityIds.forEach(el => {
+    groupedResult[el] = [];
+  });
+  result.forEach(el => {
+    // map property types
+    el.property_type = propertyTypes[el.property_type];
+    // group properties
+    groupedResult[el.entity_type_id].push(el);
+  });
+  const filledLayout = layout.map(layoutEl => {
+    let edc = groupedResult[layoutEl.entityTypeId];
+    edc = edc.map(el => {
+      if (layoutEl.entityDataConfiguration.includes(el.id)) {
+        el.checked = true;
+      } else {
+        el.checked = false;
+      }
+      return el;
+    });
+    layoutEl.entityDataConfiguration = edc;
+    return layoutEl;
+  });
+  return filledLayout;
 }
 
 export async function getAvailableTemplates() {

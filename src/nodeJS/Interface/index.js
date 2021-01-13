@@ -39,6 +39,13 @@ export async function removeElementDB(database, table, data) {
 export async function selectElementsDB(database, table, data) {
   return forwardPost(database, table, "/selectElements", data);
 }
+export async function selectElementDB(database, table, data) {
+  const results = await forwardPost(database, table, "/selectElements", data);
+  if (results.length !== 1) {
+    console.log("selectElementDB didn't return a unique element!");
+  }
+  return results[0];
+}
 export async function selectAllDB(database, table) {
   return forwardPost(database, table, "/selectAll");
 }
@@ -47,4 +54,7 @@ export async function createTableDB(database, table, data) {
 }
 export async function dropTableDB(database, table, data) {
   return forwardPost(database, table, "/dropTable", data);
+}
+export async function getBatchJoinedEntities(database, data) {
+  return forwardPost(database, null, "/getBatchJoinedEntities", data);
 }

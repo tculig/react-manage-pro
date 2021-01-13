@@ -21,7 +21,7 @@ export default function Gridlet(props) {
   const templateFontConfiguration = layoutCurrent[0]?.fontConfiguration;
   const templateEntityDataConfiguration = layoutCurrent[0]?.entityDataConfiguration;
   const templateEntityTypeId = layoutCurrent[0]?.entityTypeId;
-  const templateGridletName = layoutCurrent[0]?.i;
+  const templateGridletId = layoutCurrent[0]?.gridletId;
   const templateGridletColor = layoutCurrent[0]?.bgcolor;
   const [state] = useReducer(modReducer, {
     showColorEditorState: showColorEditor,
@@ -30,16 +30,21 @@ export default function Gridlet(props) {
   });
 
   function updateElementColor(color) {
-    dispatch(changeAttributeRedux({gridletName: templateGridletName, value: color, attributeName: "bgcolor"}));
+    dispatch(changeAttributeRedux({gridletId: templateGridletId, value: { bgcolor: color}}));
   }
 
-  function updateReduxElement(attributeName, updatedAttribute) {
+  function updateReduxFontConfiguration(updatedAttribute) {
     if(templateElement !== undefined){
       const newFontConfiguration = {
         ...templateFontConfiguration,
         ...updatedAttribute
       }
-      dispatch(changeAttributeRedux({gridletName: templateGridletName, value: newFontConfiguration, attributeName: attributeName}));
+      dispatch(changeAttributeRedux({gridletId: templateGridletId, value: { fontConfiguration: newFontConfiguration}}));
+    }
+  }
+  function updateReduxElement(updatedAttribute) {
+    if(templateElement !== undefined){
+      dispatch(changeAttributeRedux({gridletId: templateGridletId, value: updatedAttribute}));
     }
   }
 
@@ -87,10 +92,9 @@ export default function Gridlet(props) {
       }
       { showFontEditorState && 
       <FontEditor
-        onChange={(updatedAttribute) => {updateReduxElement("fontConfiguration",updatedAttribute)}}
+        onChange={(updatedAttribute) => {updateReduxFontConfiguration(updatedAttribute)}}
         onCommit={commitLayoutToDB}
         onCommitCancel={cancelLayoutChange}
-        gridletName={templateGridletName}
         positionOffset={{x:6,y:324}}
         scale={0.8}
         {...templateFontConfiguration}
@@ -98,12 +102,13 @@ export default function Gridlet(props) {
       }
       { showActiveFieldsEditorState && 
       <ActiveFieldsEditor
-        onChange={(updatedAttribute) => {updateReduxElement("entityDataConfiguration",updatedAttribute)}}
+        onChange={(updatedAttribute) => {updateReduxElement(updatedAttribute)}}
         onCommit={commitLayoutToDB}
         onCommitCancel={cancelLayoutChange}
         positionOffset={{x:6,y:6}}
         entityDataConfiguration={templateEntityDataConfiguration}
         entityTypeId={templateEntityTypeId}
+        entityTypeName={templateEntityDataConfiguration ? templateEntityDataConfiguration[0]?.name : ""}
       />
       }
       <GridLayout

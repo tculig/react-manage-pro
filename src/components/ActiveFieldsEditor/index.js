@@ -1,53 +1,20 @@
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Draggable from "react-draggable";
 import { Button, Input, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import DraggableTable from "../../ui/DraggableTable";
 import "./style.scss";
-import { getEntityTypeProperties } from "./dbcalls";
 
 export default function ActiveFieldsEditor(props) {
   const {
     onCommit,
     onCommitCancel,
-    onChange,
+    onChange, //eslint-disable-line
     scale,
     positionOffset,
-    entityTypeId,
+    entityTypeName,
     entityDataConfiguration,
   } = props;
-
-  const [entityTypeState, setEntityTypeState] = useState([]);
-
-  useEffect(() => {
-    async function asyncFunc() {
-      console.log(entityTypeId);
-      if (entityTypeId === null) return;
-      let entityTypeProperties = await getEntityTypeProperties(entityTypeId);
-      entityTypeProperties = entityTypeProperties.map((el) => {
-        if (entityDataConfiguration.includes(el.id)) {
-          el.checked = true;
-        } else {
-          el.checked = false;
-        }
-        return el;
-      });
-      setEntityTypeState(entityTypeProperties);
-    }
-    asyncFunc();
-  }, [entityTypeId]);
-
-  useEffect(() => {
-    const entityTypeProperties = entityTypeState.map((el) => {
-      if (entityDataConfiguration.includes(el.id)) {
-        el.checked = true;
-      } else {
-        el.checked = false;
-      }
-      return el;
-    });
-    setEntityTypeState(entityTypeProperties);
-  }, [entityDataConfiguration]);
 
   function handleChangeComplete() {
     onCommit();
@@ -57,15 +24,18 @@ export default function ActiveFieldsEditor(props) {
   }
 
   function toggleChecked(i) {
-    const newFields = [...entityTypeState];
+    const newFields = JSON.parse(JSON.stringify(entityDataConfiguration));
     newFields[i].checked = !newFields[i].checked;
-    const newConfig = newFields.map((el) => (el.checked ? el.id : null));
-    console.log(newConfig);
-    onChange(newConfig);
+    onChange({ entityDataConfiguration: newFields });
   }
 
-  function onDraggableChange() {
-    console.log("yolo");
+  function onDraggableChange(newRowOrder) {
+    const newFields = [];
+    newRowOrder.forEach(index => {
+      newFields.push(entityDataConfiguration[index]);
+    });
+    console.log(newFields);
+    onChange({ entityDataConfiguration: newFields });
   }
 
   function generateField(stateObj, i) {
@@ -75,7 +45,7 @@ export default function ActiveFieldsEditor(props) {
           <Input value={stateObj.property_name} disabled />
         </div>
         <div className="myTd" style={{ width: "30%" }}>
-          <Input disabled value={stateObj.property_type} />
+          <Input disabled value={stateObj.property_type.label} />
         </div>
         <div
           className="myTd"
@@ -113,8 +83,8 @@ export default function ActiveFieldsEditor(props) {
 
   function generateTableRows() {
     const fieldsHTML = [];
-    for (let i = 0; i < entityTypeState.length; i++) {
-      fieldsHTML.push(generateField(entityTypeState[i], i));
+    for (let i = 0; i < entityDataConfiguration.length; i++) {
+      fieldsHTML.push(generateField(entityDataConfiguration[i], i));
     }
     return fieldsHTML;
   }
@@ -124,16 +94,22 @@ export default function ActiveFieldsEditor(props) {
       style={{
         position: "absolute",
         zIndex: "100",
-        transform: `scale(${scale})`,
+        transform: `scale(${scale})`
       }}
     >
       <Draggable handle=".handleOuter" positionOffset={positionOffset}>
-        <div style={{ margin: "2px" }}>
+        <div style={{
+          margin: "2px",
+          border: "1px solid lightgrey",
+          borderRadius: "4px",
+          backgroundColor: "white"
+        }}
+        >
           <div
             style={{
               border: "0px solid red",
-              height: "24px",
-              width: "513px",
+              height: "80px",
+              width: "100%",
               position: "absolute",
               top: "0px",
               zIndex: "100",
@@ -160,7 +136,7 @@ export default function ActiveFieldsEditor(props) {
                 Entity name:
               </div>
               <div style={{ width: "70%" }}>
-                <Input disabled value="PENIS" />
+                <Input disabled value={entityTypeName} />
               </div>
             </div>
           </ModalHeader>
@@ -228,8 +204,8 @@ ActiveFieldsEditor.propTypes = {
   onChange: PropTypes.func.isRequired,
   onCommit: PropTypes.func.isRequired,
   onCommitCancel: PropTypes.func.isRequired,
-  entityDataConfiguration: PropTypes.arrayOf(PropTypes.number),
-  entityTypeId: PropTypes.number,
+  entityDataConfiguration: PropTypes.arrayOf(PropTypes.object),
+  entityTypeName: PropTypes.string,
   scale: PropTypes.number,
   positionOffset: PropTypes.shape({
     x: PropTypes.number,
@@ -241,5 +217,5 @@ ActiveFieldsEditor.defaultProps = {
   scale: 1,
   positionOffset: { x: 0, y: 0 },
   entityDataConfiguration: [],
-  entityTypeId: null,
+  entityTypeName: "",
 };

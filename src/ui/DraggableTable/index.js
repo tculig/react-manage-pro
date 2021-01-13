@@ -10,7 +10,7 @@ export default function MyDraggableTable(props) {
     showRowCount,
     tableRows,
   } = props;
-  console.log(tableRows);
+
   const [state, setState] = useState({
     hiddenRowExpanded: -99,
     shownRowHidden: -99,
@@ -43,6 +43,12 @@ export default function MyDraggableTable(props) {
     }
   }
 
+  function moveArrayElement(arrayIn, fromIndex, toIndex) {
+    const newRows = [...arrayIn];
+    newRows.splice(toIndex, 0, newRows.splice(fromIndex, 1)[0]);
+    return newRows;
+  }
+
   function onDragEnd() {
     setState({
       ...state,
@@ -52,6 +58,8 @@ export default function MyDraggableTable(props) {
       },
     });
     setTimeout(() => {
+      const reorderedRows = moveArrayElement(tableRows.map((el, index) => index), state.draggedRow, state.isOverCell);
+      onChange(reorderedRows);
       setState({
         ...state,
         draggedRow: null,
@@ -63,7 +71,6 @@ export default function MyDraggableTable(props) {
         resetDraggable: !state.resetDraggable,
         lastDraggableState: state.resetDraggable,
       });
-      onChange();
     }, transitionSpeed);
   }
 
