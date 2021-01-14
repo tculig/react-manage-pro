@@ -134,7 +134,7 @@ export default function Gridlet(props) {
     showFontEditorState,
     showActiveFieldsEditorState,
   } = state;
-  if(parentLayoutElement) console.log(parentLayoutElement.entityDataConfiguration.map(el => el.property_name).join("\n"));
+  console.log(parentLayoutElement);
   return (
     <div style={{ position: "relative" }}>
       {showColorEditorState && (
@@ -202,8 +202,8 @@ export default function Gridlet(props) {
       </GridLayout>) :
       <div style={{
         display: "flex",
-        alignItems: "center",
-        flexDirection: "column"
+        flexDirection: "column",
+        ...parentLayoutElement.fontConfiguration
       }}>
         {parentLayoutElement && parentLayoutElement.entityDataConfiguration.map(el => el.checked ? (<div key={ el.id }>{el.property_name}</div>): null)}
       </div>

@@ -2,10 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 function modifyLayout(layout, gridletId, value) {
   for (let i = 0; i < layout.length; i++) {
-    console.log(layout[i].gridletId);
-    console.log(gridletId);
     if (layout[i].gridletId === gridletId) {
-      console.log("MAGA");
       layout[i] = {
         ...layout[i],
         ...value

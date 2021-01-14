@@ -148,7 +148,6 @@ export default function LayoutItemTemplates() {
   // VARIABLES
   const rootRef = useRef();
   const layout = useSelector(selectLayoutRedux);
-  console.log(layout);
   const [width, height] = [
     rootRef.current?.offsetWidth,
     rootRef.current?.offsetHeight,
