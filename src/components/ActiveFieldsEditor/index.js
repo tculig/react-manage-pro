@@ -14,6 +14,9 @@ export default function ActiveFieldsEditor(props) {
     positionOffset,
     entityTypeName,
     entityDataConfiguration,
+    right,
+    left,
+    top
   } = props;
 
   function handleChangeComplete() {
@@ -31,10 +34,9 @@ export default function ActiveFieldsEditor(props) {
 
   function onDraggableChange(newRowOrder) {
     const newFields = [];
-    newRowOrder.forEach(index => {
+    newRowOrder.forEach((index) => {
       newFields.push(entityDataConfiguration[index]);
     });
-    console.log(newFields);
     onChange({ entityDataConfiguration: newFields });
   }
 
@@ -92,56 +94,41 @@ export default function ActiveFieldsEditor(props) {
   return (
     <div
       style={{
-        position: "absolute",
+        position: "relative",
         zIndex: "100",
-        transform: `scale(${scale})`
+        transform: `scale(${scale})`,
       }}
     >
-      <Draggable handle=".handleOuter" positionOffset={positionOffset}>
-        <div style={{
-          margin: "2px",
-          border: "1px solid lightgrey",
-          borderRadius: "4px",
-          backgroundColor: "white"
+      <div
+        style={{
+          position: "absolute",
+          right,
+          left,
+          top
         }}
-        >
+      >
+        <Draggable handle=".handleOuter" positionOffset={positionOffset}>
           <div
             style={{
-              border: "0px solid red",
-              height: "80px",
-              width: "100%",
-              position: "absolute",
-              top: "0px",
-              zIndex: "100",
-              cursor: "move",
+              margin: "2px",
+              border: "1px solid lightgrey",
+              borderRadius: "4px",
+              backgroundColor: "white",
             }}
-            className="handleOuter"
-          />
-          <ModalHeader>
+          >
             <div
               style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                margin: "4px",
+                border: "0px solid red",
+                height: "80px",
+                width: "100%",
+                position: "absolute",
+                top: "0px",
+                zIndex: "100",
+                cursor: "move",
               }}
-            >
-              <div
-                style={{
-                  width: "30%",
-                  textAlign: "right",
-                  paddingRight: "10px",
-                }}
-              >
-                Entity name:
-              </div>
-              <div style={{ width: "70%" }}>
-                <Input disabled value={entityTypeName} />
-              </div>
-            </div>
-          </ModalHeader>
-          <ModalBody>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+              className="handleOuter"
+            />
+            <ModalHeader>
               <div
                 style={{
                   display: "flex",
@@ -151,51 +138,76 @@ export default function ActiveFieldsEditor(props) {
                 }}
               >
                 <div
-                  className="table  myTableMock"
-                  style={{ position: "relative", transition: "all 0.3s" }}
+                  style={{
+                    width: "30%",
+                    textAlign: "right",
+                    paddingRight: "10px",
+                  }}
+                >
+                  Entity name:
+                </div>
+                <div style={{ width: "70%" }}>
+                  <Input disabled value={entityTypeName} />
+                </div>
+              </div>
+            </ModalHeader>
+            <ModalBody>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    margin: "4px",
+                  }}
                 >
                   <div
-                    className="myTr"
-                    style={{
-                      display: "flex",
-                      fontWeight: "bold",
-                    }}
+                    className="table  myTableMock"
+                    style={{ position: "relative", transition: "all 0.3s" }}
                   >
-                    <div style={{ width: "7%" }} className="myTh">
-                      #
+                    <div
+                      className="myTr"
+                      style={{
+                        display: "flex",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      <div style={{ width: "7%" }} className="myTh">
+                        #
+                      </div>
+                      <div style={{ width: "53%" }} className="myTh">
+                        Field name
+                      </div>
+                      <div style={{ width: "30%" }} className="myTh">
+                        Field type
+                      </div>
+                      <div style={{ width: "15%" }} className="myTh">
+                        Show
+                      </div>
                     </div>
-                    <div style={{ width: "53%" }} className="myTh">
-                      Field name
-                    </div>
-                    <div style={{ width: "30%" }} className="myTh">
-                      Field type
-                    </div>
-                    <div style={{ width: "15%" }} className="myTh">
-                      Show
-                    </div>
-                  </div>
 
-                  <div>
-                    <DraggableTable
-                      onChange={onDraggableChange}
-                      showRowCount
-                      tableRows={generateTableRows()}
-                    />
+                    <div>
+                      <DraggableTable
+                        onChange={onDraggableChange}
+                        showRowCount
+                        tableRows={generateTableRows()}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={handleChangeComplete}>
-              Confirm
-            </Button>
-            <Button color="danger" onClick={handleCancel}>
-              Cancel
-            </Button>
-          </ModalFooter>
-        </div>
-      </Draggable>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={handleChangeComplete}>
+                Confirm
+              </Button>
+              <Button color="danger" onClick={handleCancel}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </div>
+        </Draggable>
+      </div>
     </div>
   );
 }
@@ -206,6 +218,9 @@ ActiveFieldsEditor.propTypes = {
   onCommitCancel: PropTypes.func.isRequired,
   entityDataConfiguration: PropTypes.arrayOf(PropTypes.object),
   entityTypeName: PropTypes.string,
+  right: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  left: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  top: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   scale: PropTypes.number,
   positionOffset: PropTypes.shape({
     x: PropTypes.number,
@@ -218,4 +233,7 @@ ActiveFieldsEditor.defaultProps = {
   positionOffset: { x: 0, y: 0 },
   entityDataConfiguration: [],
   entityTypeName: "",
+  right: null,
+  left: null,
+  top: null,
 };

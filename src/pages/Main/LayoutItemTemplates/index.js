@@ -148,6 +148,7 @@ export default function LayoutItemTemplates() {
   // VARIABLES
   const rootRef = useRef();
   const layout = useSelector(selectLayoutRedux);
+  console.log(layout);
   const [width, height] = [
     rootRef.current?.offsetWidth,
     rootRef.current?.offsetHeight,
@@ -177,8 +178,8 @@ export default function LayoutItemTemplates() {
         right={20}
       />
       <Gridlet
-        showColorEditor={false}
-        showFontEditor={false}
+        showColorEditor
+        showFontEditor
         showActiveFieldsEditor
         name="root"
         level={0}

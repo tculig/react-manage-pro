@@ -21,7 +21,7 @@ module.exports = function (app, connection) {
 
   app.get("/getTemplateWithPropertiesByID", function (req, res) {
     let arrayTemplate = ["id","entityTypeId","name","dateCreated","active"];
-    let arrayTemplateProperties = ["id as gridletId","i","x","y","w","h","static","parent","text","bgcolor","scaleFactor","fontConfiguration","entityDataConfiguration"];
+    let arrayTemplateProperties = ["id as gridletId","x","y","w","h","static","parent","text","bgcolor","scaleFactor","fontConfiguration","entityDataConfiguration"];
     const query = `SELECT 
     ${arrayTemplate.map(el => `et.${el}`).join(",")}
     ,

@@ -17,8 +17,8 @@ export default function ControlWidget(props) {
           style={{
             position: "absolute",
             zIndex: "502",
-            left: right ? null : left || "422px",
-            right: right || null,
+            left,
+            right,
             top,
             padding: "4px",
             cursor: "move",
