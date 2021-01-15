@@ -1,14 +1,14 @@
 export const REACT_APP_MAIN_DATABASE = "hsvisum2";
 export const fetchURL = "http://localhost:3009";
 
-export async function forwardPost(databaseID, tableID, url, data) {
+export async function forwardPost(database, table, url, data) {
   const host = "http://localhost:3009";
   const obj = {
     method: "POST",
     body: JSON.stringify({
       data,
-      tableID,
-      databaseID,
+      table,
+      database,
     }),
   };
   try {

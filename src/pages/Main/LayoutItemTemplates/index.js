@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { first as _first } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
-import { selectLayoutRedux, storeLayoutRedux } from "../../../redux/templatesSlice";
-import { getTemplateWithPropertiesByID, getAvailableTemplates, removeTemplateDB, fillEntityDataConfiguration,
-  createTemplateDB, updateTemplateDB, getAvailableEntityTypes } from "./dbcalls";
+import { selectLayoutRedux, storeLayoutRedux } from "../../../redux/layoutSlice";
+import { getLayoutWithPropertiesByID, getAvailableLayouts, removeLayoutDB, fillEntityDataConfiguration,
+  createLayoutDB, updateLayoutDB, getAvailableEntityTypes } from "../MainLayout/dbcalls";
 import Gridlet from "../../../components/Gridlet";
 import ControlWidget from "../../../ui/ControlWidget";
 import DuplicateValidator from "../../../validators/DuplicateValidator";
@@ -40,7 +40,7 @@ export default function LayoutItemTemplates() {
 
   // DB FUNCTIONS
   async function loadAvailableTemplatesDB() {
-    const availableTemplates = await getAvailableTemplates();
+    const availableTemplates = await getAvailableLayouts("template");
     const selectRows = availableTemplates.map((entry) => {
       return { value: entry.id, label: entry.name };
     });
@@ -58,7 +58,7 @@ export default function LayoutItemTemplates() {
   }
 
   async function loadTemplateDB(id) {
-    let showingTemplate = await getTemplateWithPropertiesByID(id);
+    let showingTemplate = await getLayoutWithPropertiesByID("template", id);
     showingTemplate = nullToUndefinedArray(showingTemplate);
     showingTemplate = await fillEntityDataConfiguration(showingTemplate);
     dispatch(storeLayoutRedux(showingTemplate));
@@ -79,13 +79,13 @@ export default function LayoutItemTemplates() {
   // CRUD FUNCTIONS
   async function createTemplate(modalInternalState) {
     const name = modalInternalState.fields[0].property_value;
-    const [createResponse] = await createTemplateDB(name, modalInternalState.selectValue.value);
+    const [createResponse] = await createLayoutDB("template", name, modalInternalState.selectValue.value);
     await loadAvailableTemplatesDB();
     selectTemplateID(createResponse.insertId);
   }
 
   async function updateTemplate(modalInternalState) {
-    await updateTemplateDB(modalInternalState);
+    await updateLayoutDB("template", modalInternalState);
     await loadAvailableTemplatesDB();
     selectTemplateID(modalInternalState.loadID);
   }
@@ -121,7 +121,7 @@ export default function LayoutItemTemplates() {
   }
 
   async function deleteEntityType(id) {
-    await removeTemplateDB(id);
+    await removeLayoutDB("template", id);
     loadAvailableTemplatesDB();
   }
 

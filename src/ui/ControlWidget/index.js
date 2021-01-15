@@ -9,7 +9,19 @@ import { CustomSelectStyles } from "./CustomSelectStyles";
 import "./style.scss";
 
 export default function ControlWidget(props) {
-  const { right, left, top, onAdd, addButtonWidth, addButtonText, onEdit, onDelete, onView, select } = props;
+  const {
+    right,
+    left,
+    top,
+    onAdd,
+    addButtonWidth,
+    addButtonText,
+    onEdit,
+    onDelete,
+    onView,
+    select,
+  } = props;
+  console.log(right);
   return (
     <Draggable>
       <div style={{ position: "relative", zIndex: "1002" }}>
@@ -17,8 +29,8 @@ export default function ControlWidget(props) {
           style={{
             position: "absolute",
             zIndex: "502",
-            left,
-            right,
+            left: right ? null : left || "422px",
+            right: right || null,
             top,
             padding: "4px",
             cursor: "move",
@@ -27,11 +39,12 @@ export default function ControlWidget(props) {
             backgroundColor: "lightgray",
           }}
         >
-          <div style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center"
-          }}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
           >
             {onAdd && (
               <Button
@@ -133,7 +146,7 @@ ControlWidget.propTypes = {
     }),
     value: PropTypes.shape({
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      label: PropTypes.string
+      label: PropTypes.string,
     }),
   }),
 };
@@ -148,5 +161,5 @@ ControlWidget.defaultProps = {
   top: "18px",
   addButtonWidth: "112px",
   select: null,
-  addButtonText: "New entry"
+  addButtonText: "New entry",
 };

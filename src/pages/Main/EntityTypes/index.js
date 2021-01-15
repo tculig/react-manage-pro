@@ -172,6 +172,7 @@ export default function EntityTypes() {
         onAdd={toggleNewEntityTypeModal}
         onEdit={toggleEditModal}
         onDelete={toggleDeleteModal}
+        right={10}
       />
       <GroupByControl
         options={columnsForSort}

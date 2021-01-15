@@ -9,7 +9,7 @@ export default function Sidebar(props) {
   return (
     <SideNav
       onToggle={onToggle}
-      onSelect={onSelect}
+      onSelect={(newSelected) => { onSelect(newSelected); }}
       style={{ background: "#9494b8" }}
     >
       <SideNav.Toggle />

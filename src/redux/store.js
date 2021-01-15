@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import templatesSlice from "./templatesSlice";
+import layoutsSlice from "./layoutSlice";
 
 export default configureStore({
   reducer: {
-    templates: templatesSlice
+    layouts: layoutsSlice
   },
 });

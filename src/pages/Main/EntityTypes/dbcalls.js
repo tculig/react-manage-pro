@@ -32,6 +32,6 @@ export async function updateEntityTypeDB(entityName, entityFieldsRaw) {
 }
 
 export async function getAvailableEntityTypesWithFieldCount() {
-  const availableEntityTypes = await fetch(`${fetchURL}/getAvailableEntityTypesWithFieldCount?databaseID=${REACT_APP_MAIN_DATABASE}`).then(response => { return response.json(); });
+  const availableEntityTypes = await fetch(`${fetchURL}/getAvailableEntityTypesWithFieldCount?database=${REACT_APP_MAIN_DATABASE}`).then(response => { return response.json(); });
   return availableEntityTypes;
 }

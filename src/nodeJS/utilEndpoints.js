@@ -6,8 +6,8 @@ module.exports = function (app, connection) {
     utils.getPostData(req, (element) => {
       utils.runQueryFromObject(
         connection,
-        element.databaseID,
-        element.tableID,
+        element.database,
+        element.table,
         element.data,
         utils.QUERY_ACTIONS.INSERT,
         (results) => {
@@ -21,8 +21,8 @@ module.exports = function (app, connection) {
     utils.getPostData(req, (element) => {
       utils.runMultiQueryFromObject(
         connection,
-        element.databaseID,
-        element.tableID,
+        element.database,
+        element.table,
         element.data,
         utils.QUERY_ACTIONS.INSERT,
         (results) => {
@@ -36,8 +36,8 @@ module.exports = function (app, connection) {
     utils.getPostData(req, (element) => {
       utils.runQueryFromObject(
         connection,
-        element.databaseID,
-        element.tableID,
+        element.database,
+        element.table,
         element.data,
         utils.QUERY_ACTIONS.UPDATE,
         (results) => {
@@ -51,8 +51,8 @@ module.exports = function (app, connection) {
     utils.getPostData(req, (element) => {
       utils.runQueryFromObject(
         connection,
-        element.databaseID,
-        element.tableID,
+        element.database,
+        element.table,
         element.data,
         utils.QUERY_ACTIONS.SELECT,
         (results) => {
@@ -64,7 +64,7 @@ module.exports = function (app, connection) {
 
   app.post("/createTable", function (req, res) {
     utils.getPostData(req, (element) => {
-      let query = "CREATE TABLE `"+element.databaseID+"`.`" +element.tableID +"` (`id` INT NOT NULL AUTO_INCREMENT";
+      let query = "CREATE TABLE `"+element.database+"`.`" +element.table +"` (`id` INT NOT NULL AUTO_INCREMENT";
       const fields = element.data;
       for (var key in fields) {
         if (fields.hasOwnProperty(key)) {
@@ -82,7 +82,7 @@ module.exports = function (app, connection) {
 
   app.post("/dropTable", function (req, res) {
     utils.getPostData(req, (element) => {
-      let query = "DROP TABLE  `"+element.databaseID+"`.`" +element.tableID +"`";
+      let query = "DROP TABLE  `"+element.database+"`.`" +element.table +"`";
       if(debug) console.log(query);
       connection.query(query, function (error, results, fields) {
         if (error) console.log(error);
@@ -93,7 +93,7 @@ module.exports = function (app, connection) {
 
   app.post("/selectAll", function (req, res) {
     utils.getPostData(req, (element) => {
-      let query = "SELECT * FROM `"+element.databaseID+"`.`" +element.tableID +"`";
+      let query = "SELECT * FROM `"+element.database+"`.`" +element.table +"`";
       if(debug) console.log(query);
       connection.query(query, function (error, results, fields) {
         if (error) console.log(error);
@@ -105,7 +105,7 @@ module.exports = function (app, connection) {
   app.post("/removeElement", function (req, res) {
     utils.getPostData(req, (data) => {
       const key = Object.keys(data.data)[0];
-      let query = "DELETE FROM `" + data.databaseID + "`.`" + data.tableID + "` WHERE " + key + " = " + data.data[key];
+      let query = "DELETE FROM `" + data.database + "`.`" + data.table + "` WHERE " + key + " = " + data.data[key];
       if(debug) console.log(query);  
       connection.query(query, function (error, results, fields) {
         if (error) console.log(error);

@@ -18,12 +18,12 @@ const QUERY_ACTIONS = {
   SELECT: 2
 }
 
-function constructQuery(databaseID, tableID, availableFields, object, action) {
+function constructQuery(database, table, availableFields, object, action) {
   let query = "";
   switch(action){
-    case QUERY_ACTIONS.INSERT: query = "INSERT INTO `" + databaseID + "`.`" + tableID + "` ";break;
-    case QUERY_ACTIONS.UPDATE: query = "UPDATE `" + databaseID + "`.`" + tableID + "` SET ";break;
-    case QUERY_ACTIONS.SELECT: query = "SELECT * FROM `" + databaseID + "`.`" + tableID + "` WHERE ";break;
+    case QUERY_ACTIONS.INSERT: query = "INSERT INTO `" + database + "`.`" + table + "` ";break;
+    case QUERY_ACTIONS.UPDATE: query = "UPDATE `" + database + "`.`" + table + "` SET ";break;
+    case QUERY_ACTIONS.SELECT: query = "SELECT * FROM `" + database + "`.`" + table + "` WHERE ";break;
   }
   let querySegment1 = "";
   let querySegment2 = "";
@@ -86,13 +86,13 @@ function constructQuery(databaseID, tableID, availableFields, object, action) {
   return query;
 }
 
-function runMultiQueryFromObject(connection, databaseID, tableID, objectArray, action, callback){
-  let queryAvailableFields = "SHOW COLUMNS FROM `" + databaseID + "`.`" + tableID + "`";
+function runMultiQueryFromObject(connection, database, table, objectArray, action, callback){
+  let queryAvailableFields = "SHOW COLUMNS FROM `" + database + "`.`" + table + "`";
   connection.query(queryAvailableFields, [objectArray], function (errorAvailableFields, availableFields) {
     if (errorAvailableFields) console.log(errorAvailableFields);
     let query = "";
     for(let i=0; i<objectArray.length; i++ ){
-      query += constructQuery(databaseID, tableID, availableFields, objectArray[i], action); 
+      query += constructQuery(database, table, availableFields, objectArray[i], action); 
     }
     if(debug) console.log(query);
     connection.query(query, function (error, results, fields) {
@@ -105,11 +105,11 @@ function runMultiQueryFromObject(connection, databaseID, tableID, objectArray, a
   });
 }
 
-function runQueryFromObject(connection, databaseID, tableID, object, action, callback) {
-  let queryAvailableFields = "SHOW COLUMNS FROM `" + databaseID + "`.`" + tableID + "`";
+function runQueryFromObject(connection, database, table, object, action, callback) {
+  let queryAvailableFields = "SHOW COLUMNS FROM `" + database + "`.`" + table + "`";
   connection.query(queryAvailableFields, [object], function (errorAvailableFields, availableFields) {
     if (errorAvailableFields) console.log(errorAvailableFields);
-    const query = constructQuery(databaseID, tableID, availableFields, object, action); 
+    const query = constructQuery(database, table, availableFields, object, action); 
     if(debug) console.log(query);
     connection.query(query, function (error, results, fields) {
       if (error) {

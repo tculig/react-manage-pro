@@ -222,6 +222,7 @@ export default function EntityInstances() {
         onEdit={toggleEditModal}
         onDelete={toggleDeleteModal}
         select={selectState}
+        right={10}
       />
       <GroupByControl
         options={columnsForSort}

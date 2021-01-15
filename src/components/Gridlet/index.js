@@ -7,7 +7,7 @@ import "react-resizable/css/styles.css";
 import ColorEditor from "../ColorEditor";
 import FontEditor from "../FontEditor";
 import ActiveFieldsEditor from "../ActiveFieldsEditor";
-import { changeAttributeRedux, commitLayoutToDBRedux } from "../../redux/templatesSlice";
+import { changeAttributeRedux, commitLayoutToDBRedux } from "../../redux/layoutSlice";
 import { modReducer } from "../../utils";
 
 /* eslint-disable */
@@ -134,7 +134,7 @@ export default function Gridlet(props) {
     showFontEditorState,
     showActiveFieldsEditorState,
   } = state;
-  console.log(parentLayoutElement);
+
   return (
     <div style={{ position: "relative" }}>
       {showColorEditorState && (
@@ -203,7 +203,7 @@ export default function Gridlet(props) {
       <div style={{
         display: "flex",
         flexDirection: "column",
-        ...parentLayoutElement.fontConfiguration
+        ...parentLayoutElement?.fontConfiguration
       }}>
         {parentLayoutElement && parentLayoutElement.entityDataConfiguration.map(el => el.checked ? (<div key={ el.id }>{el.property_name}</div>): null)}
       </div>
