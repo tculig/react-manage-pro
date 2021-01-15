@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import { useDispatch } from "react-redux";
 import GridLayout from "react-grid-layout";
+import { Menu, Item, Separator, Submenu, useContextMenu } from "react-contexify";
 import PropTypes from "prop-types";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
@@ -9,36 +10,22 @@ import FontEditor from "../FontEditor";
 import ActiveFieldsEditor from "../ActiveFieldsEditor";
 import { changeAttributeRedux, commitLayoutToDBRedux } from "../../redux/layoutSlice";
 import { modReducer } from "../../utils";
+import "react-contexify/dist/ReactContexify.css";
 
 /* eslint-disable */
 export default function Gridlet(props) {
   const dispatch = useDispatch();
-  const {
-    layout,
-    cols,
-    rows,
-    scale,
-    width,
-    height,
-    name,
-    level,
-    showColorEditor,
-    showFontEditor,
-    showActiveFieldsEditor,
-    parentLayoutElement
-  } = props;
+  const { layout, cols, rows, scale, width, height, name, level, showColorEditor, showFontEditor, showActiveFieldsEditor, parentLayoutElement } = props;
   const rowHeight = height / rows;
   const scaleFactor = 1;
-  const layoutCurrent = layout.filter((el) => {
-    return el.parent === name;
-  });
-  const templateElement = layoutCurrent[0];
-  const templateFontConfiguration = layoutCurrent[0]?.fontConfiguration;
-  const templateEntityDataConfiguration =
-    layoutCurrent[0]?.entityDataConfiguration;
-  const templateEntityTypeId = layoutCurrent[0]?.entityTypeId;
-  const templateGridletId = layoutCurrent[0]?.gridletId;
-  const templateGridletColor = layoutCurrent[0]?.bgcolor;
+  const layoutCurrent = layout.filter((el) => { return el.parent === name; });
+  const layoutElement = layoutCurrent[0];
+  const layoutElementFontConfiguration = layoutCurrent[0]?.fontConfiguration;
+  const layoutElementEntityDataConfiguration = layoutCurrent[0]?.entityDataConfiguration;
+  const layoutElementEntityTypeId = layoutCurrent[0]?.entityTypeId;
+  const layoutElementGridletId = layoutCurrent[0]?.gridletId;
+  const layoutElementGridletColor = layoutCurrent[0]?.bgcolor;
+  
   const [state] = useReducer(modReducer, {
     showColorEditorState: showColorEditor,
     showFontEditorState: showFontEditor,
@@ -48,31 +35,31 @@ export default function Gridlet(props) {
   function updateElementColor(color) {
     dispatch(
       changeAttributeRedux({
-        gridletId: templateGridletId,
+        gridletId: layoutGridletId,
         value: { bgcolor: color },
       })
     );
   }
 
   function updateReduxFontConfiguration(updatedAttribute) {
-    if (templateElement !== undefined) {
+    if (layoutElement !== undefined) {
       const newFontConfiguration = {
-        ...templateFontConfiguration,
+        ...layoutElementFontConfiguration,
         ...updatedAttribute,
       };
       dispatch(
         changeAttributeRedux({
-          gridletId: templateGridletId,
+          gridletId: layoutElementGridletId,
           value: { fontConfiguration: newFontConfiguration },
         })
       );
     }
   }
   function updateReduxElement(updatedAttribute) {
-    if (templateElement !== undefined) {
+    if (layoutElement !== undefined) {
       dispatch(
         changeAttributeRedux({
-          gridletId: templateGridletId,
+          gridletId: layoutElementGridletId,
           value: updatedAttribute,
         })
       );
@@ -135,6 +122,24 @@ export default function Gridlet(props) {
     showActiveFieldsEditorState,
   } = state;
 
+  const { show } = useContextMenu({
+    id: "contextMenu"
+  });
+
+  const contextMenu = (
+    <Menu id="contextMenu">
+      <Item>Item 1</Item>
+      <Item>Item 2</Item>
+      <Separator />
+      <Item disabled>Disabled</Item>
+      <Separator />
+      <Submenu label="Submenu">
+        <Item>Sub Item 1</Item>
+        <Item>Sub Item 2</Item>
+      </Submenu>
+    </Menu>
+  );
+
   return (
     <div style={{ position: "relative" }}>
       {showColorEditorState && (
@@ -144,7 +149,7 @@ export default function Gridlet(props) {
           onCommitCancel={cancelLayoutChange}
           positionOffset={{ x: 6, y: 6 }}
           scale={0.8}
-          color={templateGridletColor || undefined}
+          color={layoutElementGridletColor || undefined}
         />
       )}
       {showFontEditorState && (
@@ -156,7 +161,7 @@ export default function Gridlet(props) {
           onCommitCancel={cancelLayoutChange}
           positionOffset={{ x: 6, y: 324 }}
           scale={0.8}
-          {...templateFontConfiguration}
+          {...layoutElementFontConfiguration}
         />
       )}
       {showActiveFieldsEditorState && (
@@ -167,47 +172,51 @@ export default function Gridlet(props) {
           onCommit={commitLayoutToDB}
           onCommitCancel={cancelLayoutChange}
           positionOffset={{ x: 6, y: 6 }}
-          entityDataConfiguration={templateEntityDataConfiguration}
-          entityTypeId={templateEntityTypeId}
-          entityTypeName={
-            templateEntityDataConfiguration
-              ? templateEntityDataConfiguration[0]?.name
-              : ""
-          }
+          entityDataConfiguration={layoutElementEntityDataConfiguration}
+          entityTypeId={layoutElementEntityTypeId}
+          entityTypeName={ layoutElementEntityDataConfiguration ? layoutElementEntityDataConfiguration[0]?.name: "" }
           right={"20px"}
           top={"100px"}
         />
       )}
       { layoutCurrent.length > 0 ? 
-      (<GridLayout
-        cols={cols}
-        compactType={null}
-        preventCollision
-        transformScale={scale}
-        width={width}
-        onMouseDown={(e) => {
-          e.stopPropagation();
-        }}
-        rowHeight={rowHeight}
-        onDragStop={(layout, oldDragItem, l, bnull, e, node) => { updateLayout(l); }}
-        onResizeStop={(layout, oldResizeItem, l, placeholder, e, node) => { updateLayout(l); }}
-        containerPadding={[0, 0, 0, 0]}
-        margin={[0, 0]}
-        maxRows={rows}
-        stretchContainer
-        name={name}
-        showPlaceholder={false}
-      >
-        {layoutCurrent.map((el) => { return makeGrid(el); })}
-      </GridLayout>) :
+      (
+        <div 
+        onContextMenu={show}
+        style={{border:"0px solid pink"}}>
+          <GridLayout
+            cols={cols}
+            compactType={null}
+            preventCollision
+            transformScale={scale}
+            width={width}
+            onMouseDown={(e) => {
+              e.stopPropagation();
+            }}
+            rowHeight={rowHeight}
+            onDragStop={(layout, oldDragItem, l, bnull, e, node) => { updateLayout(l); }}
+            onResizeStop={(layout, oldResizeItem, l, placeholder, e, node) => { updateLayout(l); }}
+            containerPadding={[0, 0, 0, 0]}
+            margin={[0, 0]}
+            maxRows={rows}
+            stretchContainer
+            name={name}
+            showPlaceholder={false}
+          >
+            {layoutCurrent.map((el) => { return makeGrid(el); })}
+          </GridLayout>
+        </div>
+      ) :
       <div style={{
         display: "flex",
         flexDirection: "column",
+        color: layoutElementGridletColor,
         ...parentLayoutElement?.fontConfiguration
       }}>
         {parentLayoutElement && parentLayoutElement.entityDataConfiguration.map(el => el.checked ? (<div key={ el.id }>{el.property_name}</div>): null)}
       </div>
       }
+      {contextMenu}
     </div>
   );
 }
