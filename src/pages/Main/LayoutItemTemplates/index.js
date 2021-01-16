@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { first as _first } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 import { selectLayoutRedux, storeLayoutRedux } from "../../../redux/layoutSlice";
-import { getLayoutWithPropertiesByID, getAvailableLayouts, removeLayoutDB, fillEntityDataConfiguration,
-  createLayoutDB, updateLayoutDB, getAvailableEntityTypes } from "../MainLayout/dbcalls";
+import { getLayoutWithPropertiesByID, getAvailableLayouts, removeLayoutDB,
+  createLayoutDB, updateLayoutDB, fillEntityDataConfiguration } from "../MainLayout/dbcalls";
+import { getAvailableEntityTypes } from "./dbcalls";
 import Gridlet from "../../../components/Gridlet";
 import ControlWidget from "../../../ui/ControlWidget";
 import DuplicateValidator from "../../../validators/DuplicateValidator";
@@ -59,6 +60,7 @@ export default function LayoutItemTemplates() {
 
   async function loadTemplateDB(id) {
     let showingTemplate = await getLayoutWithPropertiesByID("template", id);
+    console.log(showingTemplate);
     showingTemplate = nullToUndefinedArray(showingTemplate);
     showingTemplate = await fillEntityDataConfiguration(showingTemplate);
     dispatch(storeLayoutRedux(showingTemplate));

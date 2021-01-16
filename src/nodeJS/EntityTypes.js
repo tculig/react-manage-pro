@@ -1,6 +1,6 @@
 const utils = require("./utils");
 
-const debug = true;
+const debug = false;
 
 module.exports = function (app, connection) {
   app.get("/getAvailableEntityTypesWithFieldCount", function (req, res) {
@@ -14,7 +14,7 @@ module.exports = function (app, connection) {
     });
   });
 
-  app.post("/getBatchJoinedEntities", function (req, res) {
+  app.post("/getBatchJoinedEntityTypes", function (req, res) {
     utils.getPostData(req, (element) => {
       const query = `SELECT * FROM ${element.database}.entity_type et LEFT JOIN ${element.database}.entity_type_properties
       etp on etp.entity_type_id=et.id WHERE et.id IN (${element.data.join(",")})`;

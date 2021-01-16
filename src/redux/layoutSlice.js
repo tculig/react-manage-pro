@@ -22,6 +22,9 @@ export const layoutSlice = createSlice({
     storeLayoutRedux: (state, action) => {
       state.layout = action.payload;
     },
+    storeLayoutId: (state, action) => {
+      state.layoutId = action.payload;
+    },
     changeAttributeRedux: (state, action) => {
       let { layout } = state;
       layout = modifyLayout(layout, action.payload.gridletId, action.payload.value);
@@ -34,12 +37,14 @@ export const layoutSlice = createSlice({
   },
 });
 
-export const { storeLayoutRedux, changeAttributeRedux, commitLayoutToDBRedux } = layoutSlice.actions;
+export const { storeLayoutRedux, changeAttributeRedux, commitLayoutToDBRedux, storeLayoutId } = layoutSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
 export const selectLayoutRedux = (state) => state.layouts.layout;
+
+export const selectLayoutId = (state) => state.layouts.layoutId;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This

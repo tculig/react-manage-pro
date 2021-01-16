@@ -55,6 +55,9 @@ export async function createTableDB(database, table, data) {
 export async function dropTableDB(database, table, data) {
   return forwardPost(database, table, "/dropTable", data);
 }
-export async function getBatchJoinedEntities(database, data) {
-  return forwardPost(database, null, "/getBatchJoinedEntities", data);
+export async function getBatchJoinedEntityTypes(database, data) {
+  return forwardPost(database, null, "/getBatchJoinedEntityTypes", data);
+}
+export async function getBatchTemplateProperties(database, data) {
+  return forwardPost(database, null, "/getBatchTemplateProperties", data);
 }

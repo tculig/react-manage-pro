@@ -642,7 +642,7 @@ var ReactGridLayout = /*#__PURE__*/function (_React$Component) {
         onMouseDown: this.onMouseDown,
         onMouseUp:this.onMouseUp,
         onDrag: this.onDrag,
-        scaleHandler:this.props.scaleHandler,
+        scalehandler:this.props.scalehandler,
         onResizeStart: this.onResizeStart,
         onResize: this.onResize,
         onResizeStop: this.onResizeStop,

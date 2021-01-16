@@ -21,7 +21,6 @@ export default function ControlWidget(props) {
     onView,
     select,
   } = props;
-  console.log(right);
   return (
     <Draggable>
       <div style={{ position: "relative", zIndex: "1002" }}>

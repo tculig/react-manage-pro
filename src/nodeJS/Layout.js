@@ -1,15 +1,8 @@
+const utils = require("./utils");
+
 const debug = false;
 
 module.exports = function (app, connection) {
-  app.get("/getAvailableLayouts", function (req, res) {
-    const query = `SELECT * FROM ${req.query.database}.${req.query.table}`;
-    if (debug) console.log(query);
-    connection.query(query, function (error, results, fields) {
-      if (error) console.log(error);
-      res.send(results);
-    });
-  });
-
   app.get("/getLayoutByID", function (req, res) {
     const query = `SELECT * FROM ${req.query.database}.${req.query.table} WHERE id = ${req.query.id}`;
     if (debug) console.log(query);
@@ -20,14 +13,11 @@ module.exports = function (app, connection) {
   });
 
   app.get("/getLayoutWithPropertiesByID", function (req, res) {
-    let arrayLayout = ["id","entityTypeId","name","dateCreated","active"];
-    let arrayLayoutProperties = ["id as gridletId","x","y","w","h","static","parent","text","bgcolor","scaleFactor","fontConfiguration","entityDataConfiguration"];
+    let arrayLayout = ["name","dateCreated","active"];
     const query = `SELECT 
     ${arrayLayout.map(el => `et.${el}`).join(",")}
-    ,
-    ${arrayLayoutProperties.map(el => `etp.${el}`).join(",")} 
-    FROM ${req.query.database}.${req.query.table}
-    et LEFT JOIN ${req.query.database}.${req.query.table}_properties etp on etp.${req.query.table}_id=et.id WHERE et.id = ${req.query.id}`;
+    , etp.* FROM ${req.query.database}.${req.query.table}
+    et LEFT JOIN ${req.query.database}.${req.query.table}_properties etp on etp.layout_id=et.id WHERE et.id = ${req.query.id}`;
     if (debug) console.log(query);
     connection.query(query, function (error, results, fields) {
       if (error) console.log(error);
@@ -35,5 +25,14 @@ module.exports = function (app, connection) {
     });
   });
 
- 
+  app.post("/getBatchTemplateProperties", function (req, res) {
+    utils.getPostData(req, (element) => {
+      const query = `SELECT * FROM ${element.database}.template_properties WHERE layout_id IN (${element.data.join(",")})`;
+      if (debug) console.log(query);
+      connection.query(query, function (error, results, fields) {
+        if (error) console.log(error);
+        res.send(results);
+      });
+    });
+  });
 };

@@ -462,7 +462,7 @@ var GridItem = /*#__PURE__*/function (_React$Component) {
         className: isResizable ? undefined : "react-resizable-hide",
         width: position.width,
         height: position.height,
-        scaleHandler:this.props.scaleHandler,
+        scalehandler:this.props.scalehandler,
         minConstraints: minConstraints,
         maxConstraints: maxConstraints,
         onResizeStop: this.onResizeStop,
