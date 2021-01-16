@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Gridlet from "../../../components/Gridlet";
 import { selectLayoutRedux, storeLayoutRedux, storeLayoutId } from "../../../redux/layoutSlice";
 import { fillTemplateData, getAvailableLayouts, getLayoutPropertiesByID, fillEntityDataConfiguration } from "./dbcalls";
 import { nullToUndefinedArray } from "../../../utils";
+
+export const MainContext = React.createContext({});
 
 export default function MainLayout() {
   const dispatch = useDispatch();
@@ -28,6 +30,12 @@ export default function MainLayout() {
     const availableTemplatesDB = await getAvailableLayouts("template");
     setAvailableTemplates(availableTemplatesDB);
   }
+
+  // CONTEXT FUNCTIONS
+  const contextData = useContext(MainContext);
+  contextData.reloadLayout = () => {
+    loadDefaultLayout();
+  };
 
   // UI FUNCTIONS
 

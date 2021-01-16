@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import GridLayout from "react-grid-layout";
 import { Menu, Item, Submenu, useContextMenu } from "react-contexify";
@@ -12,10 +12,12 @@ import { changeAttributeRedux, commitLayoutToDBRedux, selectLayoutId } from "../
 import { modReducer } from "../../utils";
 import "react-contexify/dist/ReactContexify.css";
 import { createBlockDB } from "./dbcalls";
+import { MainContext } from "../../pages/Main/MainLayout";
 
 /* eslint-disable */
 export default function Gridlet(props) {
   const dispatch = useDispatch();
+  const mainContext = useContext(MainContext);
   const { layout, cols, rows, scale, width, height, name, level, 
     availableTemplates, showColorEditor, showFontEditor, showActiveFieldsEditor, parentLayoutElement } = props;
   const rowHeight = height / rows;
@@ -145,9 +147,10 @@ export default function Gridlet(props) {
   }
 
   const layoutId = useSelector(selectLayoutId);
-  function addBlock(templateId, gridletName, event){
-    let xPos = Math.round((event.offsetX || event.clientX)/colHeight); // offsetX works in mozilla, clientX in chrome
-    let yPos = Math.round((event.offsetY || event.clientY)/rowHeight); // offsetX works in mozilla, clientX in chrome
+  async function addBlock(templateId, gridletName, e){
+    const event = e.triggerEvent;
+    let xPos = Math.round(event.offsetX/rowHeight); 
+    let yPos = Math.round(event.offsetY/colHeight); 
     let layoutElement={
       id:null,
       parent:gridletName,
@@ -155,7 +158,9 @@ export default function Gridlet(props) {
       y:yPos,
       static:0
     };
-     createBlockDB(templateId, layoutId, layoutElement);
+    console.log(layoutElement.x+" "+layoutElement.y);
+    await createBlockDB(templateId, layoutId, layoutElement);
+    mainContext.reloadLayout();
   } 
 
   const { show } = useContextMenu({
@@ -167,9 +172,7 @@ export default function Gridlet(props) {
       <Submenu label="Insert template">
         {availableTemplates.map(el => 
           {
-            return <Item key={el.name} onClick={
-               (e) => addBlock(el.id, name, e.event) 
-              }>{el.name}</Item>
+            return <Item key={el.name} onClick={ (e) => addBlock(el.id, name, e) }>{el.name}</Item>
           })}
       </Submenu>
     </Menu>
