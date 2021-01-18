@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Input } from "reactstrap";
 import { modReducer } from "../../utils";
 import GenericModal from "../GenericModal";
-import { getEntityTypeProperties } from "./dbcalls";
+import { getEntityTypeProperties, getEntityPropertiesById } from "./dbcalls";
 import Validator from "../../validators/Validator";
 import { propertyTypes } from "../../utils/Constants";
 import "./style.scss";
@@ -17,7 +17,7 @@ export default function EntityInstanceModal(props) {
           el.property_type = propValue;
         }
       });
-      el.property_value = "";
+      if (el.property_value === undefined) el.property_value = "";
       el.placeholder = "";
       el.color = "inherit";
       return el;
@@ -36,26 +36,33 @@ export default function EntityInstanceModal(props) {
 
   useEffect(() => {
     async function loadFromDB() {
-      console.log(loadID);
-    }
-    if (loadID) {
-      loadFromDB();
-    }
-  }, [loadID]);// eslint-disable-line
-
-  useEffect(() => {
-    async function loadFromDB() {
       const entityTypeProperties = await getEntityTypeProperties(entityTypeBasicInfo.id);
-      if (entityTypeProperties !== null) {
+      if (entityTypeProperties) {
+        console.log(entityTypeProperties);
         setState({
           fields: mapPropertyTypes(entityTypeProperties)
         });
       }
     }
-    if (entityTypeBasicInfo.id != null) {
+    if (!loadID && entityTypeBasicInfo.id) {
       loadFromDB();
     }
   }, [entityTypeBasicInfo.id]);// eslint-disable-line
+
+  useEffect(() => {
+    async function loadFromDB() {
+      const entityProperties = await getEntityPropertiesById(loadID);
+      if (entityProperties) {
+        console.log(entityProperties);
+        setState({
+          fields: mapPropertyTypes(entityProperties)
+        });
+      }
+    }
+    if (loadID) {
+      loadFromDB();
+    }
+  }, [loadID]);// eslint-disable-line
 
   function handleFieldConstraints(originalField, newValue) {
     // decimal constraint

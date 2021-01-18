@@ -112,7 +112,7 @@ export default function ActiveFieldsEditor(props) {
             style={{
               margin: "2px",
               border: "1px solid lightgrey",
-              borderRadius: "4px",
+              borderRadius: "6px",
               backgroundColor: "white",
             }}
           >
@@ -197,7 +197,8 @@ export default function ActiveFieldsEditor(props) {
                 </div>
               </div>
             </ModalBody>
-            <ModalFooter>
+            <ModalFooter style={{ display: "none" }}>
+              { /* Disabled for now, but left for future use */ }
               <Button color="primary" onClick={handleChangeComplete}>
                 Confirm
               </Button>

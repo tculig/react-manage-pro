@@ -9,7 +9,7 @@ import { renameKeys, modReducer } from "../../../utils";
 import EntityInstanceModal from "../../../modals/EntityInstanceModal";
 import ConfirmationModal from "../../../modals/ConfirmationModal";
 import InfoModal from "../../../modals/InfoModal";
-import { createEntityInstanceDB, updateEntityTypeDB, getAvailableEntityTypes, removeEntityTypeDB, getEntityTypeProperties, getEntityEntriesWithProperties } from "./dbcalls";
+import { createEntityInstanceDB, updateEntityTypeDB, getAvailableEntityTypes, removeEntityTypeDB, getEntityTypeProperties, getEntityBatchPropertiesForEntityType } from "./dbcalls";
 import "react-data-grid/dist/react-data-grid.css";
 import "../../../ui/GridUtils/style.scss";
 import "./style.scss";
@@ -74,7 +74,7 @@ export default function EntityInstances(props) {
   }
 
   async function loadEntityTypeEntriesDB(entityTypeId) {
-    const entityEntriesProperties = await getEntityEntriesWithProperties(entityTypeId);
+    const entityEntriesProperties = await getEntityBatchPropertiesForEntityType(entityTypeId);
     const groupedProperties = _groupBy(entityEntriesProperties, "entity_type_id");
 
     // The grid rows are dynamically loaded and their keys are defined as the id of the property that they represent

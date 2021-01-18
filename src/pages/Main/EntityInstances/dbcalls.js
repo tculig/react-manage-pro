@@ -41,8 +41,8 @@ export async function getEntityTypeProperties(entityTypeId) {
   return entityTypeProperties;
 }
 
-export async function getEntityEntriesWithProperties(entityTypeId) {
-  const entityTypeEntries = await fetch(`${fetchURL}/getEntityEntriesWithProperties?database=${REACT_APP_MAIN_DATABASE}&entity_type_id=${entityTypeId}`)
+export async function getEntityBatchPropertiesForEntityType(entityTypeId) {
+  const entityTypeEntries = await fetch(`${fetchURL}/getEntityBatchPropertiesForEntityType?database=${REACT_APP_MAIN_DATABASE}&entity_type_id=${entityTypeId}`)
     .then(response => { return response.json(); });
   return entityTypeEntries;
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Gridlet from "../../../components/Gridlet";
-import { selectLayoutRedux, storeLayoutRedux, storeLayoutId } from "../../../redux/layoutSlice";
+import { selectLayoutRedux, storeLayoutRedux, storeLayoutId, resetRedux } from "../../../redux/layoutSlice";
 import { fillTemplateData, getAvailableLayouts, getLayoutPropertiesByID, fillEntityDataConfiguration } from "./dbcalls";
 import { nullToUndefinedArray } from "../../../utils";
 
@@ -47,6 +47,9 @@ export default function HomeView() {
   useEffect(() => {
     loadDefaultLayout();
     loadAvailableTemplates();
+    return () => {
+      dispatch(resetRedux());
+    };
   }, []);// eslint-disable-line
 
   // VARIABLES
@@ -81,6 +84,7 @@ export default function HomeView() {
         height={height}
         layout={layout}
         availableTemplates={availableTemplates}
+        customContextMenu
       />
     </div>
   );

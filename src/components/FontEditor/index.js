@@ -34,7 +34,7 @@ export default function FontEditor(props) {
 
   function toggleBold() {
     onChange({
-      fontWeight: fontWeight === "400" ? "800" : "400",
+      fontWeight: fontWeight === 400 ? 800 : 400,
     });
   }
   function toggleItalic() {
@@ -93,7 +93,11 @@ export default function FontEditor(props) {
         transform: `scale(${scale})`,
       }}
     >
-      <Draggable handle=".handle" positionOffset={positionOffset}>
+      <Draggable
+        handle=".handle"
+        positionOffset={positionOffset}
+        scale={scale}
+      >
         <div style={{ margin: "2px" }}>
           <div
             style={{
@@ -109,9 +113,8 @@ export default function FontEditor(props) {
           />
           <div style={{ position: "absolute" }}>
             <div
-              className="photoshop-picker"
               style={{
-                background: "rgb(220, 220, 220)",
+                background: "rgb(236, 236, 236)",
                 borderRadius: "4px",
                 boxShadow:
                   "rgba(0, 0, 0, 0.25) 0px 0px 0px 1px, rgba(0, 0, 0, 0.15) 0px 8px 16px",
@@ -224,6 +227,7 @@ export default function FontEditor(props) {
                       fontSize,
                       color,
                       textAlign,
+                      width: "150%" // Return to 100% if the OK and Cancel button are reinstated
                     }}
                   >
                     The quick brown fox jumps over the lazy dog.
@@ -236,7 +240,8 @@ export default function FontEditor(props) {
                     width: "35%",
                   }}
                 >
-                  <div style={{ display: "flex", flexDirection: "column" }}>
+                  <div style={{ display: "none", flexDirection: "column" }}>
+                    { /* Disabled for now, but left for future use */ }
                     <button
                       type="button"
                       className="myOKCancelButton"
@@ -285,7 +290,7 @@ export default function FontEditor(props) {
                       <FontAwesomeIcon icon={faUnderline} />
                     </button>
                   </div>
-                  <div style={{ display: "flex", flexDirection: "row" }}>
+                  <div style={{ display: "flex", flexDirection: "row", paddingTop: "6px" }}>
                     <div
                       style={{
                         margin: "4px",

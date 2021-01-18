@@ -17,6 +17,7 @@ export const layoutSlice = createSlice({
   name: "layouts",
   initialState: {
     layout: [],
+    layoutId: null
   },
   reducers: {
     storeLayoutRedux: (state, action) => {
@@ -33,27 +34,18 @@ export const layoutSlice = createSlice({
     commitLayoutToDBRedux: () => {
       console.log("save");
       // const newConfig = entityDataConfiguration.filter(el => el.checked).map(el => el.id);
+    },
+    resetRedux: (state) => {
+      state.layout = [];
+      state.layoutId = null;
     }
   },
 });
 
-export const { storeLayoutRedux, changeAttributeRedux, commitLayoutToDBRedux, storeLayoutId } = layoutSlice.actions;
+export const { storeLayoutRedux, changeAttributeRedux, commitLayoutToDBRedux, storeLayoutId, resetRedux } = layoutSlice.actions;
 
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state) => state.counter.value)`
 export const selectLayoutRedux = (state) => state.layouts.layout;
 
 export const selectLayoutId = (state) => state.layouts.layoutId;
-
-// The function below is called a thunk and allows us to perform async logic. It
-// can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
-// will call the thunk with the `dispatch` function as the first argument. Async
-// code can then be executed and other actions can be dispatched
-export const incrementAsync = (layout) => (dispatch) => {
-  setTimeout(() => {
-    dispatch(selectLayoutRedux(layout));
-  }, 1000);
-};
 
 export default layoutSlice.reducer;

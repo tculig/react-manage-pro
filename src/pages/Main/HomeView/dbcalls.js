@@ -30,9 +30,8 @@ export async function getLayoutByID(table, id) {
 }
 
 export async function getLayoutPropertiesByID(table, id) {
-  const foreignKey = `${table}_id`;
   const layoutProperties = await selectElementsDB(REACT_APP_MAIN_DATABASE, `${table}_properties`, {
-    [foreignKey]: id,
+    layout_id: id,
   });
   return layoutProperties;
 }
@@ -51,8 +50,7 @@ export async function createLayoutDB(table, name, entityTypeId) {
   const insertResponse = await createElementDB(REACT_APP_MAIN_DATABASE, table, {
     name,
     dateCreated: getToday(),
-    active: 1,
-    entityTypeId,
+    active: 1
   });
   const defaultFontConfiguration = {
     fontFamily: "Open Sans",
@@ -70,12 +68,11 @@ export async function createLayoutDB(table, name, entityTypeId) {
       entity_type_id: entityTypeId,
     }
   );
-  const foreignKey = `${table}_id`;
   const insertPropertiesResponse = await createElementDB(
     REACT_APP_MAIN_DATABASE,
     `${table}_properties`,
     processToDBLayoutEntry({
-      [foreignKey]: insertResponse.insertId,
+      layout_id: insertResponse.insertId,
       i: "rootBlock",
       x: 60,
       y: 20,
@@ -83,6 +80,8 @@ export async function createLayoutDB(table, name, entityTypeId) {
       h: 10,
       static: 0,
       parent: "root",
+      type: "block",
+      entityTypeId,
       fontConfiguration: defaultFontConfiguration,
       entityDataConfiguration: entityTypeProperties.map((el) => el.id),
     })

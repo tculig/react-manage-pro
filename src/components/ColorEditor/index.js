@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { PhotoshopPicker } from "react-color";
+import { SketchPicker } from "react-color";
 import Draggable from "react-draggable";
 import PropTypes from "prop-types";
 
@@ -46,7 +46,11 @@ export default function ColorEditor(props) {
         transform: `scale(${scale})`,
       }}
     >
-      <Draggable handle=".handle" positionOffset={positionOffset}>
+      <Draggable
+        handle=".handle"
+        positionOffset={positionOffset}
+        scale={scale}
+      >
         <div style={{ margin: "2px" }}>
           <div
             style={{
@@ -61,7 +65,7 @@ export default function ColorEditor(props) {
             className="handle"
           />
           <div style={{ position: "absolute" }}>
-            <PhotoshopPicker
+            <SketchPicker
               color={color}
               onChange={handleChange}
               onAccept={handleChangeComplete}

@@ -18,7 +18,7 @@ import { MainContext } from "../../pages/Main/HomeView";
 export default function Gridlet(props) {
   const dispatch = useDispatch();
   const mainContext = useContext(MainContext);
-  const { layout, cols, rows, scale, width, height, name, level, 
+  const { layout, cols, rows, scale, width, height, name, level, customContextMenu,
     availableTemplates, showColorEditor, showFontEditor, showActiveFieldsEditor } = props;
   const rowHeight = height / rows;
   const colHeight = width / cols;
@@ -188,11 +188,14 @@ export default function Gridlet(props) {
     <div style={{ position: "relative" }}>
       {showColorEditorState && (
         <ColorEditor
-          onChange={updateElementColor}
+          onChange={(color) => {
+            updateElementColor(color);
+            commitLayoutToDB();
+          }}
           onCommit={commitLayoutToDB}
           onCommitCancel={cancelLayoutChange}
           positionOffset={{ x: 6, y: 6 }}
-          scale={0.8}
+          scale={1.2}
           color={layoutElementGridletColor || undefined}
         />
       )}
@@ -200,10 +203,11 @@ export default function Gridlet(props) {
         <FontEditor
           onChange={(updatedAttribute) => {
             updateReduxFontConfiguration(updatedAttribute);
+            commitLayoutToDB();
           }}
           onCommit={commitLayoutToDB}
           onCommitCancel={cancelLayoutChange}
-          positionOffset={{ x: 6, y: 324 }}
+          positionOffset={{ x: 6, y: 506 }}
           scale={0.8}
           {...layoutElementFontConfiguration}
         />
@@ -212,10 +216,10 @@ export default function Gridlet(props) {
         <ActiveFieldsEditor
           onChange={(updatedAttribute) => {
             updateReduxElement(updatedAttribute);
+            commitLayoutToDB();
           }}
           onCommit={commitLayoutToDB}
           onCommitCancel={cancelLayoutChange}
-          positionOffset={{ x: 6, y: 6 }}
           entityDataConfiguration={layoutElementEntityDataConfiguration}
           entityTypeId={layoutElementEntityTypeId}
           entityTypeName={ layoutElementEntityDataConfiguration ? layoutElementEntityDataConfiguration[0]?.name: "" }
@@ -224,7 +228,7 @@ export default function Gridlet(props) {
         />
       )}
       <div 
-      onContextMenu={show}
+      onContextMenu={customContextMenu? show: null}
       style={{border:"0px solid pink"}}>
         <GridLayout
           cols={cols}
@@ -265,7 +269,8 @@ Gridlet.propTypes = {
   showColorEditor: PropTypes.bool,
   showFontEditor: PropTypes.bool,
   showActiveFieldsEditor: PropTypes.bool,
-  availableTemplates: PropTypes.arrayOf(PropTypes.object)
+  availableTemplates: PropTypes.arrayOf(PropTypes.object),
+  customContextMenu: PropTypes.bool,
 };
 
 Gridlet.defaultProps = {
@@ -277,5 +282,6 @@ Gridlet.defaultProps = {
   showColorEditor: false,
   showFontEditor: false,
   showActiveFieldsEditor: false,
-  availableTemplates: []
+  availableTemplates: [],
+  customContextMenu: false
 };

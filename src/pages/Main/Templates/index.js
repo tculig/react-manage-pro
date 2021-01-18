@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { first as _first } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
-import { selectLayoutRedux, storeLayoutRedux } from "../../../redux/layoutSlice";
+import { selectLayoutRedux, storeLayoutRedux, resetRedux } from "../../../redux/layoutSlice";
 import { getLayoutWithPropertiesByID, getAvailableLayouts, removeLayoutDB,
   createLayoutDB, updateLayoutDB, fillEntityDataConfiguration } from "../HomeView/dbcalls";
 import { getAvailableEntityTypes } from "./dbcalls";
@@ -60,7 +60,6 @@ export default function Templates() {
 
   async function loadTemplateDB(id) {
     let showingTemplate = await getLayoutWithPropertiesByID("template", id);
-    console.log(showingTemplate);
     showingTemplate = nullToUndefinedArray(showingTemplate);
     showingTemplate = await fillEntityDataConfiguration(showingTemplate);
     dispatch(storeLayoutRedux(showingTemplate));
@@ -139,7 +138,10 @@ export default function Templates() {
   useEffect(() => {
     loadAvailableTemplatesDB();
     loadAvailableEntityTypes();
-  }, []);
+    return () => {
+      dispatch(resetRedux());
+    };
+  }, []);// eslint-disable-line
 
   useEffect(() => {
     if (selectState.value) {
