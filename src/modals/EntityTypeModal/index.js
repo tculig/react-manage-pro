@@ -57,7 +57,7 @@ export default function EntityTypeModal(props) {
         });
       }
     }
-    if (loadID != null) {
+    if (loadID) {
       loadFromDB();
     }
   }, [loadID]);// eslint-disable-line
@@ -155,10 +155,10 @@ export default function EntityTypeModal(props) {
         margin: "4px",
       }}
     >
-      <div style={{ width: "30%", textAlign: "right", paddingRight: "10px" }}>
-        Entity name:
+      <div style={{ width: "35%", textAlign: "right", paddingRight: "10px" }}>
+        Entity type name:
       </div>
-      <div style={{ width: "70%" }}>
+      <div style={{ width: "65%" }}>
         <Input
           value={state.name}
           onChange={(evt) => setState({ name: evt.currentTarget.value })}
@@ -199,14 +199,17 @@ export default function EntityTypeModal(props) {
       </div>
     </div>
   );
-  const { confirm } = props;
+  const { confirm, close } = props;
 
   return (
     <GenericModal
       {...props}
       header={header}
       message={message}
-      confirm={() => { confirm(state); }}
+      confirm={() => {
+        confirm(state);
+        close();
+      }}
       className="modal-120w"
       close={null}
     />
@@ -223,7 +226,9 @@ EntityTypeModal.propTypes = {
 };
 
 EntityTypeModal.defaultProps = {
-  entityTypeBasicInfo: {},
+  entityTypeBasicInfo: {
+    name: ""
+  },
   loadID: null,
   cancel: () => {}
 };

@@ -22,6 +22,7 @@ export default function GroupByControl(props) {
   const SortableSelect = SortableContainer(Select);
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
+    console.log("GE");
     if (!Array.isArray(groupByOptions)) return;
     const newOptions = [...groupByOptions];
     newOptions.splice(
@@ -45,6 +46,7 @@ export default function GroupByControl(props) {
         isMulti
         value={groupByOptions}
         onChange={(newOptions) => {
+          if (newOptions === null) newOptions = []; // a weird quirk of the framework
           setGroupByOptions(newOptions);
           setExpandedGroupIds(new Set());
         }}

@@ -12,14 +12,14 @@ import { changeAttributeRedux, commitLayoutToDBRedux, selectLayoutId } from "../
 import { modReducer } from "../../utils";
 import "react-contexify/dist/ReactContexify.css";
 import { createBlockDB } from "./dbcalls";
-import { MainContext } from "../../pages/Main/MainLayout";
+import { MainContext } from "../../pages/Main/HomeView";
 
 /* eslint-disable */
 export default function Gridlet(props) {
   const dispatch = useDispatch();
   const mainContext = useContext(MainContext);
   const { layout, cols, rows, scale, width, height, name, level, 
-    availableTemplates, showColorEditor, showFontEditor, showActiveFieldsEditor, parentLayoutElement } = props;
+    availableTemplates, showColorEditor, showFontEditor, showActiveFieldsEditor } = props;
   const rowHeight = height / rows;
   const colHeight = width / cols;
   const scaleFactor = 1;
@@ -265,13 +265,6 @@ Gridlet.propTypes = {
   showColorEditor: PropTypes.bool,
   showFontEditor: PropTypes.bool,
   showActiveFieldsEditor: PropTypes.bool,
-  parentLayoutElement: PropTypes.shape({
-    i: PropTypes.string,
-    x: PropTypes.number,
-    y: PropTypes.number,
-    w: PropTypes.number,
-    h: PropTypes.number
-  }),
   availableTemplates: PropTypes.arrayOf(PropTypes.object)
 };
 
@@ -284,6 +277,5 @@ Gridlet.defaultProps = {
   showColorEditor: false,
   showFontEditor: false,
   showActiveFieldsEditor: false,
-  parentLayoutElement: null,
   availableTemplates: []
 };

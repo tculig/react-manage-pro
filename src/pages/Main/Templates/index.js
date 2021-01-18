@@ -3,7 +3,7 @@ import { first as _first } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 import { selectLayoutRedux, storeLayoutRedux } from "../../../redux/layoutSlice";
 import { getLayoutWithPropertiesByID, getAvailableLayouts, removeLayoutDB,
-  createLayoutDB, updateLayoutDB, fillEntityDataConfiguration } from "../MainLayout/dbcalls";
+  createLayoutDB, updateLayoutDB, fillEntityDataConfiguration } from "../HomeView/dbcalls";
 import { getAvailableEntityTypes } from "./dbcalls";
 import Gridlet from "../../../components/Gridlet";
 import ControlWidget from "../../../ui/ControlWidget";
@@ -14,7 +14,7 @@ import ConfirmationModal from "../../../modals/ConfirmationModal";
 import { propertyTypes } from "../../../utils/Constants";
 import { nullToUndefinedArray } from "../../../utils";
 
-export default function LayoutItemTemplates() {
+export default function Templates() {
   const dispatch = useDispatch();
   // STATE DECLARATIONS
   const [selectState, setSelectState] = useState({

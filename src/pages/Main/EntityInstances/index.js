@@ -1,6 +1,7 @@
-import { groupBy as rowGrouper, first as _first } from "lodash";
+import { groupBy as _groupBy, first as _first } from "lodash";
+import PropTypes from "prop-types";
 import React, { useMemo, useReducer, useCallback, useEffect, useState } from "react";
-import DataGrid from "react-data-grid";
+import DataGrid, { SelectColumn } from "react-data-grid";
 import ZoomControls from "../../../ui/GridUtils/ZoomControls";
 import GroupByControl from "../../../ui/GridUtils/GroupByControl";
 import ControlWidget from "../../../ui/ControlWidget";
@@ -8,7 +9,7 @@ import { renameKeys, modReducer } from "../../../utils";
 import EntityInstanceModal from "../../../modals/EntityInstanceModal";
 import ConfirmationModal from "../../../modals/ConfirmationModal";
 import InfoModal from "../../../modals/InfoModal";
-import { createEntityInstanceDB, updateEntityTypeDB, getAvailableEntityTypes, removeEntityTypeDB, getEntityTypeProperties, getEntityTypeEntry } from "./dbcalls";
+import { createEntityInstanceDB, updateEntityTypeDB, getAvailableEntityTypes, removeEntityTypeDB, getEntityTypeProperties, getEntityEntriesWithProperties } from "./dbcalls";
 import "react-data-grid/dist/react-data-grid.css";
 import "../../../ui/GridUtils/style.scss";
 import "./style.scss";
@@ -24,8 +25,9 @@ CustomSelectStyles.control = (provided) => ({
   boxShadow: "none",
 });
 
-export default function EntityInstances() {
+export default function EntityInstances(props) {
   const columnsForGrid = [];
+  const { showControls } = props;
 
   const [state, setState] = useReducer(modReducer, {
     gridColumns: [],
@@ -63,14 +65,30 @@ export default function EntityInstances() {
       return { key: entry.id, name: entry.property_name };
     });
     setState({
-      gridColumns: newGridColumns
+      gridColumns: [
+        SelectColumn,
+        ...newGridColumns
+      ]
     });
     return true;
   }
 
   async function loadEntityTypeEntriesDB(entityTypeId) {
-    const entityTypeEntries = await getEntityTypeEntry(entityTypeId);
-    console.log(entityTypeEntries);
+    const entityEntriesProperties = await getEntityEntriesWithProperties(entityTypeId);
+    const groupedProperties = _groupBy(entityEntriesProperties, "entity_type_id");
+
+    // The grid rows are dynamically loaded and their keys are defined as the id of the property that they represent
+    // All these few lines do is prep the sql response so that the property values have appropriate keys for the grid-view.
+    // The grid columns get dynamically loaded via loadEntityTypePropertiesDB
+    const newGridRows = Object.values(groupedProperties).map((el) => (
+      el.reduce((acc, value) => {
+        acc[value.etpid] = value.property_value;
+        return acc;
+      }, { id: el[0].id })
+    ));
+    setState({
+      gridRows: newGridRows
+    });
   }
 
   async function createEntityInstance(modalInternalState) {
@@ -83,6 +101,10 @@ export default function EntityInstances() {
     updateEntityTypeDB(modalInternalState.name, filledFields, modalInternalState.originalValues);
   }
 
+  const [isShowingDeleteConfirmModal, setIsShowingDeleteConfirmModal] = useState(false);
+  const [gridZoom, setGridZoom] = useState(1);
+  const [selectedRowIDs, setSelectedRowIDs] = useState(() => new Set());
+
   useEffect(() => {
     loadDataEntityTypesDB();
   }, []);
@@ -91,8 +113,9 @@ export default function EntityInstances() {
     async function loadColumnsAndEntries(value) {
       await loadEntityTypePropertiesDB(value);
       loadEntityTypeEntriesDB(value);
+      setSelectedRowIDs(new Set());
     }
-    if (selectState.value !== null) {
+    if (selectState.value) {
       loadColumnsAndEntries(selectState.value.value);
     }
   }, [selectState.value]);
@@ -106,9 +129,6 @@ export default function EntityInstances() {
     isShowing: false,
     message: ""
   });
-  const [isShowingDeleteConfirmModal, setIsShowingDeleteConfirmModal] = useState(false);
-  const [gridZoom, setGridZoom] = useState(1);
-  const [selectedRowIDs, setSelectedRowIDs] = useState(() => new Set());
 
   function getSelectedRows() {
     const selectedRowsArray = Array.from(selectedRowIDs);
@@ -217,6 +237,7 @@ export default function EntityInstances() {
 
   return (
     <div style={{ padding: "10px" }}>
+      { showControls && (
       <ControlWidget
         onAdd={toggleNewEntityInstanceModal}
         onEdit={toggleEditModal}
@@ -224,6 +245,7 @@ export default function EntityInstances() {
         select={selectState}
         right={10}
       />
+      )}
       <GroupByControl
         options={columnsForSort}
         {...{
@@ -251,7 +273,7 @@ export default function EntityInstances() {
             sortable: true,
           }}
           groupBy={groupBy}
-          rowGrouper={rowGrouper}
+          rowGrouper={_groupBy}
           expandedGroupIds={expandedGroupIds}
           onExpandedGroupIdsChange={setExpandedGroupIds}
           sortColumn={sortColumn}
@@ -283,3 +305,10 @@ export default function EntityInstances() {
     </div>
   );
 }
+EntityInstances.propTypes = {
+  showControls: PropTypes.bool
+};
+
+EntityInstances.defaultProps = {
+  showControls: true
+};

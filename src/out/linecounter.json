@@ -1,0 +1,662 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "c:\\react-manage-pro\\src",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2021-01-16 21:30:35",
+            "filesum": 103,
+            "codesum": 5046,
+            "commentsum": 128,
+            "blanksum": 402,
+            "statistics": {
+                ".js": {
+                    "code": 4688,
+                    "comment": 124,
+                    "blank": 356
+                },
+                ".scss": {
+                    "code": 121,
+                    "comment": 4,
+                    "blank": 14
+                },
+                ".css": {
+                    "code": 128,
+                    "comment": 0,
+                    "blank": 14
+                },
+                ".mdx": {
+                    "code": 101,
+                    "comment": 0,
+                    "blank": 18
+                },
+                ".svg": {
+                    "code": 8,
+                    "comment": 0,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "components\\ActiveFieldsEditor\\dbcalls.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 229,
+                    "comment": 1,
+                    "filename": "components\\ActiveFieldsEditor\\index.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "components\\ActiveFieldsEditor\\style.scss"
+                },
+                {
+                    "blank": 7,
+                    "code": 86,
+                    "comment": 0,
+                    "filename": "components\\ColorEditor\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "components\\ColorEditor\\style.scss"
+                },
+                {
+                    "blank": 6,
+                    "code": 76,
+                    "comment": 0,
+                    "filename": "components\\CustomNumericBox\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "components\\CustomNumericBox\\style.scss"
+                },
+                {
+                    "blank": 13,
+                    "code": 361,
+                    "comment": 0,
+                    "filename": "components\\FontEditor\\index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "components\\FontEditor\\style.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "components\\Gridlet\\dbcalls.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 274,
+                    "comment": 1,
+                    "filename": "components\\Gridlet\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "components\\Gridlet\\style.scss"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "index.css"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 3,
+                    "filename": "index.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "modals\\ConfirmationModal\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "modals\\ConfirmationModal\\style.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "modals\\EntityInstanceModal\\dbcalls.js"
+                },
+                {
+                    "blank": 15,
+                    "code": 200,
+                    "comment": 2,
+                    "filename": "modals\\EntityInstanceModal\\index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "modals\\EntityInstanceModal\\style.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "modals\\EntityTypeModal\\dbcalls.js"
+                },
+                {
+                    "blank": 13,
+                    "code": 216,
+                    "comment": 2,
+                    "filename": "modals\\EntityTypeModal\\index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "modals\\EntityTypeModal\\style.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": "modals\\GenericModal\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "modals\\GenericModal\\style.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "modals\\InfoModal\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "modals\\InfoModal\\style.scss"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "modals\\TemplateModal\\dbcalls.js"
+                },
+                {
+                    "blank": 12,
+                    "code": 144,
+                    "comment": 0,
+                    "filename": "modals\\TemplateModal\\index.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "modals\\TemplateModal\\style.scss"
+                },
+                {
+                    "blank": 9,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": "nodeJS\\DatabaseSetup.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "nodeJS\\EntityInstances.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "nodeJS\\EntityTypes.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "nodeJS\\index.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 61,
+                    "comment": 0,
+                    "filename": "nodeJS\\Interface\\index.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "nodeJS\\Layout.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 108,
+                    "comment": 0,
+                    "filename": "nodeJS\\utilEndpoints.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 134,
+                    "comment": 0,
+                    "filename": "nodeJS\\utils.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 43,
+                    "comment": 0,
+                    "filename": "pages\\Main\\EntityInstances\\dbcalls.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 268,
+                    "comment": 4,
+                    "filename": "pages\\Main\\EntityInstances\\index.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 40,
+                    "comment": 5,
+                    "filename": "pages\\Main\\EntityInstances\\index.test.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 9,
+                    "comment": 2,
+                    "filename": "pages\\Main\\EntityInstances\\style.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "pages\\Main\\EntityTypes\\dbcalls.js"
+                },
+                {
+                    "blank": 18,
+                    "code": 210,
+                    "comment": 3,
+                    "filename": "pages\\Main\\EntityTypes\\index.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 40,
+                    "comment": 5,
+                    "filename": "pages\\Main\\EntityTypes\\index.test.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 9,
+                    "comment": 2,
+                    "filename": "pages\\Main\\EntityTypes\\style.scss"
+                },
+                {
+                    "blank": 11,
+                    "code": 166,
+                    "comment": 4,
+                    "filename": "pages\\Main\\HomeView\\dbcalls.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 64,
+                    "comment": 13,
+                    "filename": "pages\\Main\\HomeView\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "pages\\Main\\HomeView\\style.scss"
+                },
+                {
+                    "blank": 2,
+                    "code": 92,
+                    "comment": 0,
+                    "filename": "pages\\Main\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "pages\\Main\\LayoutEdit\\dbcalls.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "pages\\Main\\LayoutEdit\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "pages\\Main\\LayoutEdit\\style.scss"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "pages\\Main\\style.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "pages\\Main\\Templates\\dbcalls.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 195,
+                    "comment": 9,
+                    "filename": "pages\\Main\\Templates\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "pages\\Main\\Templates\\style.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "pages\\RouterPage\\index.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "pages\\RouterPage\\Placeholder.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "pages\\RouterPage\\style.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 16,
+                    "comment": 3,
+                    "filename": "redux\\genericSlice.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 44,
+                    "comment": 8,
+                    "filename": "redux\\layoutSlice.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "redux\\store.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 92,
+                    "comment": 31,
+                    "filename": "serviceWorker.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "stories\\assets\\code-brackets.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "stories\\assets\\colors.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "stories\\assets\\comments.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "stories\\assets\\direction.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "stories\\assets\\flow.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "stories\\assets\\plugin.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "stories\\assets\\repo.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "stories\\assets\\stackalt.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "stories\\button.css"
+                },
+                {
+                    "blank": 3,
+                    "code": 29,
+                    "comment": 18,
+                    "filename": "stories\\Button.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "stories\\Button.stories.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "stories\\header.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "stories\\Header.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "stories\\Header.stories.js"
+                },
+                {
+                    "blank": 18,
+                    "code": 101,
+                    "comment": 0,
+                    "filename": "stories\\Introduction.stories.mdx"
+                },
+                {
+                    "blank": 9,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "stories\\page.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 67,
+                    "comment": 0,
+                    "filename": "stories\\Page.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "stories\\Page.stories.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "ui\\ControlWidget\\CustomSelectStyles.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 158,
+                    "comment": 1,
+                    "filename": "ui\\ControlWidget\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "ui\\ControlWidget\\style.scss"
+                },
+                {
+                    "blank": 10,
+                    "code": 234,
+                    "comment": 2,
+                    "filename": "ui\\DraggableTable\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "ui\\DraggableTable\\style.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "ui\\GridUtils\\DraggableRowRenderer.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": "ui\\GridUtils\\GroupByControl.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "ui\\GridUtils\\style.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "ui\\GridUtils\\ZoomControls.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "ui\\GridUtils\\ZoomControls.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": "ui\\Navbar\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "ui\\Navbar\\style.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "ui\\Sidebar\\index.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "ui\\Sidebar\\SidebarItem.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "ui\\Sidebar\\style.scss"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 1,
+                    "filename": "utils\\Constants.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 46,
+                    "comment": 2,
+                    "filename": "utils\\index.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "utils\\useModal.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 27,
+                    "comment": 1,
+                    "filename": "validators\\DuplicateValidator.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 17,
+                    "comment": 2,
+                    "filename": "validators\\EmptyFieldsValidator.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 44,
+                    "comment": 2,
+                    "filename": "validators\\InputValidator.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 14,
+                    "comment": 1,
+                    "filename": "validators\\Validator.js"
+                }
+            ]
+        }
+    ]
+}

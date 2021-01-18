@@ -1,0 +1,124 @@
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2021-01-16 21:30:35
+count workspace : c:\react-manage-pro\src
+total files : 103
+total code lines : 5046
+total comment lines : 128
+total blank lines : 402
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |            .js|           4688|            124|            356|     93|
+   |          .scss|            121|              4|             14|    2.4|
+   |           .css|            128|              0|             14|    2.5|
+   |           .mdx|            101|              0|             18|    2.0|
+   |           .svg|              8|              0|              0|   0.16|
+   -------------------------------------------------------------------------
+components\ActiveFieldsEditor\dbcalls.js, code is 0, comment is 0, blank is 0.
+components\ActiveFieldsEditor\index.js, code is 229, comment is 1, blank is 10.
+components\ActiveFieldsEditor\style.scss, code is 18, comment is 0, blank is 5.
+components\ColorEditor\index.js, code is 86, comment is 0, blank is 7.
+components\ColorEditor\style.scss, code is 0, comment is 0, blank is 0.
+components\CustomNumericBox\index.js, code is 76, comment is 0, blank is 6.
+components\CustomNumericBox\style.scss, code is 0, comment is 0, blank is 0.
+components\FontEditor\index.js, code is 361, comment is 0, blank is 13.
+components\FontEditor\style.scss, code is 33, comment is 0, blank is 1.
+components\Gridlet\dbcalls.js, code is 17, comment is 0, blank is 1.
+components\Gridlet\index.js, code is 274, comment is 1, blank is 14.
+components\Gridlet\style.scss, code is 0, comment is 0, blank is 0.
+index.css, code is 15, comment is 0, blank is 2.
+index.js, code is 15, comment is 3, blank is 2.
+modals\ConfirmationModal\index.js, code is 37, comment is 0, blank is 4.
+modals\ConfirmationModal\style.scss, code is 0, comment is 0, blank is 0.
+modals\EntityInstanceModal\dbcalls.js, code is 4, comment is 0, blank is 1.
+modals\EntityInstanceModal\index.js, code is 200, comment is 2, blank is 15.
+modals\EntityInstanceModal\style.scss, code is 7, comment is 0, blank is 1.
+modals\EntityTypeModal\dbcalls.js, code is 4, comment is 0, blank is 1.
+modals\EntityTypeModal\index.js, code is 216, comment is 2, blank is 13.
+modals\EntityTypeModal\style.scss, code is 3, comment is 0, blank is 1.
+modals\GenericModal\index.js, code is 66, comment is 0, blank is 4.
+modals\GenericModal\style.scss, code is 6, comment is 0, blank is 0.
+modals\InfoModal\index.js, code is 31, comment is 0, blank is 4.
+modals\InfoModal\style.scss, code is 0, comment is 0, blank is 0.
+modals\TemplateModal\dbcalls.js, code is 0, comment is 0, blank is 0.
+modals\TemplateModal\index.js, code is 144, comment is 0, blank is 12.
+modals\TemplateModal\style.scss, code is 10, comment is 0, blank is 2.
+nodeJS\DatabaseSetup.js, code is 66, comment is 0, blank is 9.
+nodeJS\EntityInstances.js, code is 20, comment is 0, blank is 3.
+nodeJS\EntityTypes.js, code is 25, comment is 0, blank is 4.
+nodeJS\index.js, code is 30, comment is 0, blank is 5.
+nodeJS\Interface\index.js, code is 61, comment is 0, blank is 2.
+nodeJS\Layout.js, code is 34, comment is 0, blank is 4.
+nodeJS\utilEndpoints.js, code is 108, comment is 0, blank is 8.
+nodeJS\utils.js, code is 134, comment is 0, blank is 9.
+pages\Main\EntityInstances\dbcalls.js, code is 43, comment is 0, blank is 6.
+pages\Main\EntityInstances\index.js, code is 268, comment is 4, blank is 25.
+pages\Main\EntityInstances\index.test.js, code is 40, comment is 5, blank is 3.
+pages\Main\EntityInstances\style.scss, code is 9, comment is 2, blank is 1.
+pages\Main\EntityTypes\dbcalls.js, code is 33, comment is 0, blank is 4.
+pages\Main\EntityTypes\index.js, code is 210, comment is 3, blank is 18.
+pages\Main\EntityTypes\index.test.js, code is 40, comment is 5, blank is 3.
+pages\Main\EntityTypes\style.scss, code is 9, comment is 2, blank is 1.
+pages\Main\HomeView\dbcalls.js, code is 166, comment is 4, blank is 11.
+pages\Main\HomeView\index.js, code is 64, comment is 13, blank is 11.
+pages\Main\HomeView\style.scss, code is 0, comment is 0, blank is 0.
+pages\Main\index.js, code is 92, comment is 0, blank is 2.
+pages\Main\LayoutEdit\dbcalls.js, code is 0, comment is 0, blank is 0.
+pages\Main\LayoutEdit\index.js, code is 27, comment is 0, blank is 1.
+pages\Main\LayoutEdit\style.scss, code is 0, comment is 0, blank is 0.
+pages\Main\style.scss, code is 0, comment is 0, blank is 0.
+pages\Main\Templates\dbcalls.js, code is 4, comment is 0, blank is 1.
+pages\Main\Templates\index.js, code is 195, comment is 9, blank is 14.
+pages\Main\Templates\style.scss, code is 0, comment is 0, blank is 0.
+pages\RouterPage\index.js, code is 38, comment is 0, blank is 1.
+pages\RouterPage\Placeholder.js, code is 9, comment is 0, blank is 2.
+pages\RouterPage\style.scss, code is 0, comment is 0, blank is 0.
+redux\genericSlice.js, code is 16, comment is 3, blank is 4.
+redux\layoutSlice.js, code is 44, comment is 8, blank is 7.
+redux\store.js, code is 7, comment is 0, blank is 1.
+serviceWorker.js, code is 92, comment is 31, blank is 14.
+stories\assets\code-brackets.svg, code is 1, comment is 0, blank is 0.
+stories\assets\colors.svg, code is 1, comment is 0, blank is 0.
+stories\assets\comments.svg, code is 1, comment is 0, blank is 0.
+stories\assets\direction.svg, code is 1, comment is 0, blank is 0.
+stories\assets\flow.svg, code is 1, comment is 0, blank is 0.
+stories\assets\plugin.svg, code is 1, comment is 0, blank is 0.
+stories\assets\repo.svg, code is 1, comment is 0, blank is 0.
+stories\assets\stackalt.svg, code is 1, comment is 0, blank is 0.
+stories\button.css, code is 30, comment is 0, blank is 0.
+stories\Button.js, code is 29, comment is 18, blank is 3.
+stories\Button.stories.js, code is 29, comment is 0, blank is 7.
+stories\header.css, code is 23, comment is 0, blank is 3.
+stories\Header.js, code is 48, comment is 0, blank is 4.
+stories\Header.stories.js, code is 13, comment is 0, blank is 5.
+stories\Introduction.stories.mdx, code is 101, comment is 0, blank is 18.
+stories\page.css, code is 60, comment is 0, blank is 9.
+stories\Page.js, code is 67, comment is 0, blank is 4.
+stories\Page.stories.js, code is 16, comment is 0, blank is 5.
+ui\ControlWidget\CustomSelectStyles.js, code is 30, comment is 0, blank is 0.
+ui\ControlWidget\index.js, code is 158, comment is 1, blank is 6.
+ui\ControlWidget\style.scss, code is 5, comment is 0, blank is 0.
+ui\DraggableTable\index.js, code is 234, comment is 2, blank is 10.
+ui\DraggableTable\style.scss, code is 0, comment is 0, blank is 0.
+ui\GridUtils\DraggableRowRenderer.js, code is 34, comment is 0, blank is 1.
+ui\GridUtils\GroupByControl.js, code is 66, comment is 0, blank is 5.
+ui\GridUtils\style.scss, code is 0, comment is 0, blank is 0.
+ui\GridUtils\ZoomControls.js, code is 63, comment is 0, blank is 3.
+ui\GridUtils\ZoomControls.scss, code is 7, comment is 0, blank is 0.
+ui\Navbar\index.js, code is 56, comment is 0, blank is 3.
+ui\Navbar\style.scss, code is 0, comment is 0, blank is 0.
+ui\Sidebar\index.js, code is 28, comment is 0, blank is 3.
+ui\Sidebar\SidebarItem.js, code is 25, comment is 0, blank is 2.
+ui\Sidebar\style.scss, code is 14, comment is 0, blank is 2.
+utils\Constants.js, code is 6, comment is 1, blank is 0.
+utils\index.js, code is 46, comment is 2, blank is 4.
+utils\useModal.js, code is 12, comment is 0, blank is 4.
+validators\DuplicateValidator.js, code is 27, comment is 1, blank is 2.
+validators\EmptyFieldsValidator.js, code is 17, comment is 2, blank is 2.
+validators\InputValidator.js, code is 44, comment is 2, blank is 3.
+validators\Validator.js, code is 14, comment is 1, blank is 1.
+===============================================================================

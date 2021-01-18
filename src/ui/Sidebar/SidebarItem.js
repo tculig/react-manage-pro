@@ -6,7 +6,7 @@ import { NavItem, NavIcon, NavText } from "@trendmicro/react-sidenav";
 export default function SidebarItem(props) {
   const { eventKey, icon, text, submenu } = props;
   return (
-    <NavItem eventKey={eventKey} key={eventKey}>
+    <NavItem eventKey={eventKey} key={eventKey} text={text}>
       <NavIcon>
         <FontAwesomeIcon icon={icon} size="lg" />
       </NavIcon>

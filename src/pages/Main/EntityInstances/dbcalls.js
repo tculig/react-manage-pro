@@ -1,4 +1,4 @@
-import { REACT_APP_MAIN_DATABASE, createElementsDB, createElementDB, removeElementDB, selectElementsDB, selectAllDB } from "../../../nodeJS/Interface";
+import { fetchURL, REACT_APP_MAIN_DATABASE, createElementsDB, createElementDB, removeElementDB, selectElementsDB, selectAllDB } from "../../../nodeJS/Interface";
 import { getToday } from "../../../utils";
 
 export async function createEntityInstanceDB(entityInstanceData) {
@@ -31,7 +31,7 @@ export async function updateEntityTypeDB(entityName, entityFieldsRaw) {
 
 export async function getAvailableEntityTypes() {
   const availableEntityTypes = await selectAllDB(REACT_APP_MAIN_DATABASE, "entity_type");
-  return availableEntityTypes;
+  return availableEntityTypes || [];
 }
 
 export async function getEntityTypeProperties(entityTypeId) {
@@ -41,9 +41,8 @@ export async function getEntityTypeProperties(entityTypeId) {
   return entityTypeProperties;
 }
 
-export async function getEntityTypeEntry(entityTypeId) {
-  const entityTypeEntries = await selectElementsDB(REACT_APP_MAIN_DATABASE, "entity_type", {
-    id: entityTypeId
-  });
+export async function getEntityEntriesWithProperties(entityTypeId) {
+  const entityTypeEntries = await fetch(`${fetchURL}/getEntityEntriesWithProperties?database=${REACT_APP_MAIN_DATABASE}&entity_type_id=${entityTypeId}`)
+    .then(response => { return response.json(); });
   return entityTypeEntries;
 }

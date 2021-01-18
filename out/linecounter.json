@@ -1,0 +1,2787 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "c:\\react-manage-pro",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2021-01-16 21:28:22",
+            "filesum": 441,
+            "codesum": 87025,
+            "commentsum": 6571,
+            "blanksum": 13354,
+            "statistics": {
+                "": {
+                    "code": 337,
+                    "comment": 4,
+                    "blank": 51
+                },
+                ".md": {
+                    "code": 1839,
+                    "comment": 340,
+                    "blank": 747
+                },
+                ".json": {
+                    "code": 21876,
+                    "comment": 0,
+                    "blank": 27
+                },
+                ".js": {
+                    "code": 23331,
+                    "comment": 4974,
+                    "blank": 4394
+                },
+                ".css": {
+                    "code": 2027,
+                    "comment": 63,
+                    "blank": 213
+                },
+                ".scss": {
+                    "code": 328,
+                    "comment": 9,
+                    "blank": 51
+                },
+                ".mdx": {
+                    "code": 101,
+                    "comment": 0,
+                    "blank": 18
+                },
+                ".html": {
+                    "code": 747,
+                    "comment": 49,
+                    "blank": 56
+                },
+                ".svg": {
+                    "code": 9,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".snap": {
+                    "code": 2,
+                    "comment": 2,
+                    "blank": 2
+                },
+                ".flow": {
+                    "code": 261,
+                    "comment": 66,
+                    "blank": 46
+                },
+                ".yml": {
+                    "code": 17,
+                    "comment": 0,
+                    "blank": 1
+                },
+                ".ts": {
+                    "code": 506,
+                    "comment": 436,
+                    "blank": 84
+                },
+                ".jsx": {
+                    "code": 1292,
+                    "comment": 265,
+                    "blank": 215
+                },
+                ".tsx": {
+                    "code": 799,
+                    "comment": 80,
+                    "blank": 135
+                },
+                ".frag": {
+                    "code": 85,
+                    "comment": 41,
+                    "blank": 26
+                },
+                ".less": {
+                    "code": 455,
+                    "comment": 92,
+                    "blank": 49
+                },
+                ".map": {
+                    "code": 23,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".lock": {
+                    "code": 20094,
+                    "comment": 62,
+                    "blank": 4214
+                },
+                ".txt": {
+                    "code": 9,
+                    "comment": 47,
+                    "blank": 8
+                },
+                ".xhtml": {
+                    "code": 3,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".log": {
+                    "code": 12884,
+                    "comment": 41,
+                    "blank": 3017
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": ".babelrc"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": ".env"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": ".eslintcache"
+                },
+                {
+                    "blank": 5,
+                    "code": 18,
+                    "comment": 1,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 2,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": ".storybook\\main.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": ".storybook\\preview.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "build\\asset-manifest.json"
+                },
+                {
+                    "filename": "build\\favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\index.html"
+                },
+                {
+                    "filename": "build\\logo192.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\logo512.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "build\\manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 1,
+                    "filename": "build\\robots.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "build\\static\\css\\main.93567964.chunk.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\static\\css\\main.93567964.chunk.css.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 2,
+                    "filename": "build\\static\\js\\2.d083eeb3.chunk.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 0,
+                    "comment": 45,
+                    "filename": "build\\static\\js\\2.d083eeb3.chunk.js.LICENSE.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\static\\js\\2.d083eeb3.chunk.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "build\\static\\js\\main.d0d9155b.chunk.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\static\\js\\main.d0d9155b.chunk.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "build\\static\\js\\runtime-main.79b54db3.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\static\\js\\runtime-main.79b54db3.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\static\\media\\logo.db36153e.svg"
+                },
+                {
+                    "blank": 14,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "libChanges\\intro.js-react\\CHANGELOG.md"
+                },
+                {
+                    "blank": 55,
+                    "code": 120,
+                    "comment": 42,
+                    "filename": "libChanges\\intro.js-react\\lib\\components\\Hints\\index.js"
+                },
+                {
+                    "blank": 97,
+                    "code": 200,
+                    "comment": 69,
+                    "filename": "libChanges\\intro.js-react\\lib\\components\\Steps\\index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 9,
+                    "comment": 4,
+                    "filename": "libChanges\\intro.js-react\\lib\\helpers\\defaultProps.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 37,
+                    "comment": 8,
+                    "filename": "libChanges\\intro.js-react\\lib\\helpers\\proptypes.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "libChanges\\intro.js-react\\lib\\index.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "libChanges\\intro.js-react\\LICENSE"
+                },
+                {
+                    "blank": 4,
+                    "code": 78,
+                    "comment": 0,
+                    "filename": "libChanges\\intro.js-react\\package.json"
+                },
+                {
+                    "blank": 29,
+                    "code": 87,
+                    "comment": 4,
+                    "filename": "libChanges\\intro.js-react\\README.md"
+                },
+                {
+                    "blank": 1,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "libChanges\\intro.js-react\\src\\components\\Hints\\__snapshots__\\index.test.js.snap"
+                },
+                {
+                    "blank": 22,
+                    "code": 78,
+                    "comment": 42,
+                    "filename": "libChanges\\intro.js-react\\src\\components\\Hints\\index.js"
+                },
+                {
+                    "blank": 31,
+                    "code": 87,
+                    "comment": 4,
+                    "filename": "libChanges\\intro.js-react\\src\\components\\Hints\\index.test.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "libChanges\\intro.js-react\\src\\components\\Steps\\__snapshots__\\index.test.js.snap"
+                },
+                {
+                    "blank": 45,
+                    "code": 156,
+                    "comment": 69,
+                    "filename": "libChanges\\intro.js-react\\src\\components\\Steps\\index.js"
+                },
+                {
+                    "blank": 91,
+                    "code": 235,
+                    "comment": 4,
+                    "filename": "libChanges\\intro.js-react\\src\\components\\Steps\\index.test.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 4,
+                    "filename": "libChanges\\intro.js-react\\src\\helpers\\defaultProps.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 48,
+                    "comment": 8,
+                    "filename": "libChanges\\intro.js-react\\src\\helpers\\proptypes.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "libChanges\\intro.js-react\\src\\index.js"
+                },
+                {
+                    "blank": 17,
+                    "code": 95,
+                    "comment": 0,
+                    "filename": "libChanges\\intro.js\\changelog.md"
+                },
+                {
+                    "blank": 493,
+                    "code": 1539,
+                    "comment": 667,
+                    "filename": "libChanges\\intro.js\\intro.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "libChanges\\intro.js\\introjs-rtl.css"
+                },
+                {
+                    "blank": 42,
+                    "code": 397,
+                    "comment": 5,
+                    "filename": "libChanges\\intro.js\\introjs.css"
+                },
+                {
+                    "blank": 55,
+                    "code": 220,
+                    "comment": 4,
+                    "filename": "libChanges\\intro.js\\license.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 9,
+                    "filename": "libChanges\\intro.js\\minified\\intro.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "libChanges\\intro.js\\minified\\introjs-rtl.min.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\intro.js\\minified\\introjs-rtl.min.css.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "libChanges\\intro.js\\minified\\introjs.min.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\intro.js\\minified\\introjs.min.css.map"
+                },
+                {
+                    "blank": 2,
+                    "code": 67,
+                    "comment": 0,
+                    "filename": "libChanges\\intro.js\\package.json"
+                },
+                {
+                    "blank": 40,
+                    "code": 67,
+                    "comment": 11,
+                    "filename": "libChanges\\intro.js\\README.md"
+                },
+                {
+                    "blank": 20,
+                    "code": 211,
+                    "comment": 13,
+                    "filename": "libChanges\\intro.js\\themes\\introjs-dark.css"
+                },
+                {
+                    "blank": 6,
+                    "code": 53,
+                    "comment": 0,
+                    "filename": "libChanges\\intro.js\\themes\\introjs-flattener.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "libChanges\\intro.js\\themes\\introjs-modern.css"
+                },
+                {
+                    "blank": 27,
+                    "code": 253,
+                    "comment": 18,
+                    "filename": "libChanges\\intro.js\\themes\\introjs-nassim.css"
+                },
+                {
+                    "blank": 26,
+                    "code": 231,
+                    "comment": 9,
+                    "filename": "libChanges\\intro.js\\themes\\introjs-nazanin.css"
+                },
+                {
+                    "blank": 26,
+                    "code": 248,
+                    "comment": 12,
+                    "filename": "libChanges\\intro.js\\themes\\introjs-royal.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 1,
+                    "filename": "libChanges\\rasterizehtml\\.jshintignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\.travis.yml"
+                },
+                {
+                    "blank": 1,
+                    "code": 1,
+                    "comment": 10,
+                    "filename": "libChanges\\rasterizehtml\\dist\\rasterizeHTML.allinone.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 32,
+                    "comment": 156,
+                    "filename": "libChanges\\rasterizehtml\\dist\\rasterizeHTML.d.ts"
+                },
+                {
+                    "blank": 210,
+                    "code": 884,
+                    "comment": 57,
+                    "filename": "libChanges\\rasterizehtml\\dist\\rasterizeHTML.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 1,
+                    "comment": 3,
+                    "filename": "libChanges\\rasterizehtml\\dist\\rasterizeHTML.min.js"
+                },
+                {
+                    "filename": "libChanges\\rasterizehtml\\examples\\ghostscript_tiger.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "libChanges\\rasterizehtml\\examples\\ghostscript_tiger_2x.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 7,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\examples\\index.html"
+                },
+                {
+                    "blank": 9,
+                    "code": 102,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\examples\\pseudoClasses.html"
+                },
+                {
+                    "blank": 2,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\examples\\retina.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\go"
+                },
+                {
+                    "blank": 20,
+                    "code": 201,
+                    "comment": 1,
+                    "filename": "libChanges\\rasterizehtml\\Gruntfile.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\LICENSE"
+                },
+                {
+                    "blank": 1,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\package.json"
+                },
+                {
+                    "blank": 7,
+                    "code": 18,
+                    "comment": 2,
+                    "filename": "libChanges\\rasterizehtml\\README.md"
+                },
+                {
+                    "blank": 2,
+                    "code": 43,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\src\\.jshintrc"
+                },
+                {
+                    "blank": 54,
+                    "code": 259,
+                    "comment": 12,
+                    "filename": "libChanges\\rasterizehtml\\src\\browser.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 82,
+                    "comment": 3,
+                    "filename": "libChanges\\rasterizehtml\\src\\document2svg.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\src\\documentHelper.js"
+                },
+                {
+                    "blank": 27,
+                    "code": 104,
+                    "comment": 9,
+                    "filename": "libChanges\\rasterizehtml\\src\\documentUtil.js"
+                },
+                {
+                    "blank": 21,
+                    "code": 67,
+                    "comment": 13,
+                    "filename": "libChanges\\rasterizehtml\\src\\index.js"
+                },
+                {
+                    "blank": 21,
+                    "code": 58,
+                    "comment": 3,
+                    "filename": "libChanges\\rasterizehtml\\src\\proxies.js"
+                },
+                {
+                    "blank": 12,
+                    "code": 81,
+                    "comment": 1,
+                    "filename": "libChanges\\rasterizehtml\\src\\rasterize.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 115,
+                    "comment": 4,
+                    "filename": "libChanges\\rasterizehtml\\src\\svg2image.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 32,
+                    "comment": 153,
+                    "filename": "libChanges\\rasterizehtml\\src\\typings.d.ts"
+                },
+                {
+                    "blank": 12,
+                    "code": 48,
+                    "comment": 2,
+                    "filename": "libChanges\\rasterizehtml\\src\\util.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\.jshintrc"
+                },
+                {
+                    "blank": 7,
+                    "code": 28,
+                    "comment": 1,
+                    "filename": "libChanges\\rasterizehtml\\test\\diffHelper.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\diffHelperPage.html"
+                },
+                {
+                    "blank": 2,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\ajax.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\ajaxContent.txt"
+                },
+                {
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\green.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\hover.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\image.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\import_test.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\invalidInput.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\invalidInput.xhtml"
+                },
+                {
+                    "blank": 0,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\nonUTF8Encoding.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\raphaelicons-license.txt"
+                },
+                {
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\raphaelicons-webfont.woff",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\rednblue.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 1,
+                    "code": 17,
+                    "comment": 1,
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\test.css"
+                },
+                {
+                    "blank": 1,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\test.html"
+                },
+                {
+                    "blank": 2,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\testFragment.html"
+                },
+                {
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\testResult.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 1,
+                    "code": 47,
+                    "comment": 22,
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\testScaled50PercentWithJs.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 10,
+                    "comment": 1,
+                    "filename": "libChanges\\rasterizehtml\\test\\fixtures\\testWithJs.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\gruntpath.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\helpers.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 61,
+                    "comment": 4,
+                    "filename": "libChanges\\rasterizehtml\\test\\integrationTest.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\integrationTestPage.html"
+                },
+                {
+                    "blank": 9,
+                    "code": 117,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\manualIntegrationTestForWebkit.html"
+                },
+                {
+                    "blank": 10,
+                    "code": 73,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\performance.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 44,
+                    "comment": 4,
+                    "filename": "libChanges\\rasterizehtml\\test\\SpecRunner.html"
+                },
+                {
+                    "blank": 176,
+                    "code": 515,
+                    "comment": 9,
+                    "filename": "libChanges\\rasterizehtml\\test\\specs\\BrowserSpec.js"
+                },
+                {
+                    "blank": 15,
+                    "code": 44,
+                    "comment": 2,
+                    "filename": "libChanges\\rasterizehtml\\test\\specs\\diffHelperSpec.js"
+                },
+                {
+                    "blank": 61,
+                    "code": 230,
+                    "comment": 4,
+                    "filename": "libChanges\\rasterizehtml\\test\\specs\\Document2SvgSpec.js"
+                },
+                {
+                    "blank": 47,
+                    "code": 106,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\specs\\DocumentHelperSpec.js"
+                },
+                {
+                    "blank": 99,
+                    "code": 191,
+                    "comment": 10,
+                    "filename": "libChanges\\rasterizehtml\\test\\specs\\DocumentUtilSpec.js"
+                },
+                {
+                    "blank": 67,
+                    "code": 234,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\specs\\IndexSpec.js"
+                },
+                {
+                    "blank": 32,
+                    "code": 134,
+                    "comment": 10,
+                    "filename": "libChanges\\rasterizehtml\\test\\specs\\IntegrationSpec.js"
+                },
+                {
+                    "blank": 36,
+                    "code": 118,
+                    "comment": 2,
+                    "filename": "libChanges\\rasterizehtml\\test\\specs\\ProxiesSpec.js"
+                },
+                {
+                    "blank": 69,
+                    "code": 205,
+                    "comment": 0,
+                    "filename": "libChanges\\rasterizehtml\\test\\specs\\RasterizeSpec.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 83,
+                    "comment": 4,
+                    "filename": "libChanges\\rasterizehtml\\test\\specs\\Svg2ImageSpec.js"
+                },
+                {
+                    "blank": 20,
+                    "code": 88,
+                    "comment": 1,
+                    "filename": "libChanges\\rasterizehtml\\test\\specs\\UtilSpec.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 99,
+                    "comment": 4,
+                    "filename": "libChanges\\rasterizehtml\\test\\testHelper.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 24,
+                    "comment": 1,
+                    "filename": "libChanges\\rasterizehtml\\Vagrantfile"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\.travis.yml"
+                },
+                {
+                    "blank": 27,
+                    "code": 261,
+                    "comment": 1,
+                    "filename": "libChanges\\react-contexify\\dist\\ReactContexify.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\dist\\ReactContexify.css.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 11,
+                    "filename": "libChanges\\react-contexify\\dist\\ReactContexify.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\dist\\ReactContexify.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\dist\\ReactContexify.min.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\jest.config.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\cloneItem.d.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 2,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\cloneItem.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\cloneItem.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 3,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\IconFont.d.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 19,
+                    "comment": 1,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\IconFont.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\IconFont.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 30,
+                    "comment": 14,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Item.d.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 89,
+                    "comment": 1,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Item.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Item.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 57,
+                    "comment": 22,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Menu.d.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 205,
+                    "comment": 6,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Menu.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Menu.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 36,
+                    "comment": 23,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\MenuProvider.d.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 101,
+                    "comment": 3,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\MenuProvider.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\MenuProvider.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Portal.d.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 43,
+                    "comment": 1,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Portal.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Portal.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Separator.d.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 1,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Separator.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Separator.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 42,
+                    "comment": 12,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Submenu.d.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 118,
+                    "comment": 1,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Submenu.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\components\\Submenu.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\index.d.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 19,
+                    "comment": 1,
+                    "filename": "libChanges\\react-contexify\\lib\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\index.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 15,
+                    "comment": 24,
+                    "filename": "libChanges\\react-contexify\\lib\\types\\index.d.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 1,
+                    "filename": "libChanges\\react-contexify\\lib\\types\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\types\\index.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\utils\\actions.d.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 1,
+                    "filename": "libChanges\\react-contexify\\lib\\utils\\actions.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\utils\\actions.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\utils\\contextMenu.d.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 14,
+                    "comment": 1,
+                    "filename": "libChanges\\react-contexify\\lib\\utils\\contextMenu.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\utils\\contextMenu.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\utils\\eventManager.d.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 26,
+                    "comment": 1,
+                    "filename": "libChanges\\react-contexify\\lib\\utils\\eventManager.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\utils\\eventManager.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\utils\\styles.d.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 4,
+                    "filename": "libChanges\\react-contexify\\lib\\utils\\styles.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\lib\\utils\\styles.js.map"
+                },
+                {
+                    "blank": 4,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\LICENSE"
+                },
+                {
+                    "blank": 1,
+                    "code": 85,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\package.json"
+                },
+                {
+                    "blank": 24,
+                    "code": 55,
+                    "comment": 5,
+                    "filename": "libChanges\\react-contexify\\README.md"
+                },
+                {
+                    "blank": 7,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\scss\\_menu.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\scss\\animations\\_fade.scss"
+                },
+                {
+                    "blank": 10,
+                    "code": 41,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\scss\\animations\\_flip.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\scss\\animations\\_pop.scss"
+                },
+                {
+                    "blank": 7,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\scss\\animations\\_zoom.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 8,
+                    "comment": 3,
+                    "filename": "libChanges\\react-contexify\\scss\\main.scss"
+                },
+                {
+                    "blank": 0,
+                    "code": 21,
+                    "comment": 1,
+                    "filename": "libChanges\\react-contexify\\scss\\themes\\_dark.scss"
+                },
+                {
+                    "blank": 2,
+                    "code": 21,
+                    "comment": 1,
+                    "filename": "libChanges\\react-contexify\\scss\\themes\\_light.scss"
+                },
+                {
+                    "blank": 14,
+                    "code": 172,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\src\\__playground__\\components\\App.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\src\\__playground__\\components\\Select.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\src\\__playground__\\components\\Table.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\src\\__playground__\\index.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\src\\__playground__\\index.html"
+                },
+                {
+                    "blank": 2,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\src\\__playground__\\index.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 1,
+                    "filename": "libChanges\\react-contexify\\src\\components\\cloneItem.ts"
+                },
+                {
+                    "blank": 5,
+                    "code": 19,
+                    "comment": 4,
+                    "filename": "libChanges\\react-contexify\\src\\components\\IconFont.tsx"
+                },
+                {
+                    "blank": 16,
+                    "code": 70,
+                    "comment": 14,
+                    "filename": "libChanges\\react-contexify\\src\\components\\Item.tsx"
+                },
+                {
+                    "blank": 41,
+                    "code": 198,
+                    "comment": 25,
+                    "filename": "libChanges\\react-contexify\\src\\components\\Menu.tsx"
+                },
+                {
+                    "blank": 20,
+                    "code": 90,
+                    "comment": 25,
+                    "filename": "libChanges\\react-contexify\\src\\components\\MenuProvider.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\src\\components\\Portal.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\src\\components\\Separator.tsx"
+                },
+                {
+                    "blank": 20,
+                    "code": 111,
+                    "comment": 12,
+                    "filename": "libChanges\\react-contexify\\src\\components\\Submenu.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\src\\index.ts"
+                },
+                {
+                    "blank": 8,
+                    "code": 15,
+                    "comment": 24,
+                    "filename": "libChanges\\react-contexify\\src\\types\\index.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\src\\utils\\actions.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\src\\utils\\contextMenu.ts"
+                },
+                {
+                    "blank": 5,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\src\\utils\\eventManager.ts"
+                },
+                {
+                    "blank": 5,
+                    "code": 33,
+                    "comment": 4,
+                    "filename": "libChanges\\react-contexify\\src\\utils\\styles.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\tsconfig.json"
+                },
+                {
+                    "blank": 1,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": "libChanges\\react-contexify\\webpack.config.dev.js"
+                },
+                {
+                    "blank": 1210,
+                    "code": 7374,
+                    "comment": 21,
+                    "filename": "libChanges\\react-contexify\\yarn.lock"
+                },
+                {
+                    "blank": 3,
+                    "code": 7,
+                    "comment": 3,
+                    "filename": "libChanges\\react-draggable\\build\\cjs\\cjs.js"
+                },
+                {
+                    "blank": 87,
+                    "code": 258,
+                    "comment": 125,
+                    "filename": "libChanges\\react-draggable\\build\\cjs\\Draggable.js"
+                },
+                {
+                    "blank": 118,
+                    "code": 264,
+                    "comment": 196,
+                    "filename": "libChanges\\react-draggable\\build\\cjs\\DraggableCore.js"
+                },
+                {
+                    "blank": 47,
+                    "code": 239,
+                    "comment": 70,
+                    "filename": "libChanges\\react-draggable\\build\\cjs\\utils\\domFns.js"
+                },
+                {
+                    "blank": 12,
+                    "code": 52,
+                    "comment": 16,
+                    "filename": "libChanges\\react-draggable\\build\\cjs\\utils\\getPrefix.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 9,
+                    "comment": 1,
+                    "filename": "libChanges\\react-draggable\\build\\cjs\\utils\\log.js"
+                },
+                {
+                    "blank": 31,
+                    "code": 143,
+                    "comment": 41,
+                    "filename": "libChanges\\react-draggable\\build\\cjs\\utils\\positionFns.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 40,
+                    "comment": 13,
+                    "filename": "libChanges\\react-draggable\\build\\cjs\\utils\\shims.js"
+                },
+                {
+                    "blank": 39,
+                    "code": 45,
+                    "comment": 17,
+                    "filename": "libChanges\\react-draggable\\build\\cjs\\utils\\types.js"
+                },
+                {
+                    "blank": 316,
+                    "code": 1102,
+                    "comment": 651,
+                    "filename": "libChanges\\react-draggable\\build\\web\\react-draggable.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-draggable\\build\\web\\react-draggable.min.js.map"
+                },
+                {
+                    "blank": 106,
+                    "code": 226,
+                    "comment": 32,
+                    "filename": "libChanges\\react-draggable\\CHANGELOG.md"
+                },
+                {
+                    "blank": 4,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "libChanges\\react-draggable\\LICENSE"
+                },
+                {
+                    "blank": 3,
+                    "code": 91,
+                    "comment": 0,
+                    "filename": "libChanges\\react-draggable\\package.json"
+                },
+                {
+                    "blank": 68,
+                    "code": 167,
+                    "comment": 71,
+                    "filename": "libChanges\\react-draggable\\README.md"
+                },
+                {
+                    "blank": 10,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": "libChanges\\react-draggable\\typings\\index.d.ts"
+                },
+                {
+                    "blank": 7,
+                    "code": 62,
+                    "comment": 0,
+                    "filename": "libChanges\\react-draggable\\typings\\test.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "libChanges\\react-draggable\\typings\\tsconfig.json"
+                },
+                {
+                    "blank": 4,
+                    "code": 16,
+                    "comment": 1,
+                    "filename": "libChanges\\react-grid-layout\\.babelrc.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "libChanges\\react-grid-layout\\.browserslistrc"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\react-grid-layout\\.eslintignore"
+                },
+                {
+                    "blank": 4,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "libChanges\\react-grid-layout\\.flowconfig"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "libChanges\\react-grid-layout\\.prettierignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "libChanges\\react-grid-layout\\.prettierrc"
+                },
+                {
+                    "blank": 1,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "libChanges\\react-grid-layout\\.travis.yml"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "libChanges\\react-grid-layout\\__mocks__\\react-grid-layout.js"
+                },
+                {
+                    "blank": 21,
+                    "code": 105,
+                    "comment": 87,
+                    "filename": "libChanges\\react-grid-layout\\build\\calculateUtils.js"
+                },
+                {
+                    "blank": 41,
+                    "code": 89,
+                    "comment": 22,
+                    "filename": "libChanges\\react-grid-layout\\build\\components\\WidthProvider.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 1,
+                    "filename": "libChanges\\react-grid-layout\\build\\fastRGLPropsEqual.js"
+                },
+                {
+                    "blank": 94,
+                    "code": 477,
+                    "comment": 116,
+                    "filename": "libChanges\\react-grid-layout\\build\\GridItem.js"
+                },
+                {
+                    "blank": 97,
+                    "code": 584,
+                    "comment": 126,
+                    "filename": "libChanges\\react-grid-layout\\build\\ReactGridLayout.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 70,
+                    "comment": 56,
+                    "filename": "libChanges\\react-grid-layout\\build\\ReactGridLayoutPropTypes.js"
+                },
+                {
+                    "blank": 65,
+                    "code": 208,
+                    "comment": 93,
+                    "filename": "libChanges\\react-grid-layout\\build\\ResponsiveReactGridLayout.js"
+                },
+                {
+                    "blank": 17,
+                    "code": 63,
+                    "comment": 53,
+                    "filename": "libChanges\\react-grid-layout\\build\\responsiveUtils.js"
+                },
+                {
+                    "blank": 131,
+                    "code": 458,
+                    "comment": 280,
+                    "filename": "libChanges\\react-grid-layout\\build\\utils.js"
+                },
+                {
+                    "blank": 91,
+                    "code": 199,
+                    "comment": 22,
+                    "filename": "libChanges\\react-grid-layout\\CHANGELOG.md"
+                },
+                {
+                    "blank": 6,
+                    "code": 55,
+                    "comment": 0,
+                    "filename": "libChanges\\react-grid-layout\\css\\styles.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 17,
+                    "comment": 2,
+                    "filename": "libChanges\\react-grid-layout\\flow-typed\\npm\\classnames_v2.x.x.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 132,
+                    "comment": 4,
+                    "filename": "libChanges\\react-grid-layout\\flow-typed\\npm\\enzyme_v3.x.x.js"
+                },
+                {
+                    "blank": 36,
+                    "code": 508,
+                    "comment": 638,
+                    "filename": "libChanges\\react-grid-layout\\flow-typed\\npm\\jest_v24.x.x.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "libChanges\\react-grid-layout\\index.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 1,
+                    "filename": "libChanges\\react-grid-layout\\index.js.flow"
+                },
+                {
+                    "blank": 2,
+                    "code": 11,
+                    "comment": 3,
+                    "filename": "libChanges\\react-grid-layout\\interfaces\\classnames.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 87,
+                    "comment": 52,
+                    "filename": "libChanges\\react-grid-layout\\lib\\calculateUtils.js"
+                },
+                {
+                    "blank": 13,
+                    "code": 69,
+                    "comment": 15,
+                    "filename": "libChanges\\react-grid-layout\\lib\\components\\WidthProvider.jsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 28,
+                    "comment": 12,
+                    "filename": "libChanges\\react-grid-layout\\lib\\fastRGLPropsEqual.js"
+                },
+                {
+                    "blank": 75,
+                    "code": 452,
+                    "comment": 99,
+                    "filename": "libChanges\\react-grid-layout\\lib\\GridItem.jsx"
+                },
+                {
+                    "blank": 85,
+                    "code": 546,
+                    "comment": 92,
+                    "filename": "libChanges\\react-grid-layout\\lib\\ReactGridLayout.jsx"
+                },
+                {
+                    "blank": 21,
+                    "code": 105,
+                    "comment": 54,
+                    "filename": "libChanges\\react-grid-layout\\lib\\ReactGridLayoutPropTypes.js"
+                },
+                {
+                    "blank": 42,
+                    "code": 225,
+                    "comment": 59,
+                    "filename": "libChanges\\react-grid-layout\\lib\\ResponsiveReactGridLayout.jsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 66,
+                    "comment": 39,
+                    "filename": "libChanges\\react-grid-layout\\lib\\responsiveUtils.js"
+                },
+                {
+                    "blank": 63,
+                    "code": 501,
+                    "comment": 194,
+                    "filename": "libChanges\\react-grid-layout\\lib\\utils.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "libChanges\\react-grid-layout\\LICENSE"
+                },
+                {
+                    "blank": 5,
+                    "code": 106,
+                    "comment": 0,
+                    "filename": "libChanges\\react-grid-layout\\package.json"
+                },
+                {
+                    "blank": 107,
+                    "code": 308,
+                    "comment": 142,
+                    "filename": "libChanges\\react-grid-layout\\README.md"
+                },
+                {
+                    "blank": 2,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "libChanges\\react-resizable\\.babelrc"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "libChanges\\react-resizable\\.browserslistrc"
+                },
+                {
+                    "blank": 2,
+                    "code": 30,
+                    "comment": 1,
+                    "filename": "libChanges\\react-resizable\\.eslintrc"
+                },
+                {
+                    "blank": 4,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "libChanges\\react-resizable\\.flowconfig"
+                },
+                {
+                    "blank": 57,
+                    "code": 205,
+                    "comment": 57,
+                    "filename": "libChanges\\react-resizable\\build\\Resizable.js"
+                },
+                {
+                    "blank": 35,
+                    "code": 177,
+                    "comment": 57,
+                    "filename": "libChanges\\react-resizable\\build\\Resizable.js.flow"
+                },
+                {
+                    "blank": 28,
+                    "code": 101,
+                    "comment": 6,
+                    "filename": "libChanges\\react-resizable\\build\\ResizableBox.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 68,
+                    "comment": 6,
+                    "filename": "libChanges\\react-resizable\\build\\ResizableBox.js.flow"
+                },
+                {
+                    "blank": 9,
+                    "code": 17,
+                    "comment": 1,
+                    "filename": "libChanges\\react-resizable\\build\\utils.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 2,
+                    "filename": "libChanges\\react-resizable\\build\\utils.js.flow"
+                },
+                {
+                    "blank": 46,
+                    "code": 62,
+                    "comment": 8,
+                    "filename": "libChanges\\react-resizable\\CHANGELOG.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 65,
+                    "comment": 0,
+                    "filename": "libChanges\\react-resizable\\css\\styles.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "libChanges\\react-resizable\\index.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "libChanges\\react-resizable\\index.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "libChanges\\react-resizable\\LICENSE"
+                },
+                {
+                    "blank": 2,
+                    "code": 72,
+                    "comment": 0,
+                    "filename": "libChanges\\react-resizable\\package.json"
+                },
+                {
+                    "blank": 16,
+                    "code": 47,
+                    "comment": 7,
+                    "filename": "libChanges\\react-resizable\\README.md"
+                },
+                {
+                    "blank": 50,
+                    "code": 77,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\CHANGELOG.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\dist\\vanta.birds.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\dist\\vanta.cells.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\dist\\vanta.clouds.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\dist\\vanta.clouds2.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\dist\\vanta.dots.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\dist\\vanta.fog.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\dist\\vanta.globe.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\dist\\vanta.halo.min.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 667,
+                    "comment": 3,
+                    "filename": "libChanges\\vanta\\dist\\vanta.net.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\dist\\vanta.rings.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\dist\\vanta.ripple.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\dist\\vanta.topology.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\dist\\vanta.trunk.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\dist\\vanta.waves.min.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\LICENSE.md"
+                },
+                {
+                    "blank": 1,
+                    "code": 35,
+                    "comment": 0,
+                    "filename": "libChanges\\vanta\\package.json"
+                },
+                {
+                    "blank": 43,
+                    "code": 151,
+                    "comment": 20,
+                    "filename": "libChanges\\vanta\\README.md"
+                },
+                {
+                    "blank": 36,
+                    "code": 323,
+                    "comment": 57,
+                    "filename": "libChanges\\vanta\\src\\_base.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 40,
+                    "comment": 2,
+                    "filename": "libChanges\\vanta\\src\\_p5Base.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 93,
+                    "comment": 1,
+                    "filename": "libChanges\\vanta\\src\\_shaderBase.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 327,
+                    "comment": 24,
+                    "filename": "libChanges\\vanta\\src\\gallery.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 43,
+                    "comment": 1,
+                    "filename": "libChanges\\vanta\\src\\helpers.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 160,
+                    "comment": 8,
+                    "filename": "libChanges\\vanta\\src\\skeleton.less"
+                },
+                {
+                    "blank": 30,
+                    "code": 295,
+                    "comment": 84,
+                    "filename": "libChanges\\vanta\\src\\styles.less"
+                },
+                {
+                    "blank": 130,
+                    "code": 691,
+                    "comment": 55,
+                    "filename": "libChanges\\vanta\\src\\vanta.birds.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 59,
+                    "comment": 1,
+                    "filename": "libChanges\\vanta\\src\\vanta.cells.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 130,
+                    "comment": 17,
+                    "filename": "libChanges\\vanta\\src\\vanta.clouds.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 42,
+                    "comment": 4,
+                    "filename": "libChanges\\vanta\\src\\vanta.clouds2.js"
+                },
+                {
+                    "blank": 12,
+                    "code": 91,
+                    "comment": 17,
+                    "filename": "libChanges\\vanta\\src\\vanta.dots.js"
+                },
+                {
+                    "blank": 21,
+                    "code": 81,
+                    "comment": 12,
+                    "filename": "libChanges\\vanta\\src\\vanta.fog.js"
+                },
+                {
+                    "blank": 54,
+                    "code": 255,
+                    "comment": 83,
+                    "filename": "libChanges\\vanta\\src\\vanta.globe.js"
+                },
+                {
+                    "blank": 49,
+                    "code": 215,
+                    "comment": 71,
+                    "filename": "libChanges\\vanta\\src\\vanta.halo.js"
+                },
+                {
+                    "blank": 42,
+                    "code": 194,
+                    "comment": 67,
+                    "filename": "libChanges\\vanta\\src\\vanta.net.js"
+                },
+                {
+                    "blank": 40,
+                    "code": 168,
+                    "comment": 90,
+                    "filename": "libChanges\\vanta\\src\\vanta.rings.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 50,
+                    "comment": 3,
+                    "filename": "libChanges\\vanta\\src\\vanta.ripple.js"
+                },
+                {
+                    "blank": 28,
+                    "code": 145,
+                    "comment": 15,
+                    "filename": "libChanges\\vanta\\src\\vanta.topology.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 67,
+                    "comment": 11,
+                    "filename": "libChanges\\vanta\\src\\vanta.trunk.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 144,
+                    "comment": 29,
+                    "filename": "libChanges\\vanta\\src\\vanta.waves.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 85,
+                    "comment": 41,
+                    "filename": "libChanges\\vanta\\vendor\\FilmGrain_v1.1.frag"
+                },
+                {
+                    "blank": 119,
+                    "code": 196,
+                    "comment": 106,
+                    "filename": "libChanges\\vanta\\vendor\\GPUComputationRenderer.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 2,
+                    "filename": "libChanges\\vanta\\vendor\\p5.min.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1069,
+                    "comment": 1,
+                    "filename": "libChanges\\vanta\\vendor\\three.r119.min.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 27,
+                    "comment": 4,
+                    "filename": "libChanges\\vanta\\webpack.build.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 35,
+                    "comment": 3,
+                    "filename": "libChanges\\vanta\\webpack.config.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 21042,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 4,
+                    "code": 143,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "filename": "public\\favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 20,
+                    "comment": 23,
+                    "filename": "public\\index.html"
+                },
+                {
+                    "filename": "public\\logo192.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\logo512.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "public\\manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 1,
+                    "filename": "public\\robots.txt"
+                },
+                {
+                    "blank": 31,
+                    "code": 37,
+                    "comment": 12,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\ActiveFieldsEditor\\dbcalls.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 229,
+                    "comment": 1,
+                    "filename": "src\\components\\ActiveFieldsEditor\\index.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "src\\components\\ActiveFieldsEditor\\style.scss"
+                },
+                {
+                    "blank": 7,
+                    "code": 86,
+                    "comment": 0,
+                    "filename": "src\\components\\ColorEditor\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\ColorEditor\\style.scss"
+                },
+                {
+                    "blank": 6,
+                    "code": 76,
+                    "comment": 0,
+                    "filename": "src\\components\\CustomNumericBox\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\CustomNumericBox\\style.scss"
+                },
+                {
+                    "blank": 13,
+                    "code": 361,
+                    "comment": 0,
+                    "filename": "src\\components\\FontEditor\\index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "src\\components\\FontEditor\\style.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src\\components\\Gridlet\\dbcalls.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 274,
+                    "comment": 1,
+                    "filename": "src\\components\\Gridlet\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\Gridlet\\style.scss"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src\\index.css"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 3,
+                    "filename": "src\\index.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "src\\modals\\ConfirmationModal\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\modals\\ConfirmationModal\\style.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src\\modals\\EntityInstanceModal\\dbcalls.js"
+                },
+                {
+                    "blank": 15,
+                    "code": 200,
+                    "comment": 2,
+                    "filename": "src\\modals\\EntityInstanceModal\\index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\modals\\EntityInstanceModal\\style.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src\\modals\\EntityTypeModal\\dbcalls.js"
+                },
+                {
+                    "blank": 13,
+                    "code": 216,
+                    "comment": 2,
+                    "filename": "src\\modals\\EntityTypeModal\\index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src\\modals\\EntityTypeModal\\style.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": "src\\modals\\GenericModal\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "src\\modals\\GenericModal\\style.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "src\\modals\\InfoModal\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\modals\\InfoModal\\style.scss"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\modals\\TemplateModal\\dbcalls.js"
+                },
+                {
+                    "blank": 12,
+                    "code": 144,
+                    "comment": 0,
+                    "filename": "src\\modals\\TemplateModal\\index.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src\\modals\\TemplateModal\\style.scss"
+                },
+                {
+                    "blank": 9,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": "src\\nodeJS\\DatabaseSetup.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src\\nodeJS\\EntityInstances.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "src\\nodeJS\\EntityTypes.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "src\\nodeJS\\index.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 61,
+                    "comment": 0,
+                    "filename": "src\\nodeJS\\Interface\\index.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "src\\nodeJS\\Layout.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 108,
+                    "comment": 0,
+                    "filename": "src\\nodeJS\\utilEndpoints.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 134,
+                    "comment": 0,
+                    "filename": "src\\nodeJS\\utils.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 43,
+                    "comment": 0,
+                    "filename": "src\\pages\\Main\\EntityInstances\\dbcalls.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 268,
+                    "comment": 4,
+                    "filename": "src\\pages\\Main\\EntityInstances\\index.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 40,
+                    "comment": 5,
+                    "filename": "src\\pages\\Main\\EntityInstances\\index.test.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 9,
+                    "comment": 2,
+                    "filename": "src\\pages\\Main\\EntityInstances\\style.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "src\\pages\\Main\\EntityTypes\\dbcalls.js"
+                },
+                {
+                    "blank": 18,
+                    "code": 210,
+                    "comment": 3,
+                    "filename": "src\\pages\\Main\\EntityTypes\\index.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 40,
+                    "comment": 5,
+                    "filename": "src\\pages\\Main\\EntityTypes\\index.test.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 9,
+                    "comment": 2,
+                    "filename": "src\\pages\\Main\\EntityTypes\\style.scss"
+                },
+                {
+                    "blank": 11,
+                    "code": 166,
+                    "comment": 4,
+                    "filename": "src\\pages\\Main\\HomeView\\dbcalls.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 64,
+                    "comment": 13,
+                    "filename": "src\\pages\\Main\\HomeView\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\pages\\Main\\HomeView\\style.scss"
+                },
+                {
+                    "blank": 2,
+                    "code": 92,
+                    "comment": 0,
+                    "filename": "src\\pages\\Main\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\pages\\Main\\LayoutEdit\\dbcalls.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "src\\pages\\Main\\LayoutEdit\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\pages\\Main\\LayoutEdit\\style.scss"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\pages\\Main\\style.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src\\pages\\Main\\Templates\\dbcalls.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 195,
+                    "comment": 9,
+                    "filename": "src\\pages\\Main\\Templates\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\pages\\Main\\Templates\\style.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "src\\pages\\RouterPage\\index.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "src\\pages\\RouterPage\\Placeholder.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\pages\\RouterPage\\style.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 16,
+                    "comment": 3,
+                    "filename": "src\\redux\\genericSlice.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 44,
+                    "comment": 8,
+                    "filename": "src\\redux\\layoutSlice.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\redux\\store.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 92,
+                    "comment": 31,
+                    "filename": "src\\serviceWorker.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src\\stories\\assets\\code-brackets.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src\\stories\\assets\\colors.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src\\stories\\assets\\comments.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src\\stories\\assets\\direction.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src\\stories\\assets\\flow.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src\\stories\\assets\\plugin.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src\\stories\\assets\\repo.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src\\stories\\assets\\stackalt.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "src\\stories\\button.css"
+                },
+                {
+                    "blank": 3,
+                    "code": 29,
+                    "comment": 18,
+                    "filename": "src\\stories\\Button.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "src\\stories\\Button.stories.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "src\\stories\\header.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "src\\stories\\Header.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src\\stories\\Header.stories.js"
+                },
+                {
+                    "blank": 18,
+                    "code": 101,
+                    "comment": 0,
+                    "filename": "src\\stories\\Introduction.stories.mdx"
+                },
+                {
+                    "blank": 9,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "src\\stories\\page.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 67,
+                    "comment": 0,
+                    "filename": "src\\stories\\Page.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "src\\stories\\Page.stories.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "src\\ui\\ControlWidget\\CustomSelectStyles.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 158,
+                    "comment": 1,
+                    "filename": "src\\ui\\ControlWidget\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "src\\ui\\ControlWidget\\style.scss"
+                },
+                {
+                    "blank": 10,
+                    "code": 234,
+                    "comment": 2,
+                    "filename": "src\\ui\\DraggableTable\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\ui\\DraggableTable\\style.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "src\\ui\\GridUtils\\DraggableRowRenderer.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": "src\\ui\\GridUtils\\GroupByControl.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\ui\\GridUtils\\style.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "src\\ui\\GridUtils\\ZoomControls.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\ui\\GridUtils\\ZoomControls.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": "src\\ui\\Navbar\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\ui\\Navbar\\style.scss"
+                },
+                {
+                    "blank": 3,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "src\\ui\\Sidebar\\index.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "src\\ui\\Sidebar\\SidebarItem.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "src\\ui\\Sidebar\\style.scss"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 1,
+                    "filename": "src\\utils\\Constants.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 46,
+                    "comment": 2,
+                    "filename": "src\\utils\\index.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src\\utils\\useModal.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 27,
+                    "comment": 1,
+                    "filename": "src\\validators\\DuplicateValidator.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 17,
+                    "comment": 2,
+                    "filename": "src\\validators\\EmptyFieldsValidator.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 44,
+                    "comment": 2,
+                    "filename": "src\\validators\\InputValidator.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 14,
+                    "comment": 1,
+                    "filename": "src\\validators\\Validator.js"
+                },
+                {
+                    "blank": 3017,
+                    "code": 12884,
+                    "comment": 41,
+                    "filename": "yarn-error.log"
+                },
+                {
+                    "blank": 3004,
+                    "code": 12720,
+                    "comment": 41,
+                    "filename": "yarn.lock"
+                }
+            ]
+        }
+    ]
+}

@@ -5,26 +5,28 @@ import Sidebar from "../../ui/Sidebar";
 import SidebarItem from "../../ui/Sidebar/SidebarItem";
 import EntityTypes from "./EntityTypes";
 import EntityInstances from "./EntityInstances";
-import LayoutItemTemplates from "./LayoutItemTemplates";
-import MainLayout from "./MainLayout";
+import Templates from "./Templates";
+import LayoutEdit from "./LayoutEdit";
+import HomeView from "./HomeView";
 
 const MainContainer = styled.main`
   position: relative;
   overflow: hidden;
   transition: all 0.15s;
+  height: 100%;
   margin-left: ${(props) => (props.expanded ? 240 : 64)}px;
 `;
 
 export default function Main() {
   const [state, setState] = useState({
     sidebarExpanded: false,
-    sidebarSelected: "mainlayout",
+    sidebarSelected: "homeview",
     sidebarItems: [
       SidebarItem({
-        eventKey: "mainlayout",
+        eventKey: "homeview",
         text: "Home",
         icon: faHome,
-        key: "mainlayout"
+        key: "homeview"
       }),
       SidebarItem({
         eventKey: "entitytypes",
@@ -39,16 +41,16 @@ export default function Main() {
         key: "entityinstances"
       }),
       SidebarItem({
-        eventKey: "layoutitemtemplates",
-        text: "Layout Item Templates",
+        eventKey: "templates",
+        text: "Block Templates",
         icon: faFileAlt,
-        key: "layoutitemtemplates"
+        key: "templates"
       }),
       SidebarItem({
-        eventKey: "screen",
-        text: "Screen",
+        eventKey: "layoutedit",
+        text: "Layout edit",
         icon: faObjectGroup,
-        key: "screen"
+        key: "layoutedit"
       })
     ],
   });
@@ -59,18 +61,22 @@ export default function Main() {
     });
   }
   function sidebarOnSelect(selectedItem) {
-    console.log(selectedItem);
     setState({
       ...state,
       sidebarSelected: selectedItem,
     });
   }
   const { sidebarSelected, sidebarItems, sidebarExpanded } = state;
+  const sidebarSelectedTitle = sidebarItems.filter((el) => {
+    return el.props.eventKey === sidebarSelected;
+  })[0]?.props?.text;
+
   return (
     <div
       style={{
         position: "relative",
         height: "calc(100vh - 56px)",
+        overflow: "hidden"
       }}
     >
       <Sidebar
@@ -80,10 +86,21 @@ export default function Main() {
         items={sidebarItems}
       />
       <MainContainer expanded={sidebarExpanded}>
-        {sidebarSelected === "mainlayout" && <MainLayout />}
+        <div style={{
+          width: "100%",
+          backgroundColor: "linen",
+          color: "grey",
+          padding: "8px",
+          fontWeight: "bold"
+        }}
+        >
+          {sidebarSelectedTitle}
+        </div>
+        {sidebarSelected === "homeview" && <HomeView />}
         {sidebarSelected === "entitytypes" && <EntityTypes />}
         {sidebarSelected === "entityinstances" && <EntityInstances />}
-        {sidebarSelected === "layoutitemtemplates" && <LayoutItemTemplates />}
+        {sidebarSelected === "templates" && <Templates />}
+        {sidebarSelected === "layoutedit" && <LayoutEdit />}
       </MainContainer>
     </div>
   );

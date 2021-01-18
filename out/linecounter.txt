@@ -1,0 +1,479 @@
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2021-01-16 21:28:22
+count workspace : c:\react-manage-pro
+total files : 441
+total code lines : 87025
+total comment lines : 6571
+total blank lines : 13354
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |               |            337|              4|             51|   0.39|
+   |            .md|           1839|            340|            747|    2.1|
+   |          .json|          21876|              0|             27|     25|
+   |            .js|          23331|           4974|           4394|     27|
+   |           .css|           2027|             63|            213|    2.3|
+   |          .scss|            328|              9|             51|   0.38|
+   |           .mdx|            101|              0|             18|   0.12|
+   |          .html|            747|             49|             56|   0.86|
+   |           .svg|              9|              0|              0|  0.010|
+   |          .snap|              2|              2|              2| 0.0023|
+   |          .flow|            261|             66|             46|   0.30|
+   |           .yml|             17|              0|              1|  0.020|
+   |            .ts|            506|            436|             84|   0.58|
+   |           .jsx|           1292|            265|            215|    1.5|
+   |           .tsx|            799|             80|            135|   0.92|
+   |          .frag|             85|             41|             26|  0.098|
+   |          .less|            455|             92|             49|   0.52|
+   |           .map|             23|              0|              0|  0.026|
+   |          .lock|          20094|             62|           4214|     23|
+   |           .txt|              9|             47|              8|  0.010|
+   |         .xhtml|              3|              0|              0| 0.0034|
+   |           .log|          12884|             41|           3017|     15|
+   -------------------------------------------------------------------------
+.babelrc, code is 3, comment is 0, blank is 0.
+.env, code is 1, comment is 0, blank is 0.
+.eslintcache, code is 1, comment is 0, blank is 0.
+.gitignore, code is 18, comment is 1, blank is 5.
+.storybook\main.js, code is 9, comment is 0, blank is 2.
+.storybook\preview.js, code is 3, comment is 0, blank is 1.
+build\asset-manifest.json, code is 20, comment is 0, blank is 1.
+build\favicon.ico, it is a binary file.
+build\index.html, code is 1, comment is 0, blank is 0.
+build\logo192.png, it is a binary file.
+build\logo512.png, it is a binary file.
+build\manifest.json, code is 25, comment is 0, blank is 0.
+build\robots.txt, code is 2, comment is 1, blank is 0.
+build\static\css\main.93567964.chunk.css, code is 1, comment is 1, blank is 0.
+build\static\css\main.93567964.chunk.css.map, code is 1, comment is 0, blank is 0.
+build\static\js\2.d083eeb3.chunk.js, code is 1, comment is 2, blank is 0.
+build\static\js\2.d083eeb3.chunk.js.LICENSE.txt, code is 0, comment is 45, blank is 5.
+build\static\js\2.d083eeb3.chunk.js.map, code is 1, comment is 0, blank is 0.
+build\static\js\main.d0d9155b.chunk.js, code is 1, comment is 1, blank is 0.
+build\static\js\main.d0d9155b.chunk.js.map, code is 1, comment is 0, blank is 0.
+build\static\js\runtime-main.79b54db3.js, code is 1, comment is 1, blank is 0.
+build\static\js\runtime-main.79b54db3.js.map, code is 1, comment is 0, blank is 0.
+build\static\media\logo.db36153e.svg, code is 1, comment is 0, blank is 0.
+libChanges\intro.js-react\CHANGELOG.md, code is 19, comment is 0, blank is 14.
+libChanges\intro.js-react\lib\components\Hints\index.js, code is 120, comment is 42, blank is 55.
+libChanges\intro.js-react\lib\components\Steps\index.js, code is 200, comment is 69, blank is 97.
+libChanges\intro.js-react\lib\helpers\defaultProps.js, code is 9, comment is 4, blank is 1.
+libChanges\intro.js-react\lib\helpers\proptypes.js, code is 37, comment is 8, blank is 7.
+libChanges\intro.js-react\lib\index.js, code is 19, comment is 0, blank is 6.
+libChanges\intro.js-react\LICENSE, code is 17, comment is 0, blank is 4.
+libChanges\intro.js-react\package.json, code is 78, comment is 0, blank is 4.
+libChanges\intro.js-react\README.md, code is 87, comment is 4, blank is 29.
+libChanges\intro.js-react\src\components\Hints\__snapshots__\index.test.js.snap, code is 1, comment is 1, blank is 1.
+libChanges\intro.js-react\src\components\Hints\index.js, code is 78, comment is 42, blank is 22.
+libChanges\intro.js-react\src\components\Hints\index.test.js, code is 87, comment is 4, blank is 31.
+libChanges\intro.js-react\src\components\Steps\__snapshots__\index.test.js.snap, code is 1, comment is 1, blank is 1.
+libChanges\intro.js-react\src\components\Steps\index.js, code is 156, comment is 69, blank is 45.
+libChanges\intro.js-react\src\components\Steps\index.test.js, code is 235, comment is 4, blank is 91.
+libChanges\intro.js-react\src\helpers\defaultProps.js, code is 4, comment is 4, blank is 0.
+libChanges\intro.js-react\src\helpers\proptypes.js, code is 48, comment is 8, blank is 3.
+libChanges\intro.js-react\src\index.js, code is 2, comment is 0, blank is 0.
+libChanges\intro.js\changelog.md, code is 95, comment is 0, blank is 17.
+libChanges\intro.js\intro.js, code is 1539, comment is 667, blank is 493.
+libChanges\intro.js\introjs-rtl.css, code is 15, comment is 0, blank is 5.
+libChanges\intro.js\introjs.css, code is 397, comment is 5, blank is 42.
+libChanges\intro.js\license.md, code is 220, comment is 4, blank is 55.
+libChanges\intro.js\minified\intro.min.js, code is 1, comment is 9, blank is 0.
+libChanges\intro.js\minified\introjs-rtl.min.css, code is 1, comment is 1, blank is 0.
+libChanges\intro.js\minified\introjs-rtl.min.css.map, code is 1, comment is 0, blank is 0.
+libChanges\intro.js\minified\introjs.min.css, code is 1, comment is 1, blank is 0.
+libChanges\intro.js\minified\introjs.min.css.map, code is 1, comment is 0, blank is 0.
+libChanges\intro.js\package.json, code is 67, comment is 0, blank is 2.
+libChanges\intro.js\README.md, code is 67, comment is 11, blank is 40.
+libChanges\intro.js\themes\introjs-dark.css, code is 211, comment is 13, blank is 20.
+libChanges\intro.js\themes\introjs-flattener.css, code is 53, comment is 0, blank is 6.
+libChanges\intro.js\themes\introjs-modern.css, code is 51, comment is 0, blank is 4.
+libChanges\intro.js\themes\introjs-nassim.css, code is 253, comment is 18, blank is 27.
+libChanges\intro.js\themes\introjs-nazanin.css, code is 231, comment is 9, blank is 26.
+libChanges\intro.js\themes\introjs-royal.css, code is 248, comment is 12, blank is 26.
+libChanges\rasterizehtml\.jshintignore, code is 2, comment is 1, blank is 0.
+libChanges\rasterizehtml\.travis.yml, code is 4, comment is 0, blank is 0.
+libChanges\rasterizehtml\dist\rasterizeHTML.allinone.js, code is 1, comment is 10, blank is 1.
+libChanges\rasterizehtml\dist\rasterizeHTML.d.ts, code is 32, comment is 156, blank is 25.
+libChanges\rasterizehtml\dist\rasterizeHTML.js, code is 884, comment is 57, blank is 210.
+libChanges\rasterizehtml\dist\rasterizeHTML.min.js, code is 1, comment is 3, blank is 1.
+libChanges\rasterizehtml\examples\ghostscript_tiger.png, it is a binary file.
+libChanges\rasterizehtml\examples\ghostscript_tiger_2x.png, it is a binary file.
+libChanges\rasterizehtml\examples\index.html, code is 60, comment is 0, blank is 7.
+libChanges\rasterizehtml\examples\pseudoClasses.html, code is 102, comment is 0, blank is 9.
+libChanges\rasterizehtml\examples\retina.html, code is 36, comment is 0, blank is 2.
+libChanges\rasterizehtml\go, code is 5, comment is 0, blank is 1.
+libChanges\rasterizehtml\Gruntfile.js, code is 201, comment is 1, blank is 20.
+libChanges\rasterizehtml\LICENSE, code is 4, comment is 0, blank is 3.
+libChanges\rasterizehtml\package.json, code is 52, comment is 0, blank is 1.
+libChanges\rasterizehtml\README.md, code is 18, comment is 2, blank is 7.
+libChanges\rasterizehtml\src\.jshintrc, code is 43, comment is 0, blank is 2.
+libChanges\rasterizehtml\src\browser.js, code is 259, comment is 12, blank is 54.
+libChanges\rasterizehtml\src\document2svg.js, code is 82, comment is 3, blank is 25.
+libChanges\rasterizehtml\src\documentHelper.js, code is 54, comment is 0, blank is 11.
+libChanges\rasterizehtml\src\documentUtil.js, code is 104, comment is 9, blank is 27.
+libChanges\rasterizehtml\src\index.js, code is 67, comment is 13, blank is 21.
+libChanges\rasterizehtml\src\proxies.js, code is 58, comment is 3, blank is 21.
+libChanges\rasterizehtml\src\rasterize.js, code is 81, comment is 1, blank is 12.
+libChanges\rasterizehtml\src\svg2image.js, code is 115, comment is 4, blank is 19.
+libChanges\rasterizehtml\src\typings.d.ts, code is 32, comment is 153, blank is 25.
+libChanges\rasterizehtml\src\util.js, code is 48, comment is 2, blank is 12.
+libChanges\rasterizehtml\test\.jshintrc, code is 40, comment is 0, blank is 5.
+libChanges\rasterizehtml\test\diffHelper.js, code is 28, comment is 1, blank is 7.
+libChanges\rasterizehtml\test\diffHelperPage.html, code is 51, comment is 0, blank is 9.
+libChanges\rasterizehtml\test\fixtures\ajax.html, code is 19, comment is 0, blank is 2.
+libChanges\rasterizehtml\test\fixtures\ajaxContent.txt, code is 1, comment is 0, blank is 0.
+libChanges\rasterizehtml\test\fixtures\green.png, it is a binary file.
+libChanges\rasterizehtml\test\fixtures\hover.html, code is 12, comment is 0, blank is 0.
+libChanges\rasterizehtml\test\fixtures\image.html, code is 9, comment is 0, blank is 0.
+libChanges\rasterizehtml\test\fixtures\import_test.css, code is 1, comment is 1, blank is 0.
+libChanges\rasterizehtml\test\fixtures\invalidInput.html, code is 3, comment is 0, blank is 0.
+libChanges\rasterizehtml\test\fixtures\invalidInput.xhtml, code is 3, comment is 0, blank is 0.
+libChanges\rasterizehtml\test\fixtures\nonUTF8Encoding.html, code is 10, comment is 0, blank is 0.
+libChanges\rasterizehtml\test\fixtures\raphaelicons-license.txt, code is 4, comment is 0, blank is 3.
+libChanges\rasterizehtml\test\fixtures\raphaelicons-webfont.woff, it is a binary file.
+libChanges\rasterizehtml\test\fixtures\rednblue.png, it is a binary file.
+libChanges\rasterizehtml\test\fixtures\test.css, code is 17, comment is 1, blank is 1.
+libChanges\rasterizehtml\test\fixtures\test.html, code is 39, comment is 0, blank is 1.
+libChanges\rasterizehtml\test\fixtures\testFragment.html, code is 38, comment is 0, blank is 2.
+libChanges\rasterizehtml\test\fixtures\testResult.png, it is a binary file.
+libChanges\rasterizehtml\test\fixtures\testScaled50PercentWithJs.html, code is 47, comment is 22, blank is 1.
+libChanges\rasterizehtml\test\fixtures\testWithJs.js, code is 10, comment is 1, blank is 0.
+libChanges\rasterizehtml\test\gruntpath.js, code is 1, comment is 0, blank is 0.
+libChanges\rasterizehtml\test\helpers.js, code is 33, comment is 0, blank is 1.
+libChanges\rasterizehtml\test\integrationTest.js, code is 61, comment is 4, blank is 16.
+libChanges\rasterizehtml\test\integrationTestPage.html, code is 37, comment is 0, blank is 1.
+libChanges\rasterizehtml\test\manualIntegrationTestForWebkit.html, code is 117, comment is 0, blank is 9.
+libChanges\rasterizehtml\test\performance.html, code is 73, comment is 0, blank is 10.
+libChanges\rasterizehtml\test\SpecRunner.html, code is 44, comment is 4, blank is 3.
+libChanges\rasterizehtml\test\specs\BrowserSpec.js, code is 515, comment is 9, blank is 176.
+libChanges\rasterizehtml\test\specs\diffHelperSpec.js, code is 44, comment is 2, blank is 15.
+libChanges\rasterizehtml\test\specs\Document2SvgSpec.js, code is 230, comment is 4, blank is 61.
+libChanges\rasterizehtml\test\specs\DocumentHelperSpec.js, code is 106, comment is 0, blank is 47.
+libChanges\rasterizehtml\test\specs\DocumentUtilSpec.js, code is 191, comment is 10, blank is 99.
+libChanges\rasterizehtml\test\specs\IndexSpec.js, code is 234, comment is 0, blank is 67.
+libChanges\rasterizehtml\test\specs\IntegrationSpec.js, code is 134, comment is 10, blank is 32.
+libChanges\rasterizehtml\test\specs\ProxiesSpec.js, code is 118, comment is 2, blank is 36.
+libChanges\rasterizehtml\test\specs\RasterizeSpec.js, code is 205, comment is 0, blank is 69.
+libChanges\rasterizehtml\test\specs\Svg2ImageSpec.js, code is 83, comment is 4, blank is 16.
+libChanges\rasterizehtml\test\specs\UtilSpec.js, code is 88, comment is 1, blank is 20.
+libChanges\rasterizehtml\test\testHelper.js, code is 99, comment is 4, blank is 22.
+libChanges\rasterizehtml\Vagrantfile, code is 24, comment is 1, blank is 3.
+libChanges\react-contexify\.travis.yml, code is 5, comment is 0, blank is 0.
+libChanges\react-contexify\dist\ReactContexify.css, code is 261, comment is 1, blank is 27.
+libChanges\react-contexify\dist\ReactContexify.css.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\dist\ReactContexify.js, code is 2, comment is 11, blank is 0.
+libChanges\react-contexify\dist\ReactContexify.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\dist\ReactContexify.min.css, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\jest.config.js, code is 22, comment is 0, blank is 4.
+libChanges\react-contexify\lib\components\cloneItem.d.ts, code is 6, comment is 0, blank is 0.
+libChanges\react-contexify\lib\components\cloneItem.js, code is 8, comment is 2, blank is 0.
+libChanges\react-contexify\lib\components\cloneItem.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\lib\components\IconFont.d.ts, code is 7, comment is 3, blank is 0.
+libChanges\react-contexify\lib\components\IconFont.js, code is 19, comment is 1, blank is 0.
+libChanges\react-contexify\lib\components\IconFont.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\lib\components\Item.d.ts, code is 30, comment is 14, blank is 0.
+libChanges\react-contexify\lib\components\Item.js, code is 89, comment is 1, blank is 0.
+libChanges\react-contexify\lib\components\Item.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\lib\components\Menu.d.ts, code is 57, comment is 22, blank is 0.
+libChanges\react-contexify\lib\components\Menu.js, code is 205, comment is 6, blank is 1.
+libChanges\react-contexify\lib\components\Menu.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\lib\components\MenuProvider.d.ts, code is 36, comment is 23, blank is 0.
+libChanges\react-contexify\lib\components\MenuProvider.js, code is 101, comment is 3, blank is 0.
+libChanges\react-contexify\lib\components\MenuProvider.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\lib\components\Portal.d.ts, code is 13, comment is 0, blank is 0.
+libChanges\react-contexify\lib\components\Portal.js, code is 43, comment is 1, blank is 0.
+libChanges\react-contexify\lib\components\Portal.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\lib\components\Separator.d.ts, code is 2, comment is 0, blank is 0.
+libChanges\react-contexify\lib\components\Separator.js, code is 8, comment is 1, blank is 0.
+libChanges\react-contexify\lib\components\Separator.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\lib\components\Submenu.d.ts, code is 42, comment is 12, blank is 0.
+libChanges\react-contexify\lib\components\Submenu.js, code is 118, comment is 1, blank is 0.
+libChanges\react-contexify\lib\components\Submenu.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\lib\index.d.ts, code is 8, comment is 0, blank is 0.
+libChanges\react-contexify\lib\index.js, code is 19, comment is 1, blank is 0.
+libChanges\react-contexify\lib\index.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\lib\types\index.d.ts, code is 15, comment is 24, blank is 0.
+libChanges\react-contexify\lib\types\index.js, code is 2, comment is 1, blank is 0.
+libChanges\react-contexify\lib\types\index.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\lib\utils\actions.d.ts, code is 3, comment is 0, blank is 0.
+libChanges\react-contexify\lib\utils\actions.js, code is 4, comment is 1, blank is 0.
+libChanges\react-contexify\lib\utils\actions.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\lib\utils\contextMenu.d.ts, code is 12, comment is 0, blank is 0.
+libChanges\react-contexify\lib\utils\contextMenu.js, code is 14, comment is 1, blank is 0.
+libChanges\react-contexify\lib\utils\contextMenu.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\lib\utils\eventManager.d.ts, code is 9, comment is 0, blank is 0.
+libChanges\react-contexify\lib\utils\eventManager.js, code is 26, comment is 1, blank is 0.
+libChanges\react-contexify\lib\utils\eventManager.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\lib\utils\styles.d.ts, code is 25, comment is 0, blank is 0.
+libChanges\react-contexify\lib\utils\styles.js, code is 25, comment is 4, blank is 0.
+libChanges\react-contexify\lib\utils\styles.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-contexify\LICENSE, code is 17, comment is 0, blank is 4.
+libChanges\react-contexify\package.json, code is 85, comment is 0, blank is 1.
+libChanges\react-contexify\README.md, code is 55, comment is 5, blank is 24.
+libChanges\react-contexify\scss\_menu.scss, code is 59, comment is 0, blank is 7.
+libChanges\react-contexify\scss\animations\_fade.scss, code is 15, comment is 0, blank is 4.
+libChanges\react-contexify\scss\animations\_flip.scss, code is 41, comment is 0, blank is 10.
+libChanges\react-contexify\scss\animations\_pop.scss, code is 15, comment is 0, blank is 4.
+libChanges\react-contexify\scss\animations\_zoom.scss, code is 27, comment is 0, blank is 7.
+libChanges\react-contexify\scss\main.scss, code is 8, comment is 3, blank is 3.
+libChanges\react-contexify\scss\themes\_dark.scss, code is 21, comment is 1, blank is 0.
+libChanges\react-contexify\scss\themes\_light.scss, code is 21, comment is 1, blank is 2.
+libChanges\react-contexify\src\__playground__\components\App.tsx, code is 172, comment is 0, blank is 14.
+libChanges\react-contexify\src\__playground__\components\Select.tsx, code is 16, comment is 0, blank is 2.
+libChanges\react-contexify\src\__playground__\components\Table.tsx, code is 28, comment is 0, blank is 2.
+libChanges\react-contexify\src\__playground__\index.css, code is 37, comment is 0, blank is 9.
+libChanges\react-contexify\src\__playground__\index.html, code is 14, comment is 0, blank is 0.
+libChanges\react-contexify\src\__playground__\index.tsx, code is 6, comment is 0, blank is 2.
+libChanges\react-contexify\src\components\cloneItem.ts, code is 11, comment is 1, blank is 1.
+libChanges\react-contexify\src\components\IconFont.tsx, code is 19, comment is 4, blank is 5.
+libChanges\react-contexify\src\components\Item.tsx, code is 70, comment is 14, blank is 16.
+libChanges\react-contexify\src\components\Menu.tsx, code is 198, comment is 25, blank is 41.
+libChanges\react-contexify\src\components\MenuProvider.tsx, code is 90, comment is 25, blank is 20.
+libChanges\react-contexify\src\components\Portal.tsx, code is 24, comment is 0, blank is 4.
+libChanges\react-contexify\src\components\Separator.tsx, code is 3, comment is 0, blank is 2.
+libChanges\react-contexify\src\components\Submenu.tsx, code is 111, comment is 12, blank is 20.
+libChanges\react-contexify\src\index.ts, code is 8, comment is 0, blank is 1.
+libChanges\react-contexify\src\types\index.ts, code is 15, comment is 24, blank is 8.
+libChanges\react-contexify\src\utils\actions.ts, code is 3, comment is 0, blank is 1.
+libChanges\react-contexify\src\utils\contextMenu.ts, code is 25, comment is 0, blank is 3.
+libChanges\react-contexify\src\utils\eventManager.ts, code is 26, comment is 0, blank is 5.
+libChanges\react-contexify\src\utils\styles.ts, code is 33, comment is 4, blank is 5.
+libChanges\react-contexify\tsconfig.json, code is 25, comment is 0, blank is 2.
+libChanges\react-contexify\webpack.config.dev.js, code is 56, comment is 0, blank is 1.
+libChanges\react-contexify\yarn.lock, code is 7374, comment is 21, blank is 1210.
+libChanges\react-draggable\build\cjs\cjs.js, code is 7, comment is 3, blank is 3.
+libChanges\react-draggable\build\cjs\Draggable.js, code is 258, comment is 125, blank is 87.
+libChanges\react-draggable\build\cjs\DraggableCore.js, code is 264, comment is 196, blank is 118.
+libChanges\react-draggable\build\cjs\utils\domFns.js, code is 239, comment is 70, blank is 47.
+libChanges\react-draggable\build\cjs\utils\getPrefix.js, code is 52, comment is 16, blank is 12.
+libChanges\react-draggable\build\cjs\utils\log.js, code is 9, comment is 1, blank is 3.
+libChanges\react-draggable\build\cjs\utils\positionFns.js, code is 143, comment is 41, blank is 31.
+libChanges\react-draggable\build\cjs\utils\shims.js, code is 40, comment is 13, blank is 6.
+libChanges\react-draggable\build\cjs\utils\types.js, code is 45, comment is 17, blank is 39.
+libChanges\react-draggable\build\web\react-draggable.min.js, code is 1102, comment is 651, blank is 316.
+libChanges\react-draggable\build\web\react-draggable.min.js.map, code is 1, comment is 0, blank is 0.
+libChanges\react-draggable\CHANGELOG.md, code is 226, comment is 32, blank is 106.
+libChanges\react-draggable\LICENSE, code is 17, comment is 0, blank is 4.
+libChanges\react-draggable\package.json, code is 91, comment is 0, blank is 3.
+libChanges\react-draggable\README.md, code is 167, comment is 71, blank is 68.
+libChanges\react-draggable\typings\index.d.ts, code is 56, comment is 0, blank is 10.
+libChanges\react-draggable\typings\test.tsx, code is 62, comment is 0, blank is 7.
+libChanges\react-draggable\typings\tsconfig.json, code is 10, comment is 0, blank is 1.
+libChanges\react-grid-layout\.babelrc.js, code is 16, comment is 1, blank is 4.
+libChanges\react-grid-layout\.browserslistrc, code is 3, comment is 0, blank is 0.
+libChanges\react-grid-layout\.eslintignore, code is 1, comment is 0, blank is 0.
+libChanges\react-grid-layout\.flowconfig, code is 15, comment is 0, blank is 4.
+libChanges\react-grid-layout\.prettierignore, code is 2, comment is 0, blank is 0.
+libChanges\react-grid-layout\.prettierrc, code is 18, comment is 0, blank is 0.
+libChanges\react-grid-layout\.travis.yml, code is 8, comment is 0, blank is 1.
+libChanges\react-grid-layout\__mocks__\react-grid-layout.js, code is 1, comment is 1, blank is 0.
+libChanges\react-grid-layout\build\calculateUtils.js, code is 105, comment is 87, blank is 21.
+libChanges\react-grid-layout\build\components\WidthProvider.js, code is 89, comment is 22, blank is 41.
+libChanges\react-grid-layout\build\fastRGLPropsEqual.js, code is 4, comment is 1, blank is 0.
+libChanges\react-grid-layout\build\GridItem.js, code is 477, comment is 116, blank is 94.
+libChanges\react-grid-layout\build\ReactGridLayout.js, code is 584, comment is 126, blank is 97.
+libChanges\react-grid-layout\build\ReactGridLayoutPropTypes.js, code is 70, comment is 56, blank is 10.
+libChanges\react-grid-layout\build\ResponsiveReactGridLayout.js, code is 208, comment is 93, blank is 65.
+libChanges\react-grid-layout\build\responsiveUtils.js, code is 63, comment is 53, blank is 17.
+libChanges\react-grid-layout\build\utils.js, code is 458, comment is 280, blank is 131.
+libChanges\react-grid-layout\CHANGELOG.md, code is 199, comment is 22, blank is 91.
+libChanges\react-grid-layout\css\styles.css, code is 55, comment is 0, blank is 6.
+libChanges\react-grid-layout\flow-typed\npm\classnames_v2.x.x.js, code is 17, comment is 2, blank is 4.
+libChanges\react-grid-layout\flow-typed\npm\enzyme_v3.x.x.js, code is 132, comment is 4, blank is 7.
+libChanges\react-grid-layout\flow-typed\npm\jest_v24.x.x.js, code is 508, comment is 638, blank is 36.
+libChanges\react-grid-layout\index.js, code is 5, comment is 0, blank is 0.
+libChanges\react-grid-layout\index.js.flow, code is 5, comment is 1, blank is 2.
+libChanges\react-grid-layout\interfaces\classnames.js, code is 11, comment is 3, blank is 2.
+libChanges\react-grid-layout\lib\calculateUtils.js, code is 87, comment is 52, blank is 14.
+libChanges\react-grid-layout\lib\components\WidthProvider.jsx, code is 69, comment is 15, blank is 13.
+libChanges\react-grid-layout\lib\fastRGLPropsEqual.js, code is 28, comment is 12, blank is 6.
+libChanges\react-grid-layout\lib\GridItem.jsx, code is 452, comment is 99, blank is 75.
+libChanges\react-grid-layout\lib\ReactGridLayout.jsx, code is 546, comment is 92, blank is 85.
+libChanges\react-grid-layout\lib\ReactGridLayoutPropTypes.js, code is 105, comment is 54, blank is 21.
+libChanges\react-grid-layout\lib\ResponsiveReactGridLayout.jsx, code is 225, comment is 59, blank is 42.
+libChanges\react-grid-layout\lib\responsiveUtils.js, code is 66, comment is 39, blank is 9.
+libChanges\react-grid-layout\lib\utils.js, code is 501, comment is 194, blank is 63.
+libChanges\react-grid-layout\LICENSE, code is 17, comment is 0, blank is 4.
+libChanges\react-grid-layout\package.json, code is 106, comment is 0, blank is 5.
+libChanges\react-grid-layout\README.md, code is 308, comment is 142, blank is 107.
+libChanges\react-resizable\.babelrc, code is 14, comment is 0, blank is 2.
+libChanges\react-resizable\.browserslistrc, code is 3, comment is 0, blank is 0.
+libChanges\react-resizable\.eslintrc, code is 30, comment is 1, blank is 2.
+libChanges\react-resizable\.flowconfig, code is 25, comment is 0, blank is 4.
+libChanges\react-resizable\build\Resizable.js, code is 205, comment is 57, blank is 57.
+libChanges\react-resizable\build\Resizable.js.flow, code is 177, comment is 57, blank is 35.
+libChanges\react-resizable\build\ResizableBox.js, code is 101, comment is 6, blank is 28.
+libChanges\react-resizable\build\ResizableBox.js.flow, code is 68, comment is 6, blank is 8.
+libChanges\react-resizable\build\utils.js, code is 17, comment is 1, blank is 9.
+libChanges\react-resizable\build\utils.js.flow, code is 11, comment is 2, blank is 1.
+libChanges\react-resizable\CHANGELOG.md, code is 62, comment is 8, blank is 46.
+libChanges\react-resizable\css\styles.css, code is 65, comment is 0, blank is 0.
+libChanges\react-resizable\index.html, code is 15, comment is 0, blank is 0.
+libChanges\react-resizable\index.js, code is 6, comment is 0, blank is 1.
+libChanges\react-resizable\LICENSE, code is 17, comment is 0, blank is 4.
+libChanges\react-resizable\package.json, code is 72, comment is 0, blank is 2.
+libChanges\react-resizable\README.md, code is 47, comment is 7, blank is 16.
+libChanges\vanta\CHANGELOG.md, code is 77, comment is 0, blank is 50.
+libChanges\vanta\dist\vanta.birds.min.js, code is 1, comment is 0, blank is 0.
+libChanges\vanta\dist\vanta.cells.min.js, code is 1, comment is 0, blank is 0.
+libChanges\vanta\dist\vanta.clouds.min.js, code is 1, comment is 0, blank is 0.
+libChanges\vanta\dist\vanta.clouds2.min.js, code is 1, comment is 0, blank is 0.
+libChanges\vanta\dist\vanta.dots.min.js, code is 1, comment is 0, blank is 0.
+libChanges\vanta\dist\vanta.fog.min.js, code is 1, comment is 0, blank is 0.
+libChanges\vanta\dist\vanta.globe.min.js, code is 1, comment is 0, blank is 0.
+libChanges\vanta\dist\vanta.halo.min.js, code is 1, comment is 0, blank is 0.
+libChanges\vanta\dist\vanta.net.min.js, code is 667, comment is 3, blank is 4.
+libChanges\vanta\dist\vanta.rings.min.js, code is 1, comment is 0, blank is 0.
+libChanges\vanta\dist\vanta.ripple.min.js, code is 1, comment is 0, blank is 0.
+libChanges\vanta\dist\vanta.topology.min.js, code is 1, comment is 0, blank is 0.
+libChanges\vanta\dist\vanta.trunk.min.js, code is 1, comment is 0, blank is 0.
+libChanges\vanta\dist\vanta.waves.min.js, code is 1, comment is 0, blank is 0.
+libChanges\vanta\LICENSE.md, code is 4, comment is 0, blank is 3.
+libChanges\vanta\package.json, code is 35, comment is 0, blank is 1.
+libChanges\vanta\README.md, code is 151, comment is 20, blank is 43.
+libChanges\vanta\src\_base.js, code is 323, comment is 57, blank is 36.
+libChanges\vanta\src\_p5Base.js, code is 40, comment is 2, blank is 1.
+libChanges\vanta\src\_shaderBase.js, code is 93, comment is 1, blank is 3.
+libChanges\vanta\src\gallery.js, code is 327, comment is 24, blank is 22.
+libChanges\vanta\src\helpers.js, code is 43, comment is 1, blank is 9.
+libChanges\vanta\src\skeleton.less, code is 160, comment is 8, blank is 19.
+libChanges\vanta\src\styles.less, code is 295, comment is 84, blank is 30.
+libChanges\vanta\src\vanta.birds.js, code is 691, comment is 55, blank is 130.
+libChanges\vanta\src\vanta.cells.js, code is 59, comment is 1, blank is 11.
+libChanges\vanta\src\vanta.clouds.js, code is 130, comment is 17, blank is 26.
+libChanges\vanta\src\vanta.clouds2.js, code is 42, comment is 4, blank is 5.
+libChanges\vanta\src\vanta.dots.js, code is 91, comment is 17, blank is 12.
+libChanges\vanta\src\vanta.fog.js, code is 81, comment is 12, blank is 21.
+libChanges\vanta\src\vanta.globe.js, code is 255, comment is 83, blank is 54.
+libChanges\vanta\src\vanta.halo.js, code is 215, comment is 71, blank is 49.
+libChanges\vanta\src\vanta.net.js, code is 194, comment is 67, blank is 42.
+libChanges\vanta\src\vanta.rings.js, code is 168, comment is 90, blank is 40.
+libChanges\vanta\src\vanta.ripple.js, code is 50, comment is 3, blank is 8.
+libChanges\vanta\src\vanta.topology.js, code is 145, comment is 15, blank is 28.
+libChanges\vanta\src\vanta.trunk.js, code is 67, comment is 11, blank is 10.
+libChanges\vanta\src\vanta.waves.js, code is 144, comment is 29, blank is 25.
+libChanges\vanta\vendor\FilmGrain_v1.1.frag, code is 85, comment is 41, blank is 26.
+libChanges\vanta\vendor\GPUComputationRenderer.js, code is 196, comment is 106, blank is 119.
+libChanges\vanta\vendor\p5.min.js, code is 9, comment is 2, blank is 0.
+libChanges\vanta\vendor\three.r119.min.js, code is 1069, comment is 1, blank is 0.
+libChanges\vanta\webpack.build.js, code is 27, comment is 4, blank is 2.
+libChanges\vanta\webpack.config.js, code is 35, comment is 3, blank is 4.
+package-lock.json, code is 21042, comment is 0, blank is 0.
+package.json, code is 143, comment is 0, blank is 4.
+public\favicon.ico, it is a binary file.
+public\index.html, code is 20, comment is 23, blank is 0.
+public\logo192.png, it is a binary file.
+public\logo512.png, it is a binary file.
+public\manifest.json, code is 25, comment is 0, blank is 0.
+public\robots.txt, code is 2, comment is 1, blank is 0.
+README.md, code is 37, comment is 12, blank is 31.
+src\components\ActiveFieldsEditor\dbcalls.js, code is 0, comment is 0, blank is 0.
+src\components\ActiveFieldsEditor\index.js, code is 229, comment is 1, blank is 10.
+src\components\ActiveFieldsEditor\style.scss, code is 18, comment is 0, blank is 5.
+src\components\ColorEditor\index.js, code is 86, comment is 0, blank is 7.
+src\components\ColorEditor\style.scss, code is 0, comment is 0, blank is 0.
+src\components\CustomNumericBox\index.js, code is 76, comment is 0, blank is 6.
+src\components\CustomNumericBox\style.scss, code is 0, comment is 0, blank is 0.
+src\components\FontEditor\index.js, code is 361, comment is 0, blank is 13.
+src\components\FontEditor\style.scss, code is 33, comment is 0, blank is 1.
+src\components\Gridlet\dbcalls.js, code is 17, comment is 0, blank is 1.
+src\components\Gridlet\index.js, code is 274, comment is 1, blank is 14.
+src\components\Gridlet\style.scss, code is 0, comment is 0, blank is 0.
+src\index.css, code is 15, comment is 0, blank is 2.
+src\index.js, code is 15, comment is 3, blank is 2.
+src\modals\ConfirmationModal\index.js, code is 37, comment is 0, blank is 4.
+src\modals\ConfirmationModal\style.scss, code is 0, comment is 0, blank is 0.
+src\modals\EntityInstanceModal\dbcalls.js, code is 4, comment is 0, blank is 1.
+src\modals\EntityInstanceModal\index.js, code is 200, comment is 2, blank is 15.
+src\modals\EntityInstanceModal\style.scss, code is 7, comment is 0, blank is 1.
+src\modals\EntityTypeModal\dbcalls.js, code is 4, comment is 0, blank is 1.
+src\modals\EntityTypeModal\index.js, code is 216, comment is 2, blank is 13.
+src\modals\EntityTypeModal\style.scss, code is 3, comment is 0, blank is 1.
+src\modals\GenericModal\index.js, code is 66, comment is 0, blank is 4.
+src\modals\GenericModal\style.scss, code is 6, comment is 0, blank is 0.
+src\modals\InfoModal\index.js, code is 31, comment is 0, blank is 4.
+src\modals\InfoModal\style.scss, code is 0, comment is 0, blank is 0.
+src\modals\TemplateModal\dbcalls.js, code is 0, comment is 0, blank is 0.
+src\modals\TemplateModal\index.js, code is 144, comment is 0, blank is 12.
+src\modals\TemplateModal\style.scss, code is 10, comment is 0, blank is 2.
+src\nodeJS\DatabaseSetup.js, code is 66, comment is 0, blank is 9.
+src\nodeJS\EntityInstances.js, code is 20, comment is 0, blank is 3.
+src\nodeJS\EntityTypes.js, code is 25, comment is 0, blank is 4.
+src\nodeJS\index.js, code is 30, comment is 0, blank is 5.
+src\nodeJS\Interface\index.js, code is 61, comment is 0, blank is 2.
+src\nodeJS\Layout.js, code is 34, comment is 0, blank is 4.
+src\nodeJS\utilEndpoints.js, code is 108, comment is 0, blank is 8.
+src\nodeJS\utils.js, code is 134, comment is 0, blank is 9.
+src\pages\Main\EntityInstances\dbcalls.js, code is 43, comment is 0, blank is 6.
+src\pages\Main\EntityInstances\index.js, code is 268, comment is 4, blank is 25.
+src\pages\Main\EntityInstances\index.test.js, code is 40, comment is 5, blank is 3.
+src\pages\Main\EntityInstances\style.scss, code is 9, comment is 2, blank is 1.
+src\pages\Main\EntityTypes\dbcalls.js, code is 33, comment is 0, blank is 4.
+src\pages\Main\EntityTypes\index.js, code is 210, comment is 3, blank is 18.
+src\pages\Main\EntityTypes\index.test.js, code is 40, comment is 5, blank is 3.
+src\pages\Main\EntityTypes\style.scss, code is 9, comment is 2, blank is 1.
+src\pages\Main\HomeView\dbcalls.js, code is 166, comment is 4, blank is 11.
+src\pages\Main\HomeView\index.js, code is 64, comment is 13, blank is 11.
+src\pages\Main\HomeView\style.scss, code is 0, comment is 0, blank is 0.
+src\pages\Main\index.js, code is 92, comment is 0, blank is 2.
+src\pages\Main\LayoutEdit\dbcalls.js, code is 0, comment is 0, blank is 0.
+src\pages\Main\LayoutEdit\index.js, code is 27, comment is 0, blank is 1.
+src\pages\Main\LayoutEdit\style.scss, code is 0, comment is 0, blank is 0.
+src\pages\Main\style.scss, code is 0, comment is 0, blank is 0.
+src\pages\Main\Templates\dbcalls.js, code is 4, comment is 0, blank is 1.
+src\pages\Main\Templates\index.js, code is 195, comment is 9, blank is 14.
+src\pages\Main\Templates\style.scss, code is 0, comment is 0, blank is 0.
+src\pages\RouterPage\index.js, code is 38, comment is 0, blank is 1.
+src\pages\RouterPage\Placeholder.js, code is 9, comment is 0, blank is 2.
+src\pages\RouterPage\style.scss, code is 0, comment is 0, blank is 0.
+src\redux\genericSlice.js, code is 16, comment is 3, blank is 4.
+src\redux\layoutSlice.js, code is 44, comment is 8, blank is 7.
+src\redux\store.js, code is 7, comment is 0, blank is 1.
+src\serviceWorker.js, code is 92, comment is 31, blank is 14.
+src\stories\assets\code-brackets.svg, code is 1, comment is 0, blank is 0.
+src\stories\assets\colors.svg, code is 1, comment is 0, blank is 0.
+src\stories\assets\comments.svg, code is 1, comment is 0, blank is 0.
+src\stories\assets\direction.svg, code is 1, comment is 0, blank is 0.
+src\stories\assets\flow.svg, code is 1, comment is 0, blank is 0.
+src\stories\assets\plugin.svg, code is 1, comment is 0, blank is 0.
+src\stories\assets\repo.svg, code is 1, comment is 0, blank is 0.
+src\stories\assets\stackalt.svg, code is 1, comment is 0, blank is 0.
+src\stories\button.css, code is 30, comment is 0, blank is 0.
+src\stories\Button.js, code is 29, comment is 18, blank is 3.
+src\stories\Button.stories.js, code is 29, comment is 0, blank is 7.
+src\stories\header.css, code is 23, comment is 0, blank is 3.
+src\stories\Header.js, code is 48, comment is 0, blank is 4.
+src\stories\Header.stories.js, code is 13, comment is 0, blank is 5.
+src\stories\Introduction.stories.mdx, code is 101, comment is 0, blank is 18.
+src\stories\page.css, code is 60, comment is 0, blank is 9.
+src\stories\Page.js, code is 67, comment is 0, blank is 4.
+src\stories\Page.stories.js, code is 16, comment is 0, blank is 5.
+src\ui\ControlWidget\CustomSelectStyles.js, code is 30, comment is 0, blank is 0.
+src\ui\ControlWidget\index.js, code is 158, comment is 1, blank is 6.
+src\ui\ControlWidget\style.scss, code is 5, comment is 0, blank is 0.
+src\ui\DraggableTable\index.js, code is 234, comment is 2, blank is 10.
+src\ui\DraggableTable\style.scss, code is 0, comment is 0, blank is 0.
+src\ui\GridUtils\DraggableRowRenderer.js, code is 34, comment is 0, blank is 1.
+src\ui\GridUtils\GroupByControl.js, code is 66, comment is 0, blank is 5.
+src\ui\GridUtils\style.scss, code is 0, comment is 0, blank is 0.
+src\ui\GridUtils\ZoomControls.js, code is 63, comment is 0, blank is 3.
+src\ui\GridUtils\ZoomControls.scss, code is 7, comment is 0, blank is 0.
+src\ui\Navbar\index.js, code is 56, comment is 0, blank is 3.
+src\ui\Navbar\style.scss, code is 0, comment is 0, blank is 0.
+src\ui\Sidebar\index.js, code is 28, comment is 0, blank is 3.
+src\ui\Sidebar\SidebarItem.js, code is 25, comment is 0, blank is 2.
+src\ui\Sidebar\style.scss, code is 14, comment is 0, blank is 2.
+src\utils\Constants.js, code is 6, comment is 1, blank is 0.
+src\utils\index.js, code is 46, comment is 2, blank is 4.
+src\utils\useModal.js, code is 12, comment is 0, blank is 4.
+src\validators\DuplicateValidator.js, code is 27, comment is 1, blank is 2.
+src\validators\EmptyFieldsValidator.js, code is 17, comment is 2, blank is 2.
+src\validators\InputValidator.js, code is 44, comment is 2, blank is 3.
+src\validators\Validator.js, code is 14, comment is 1, blank is 1.
+yarn-error.log, code is 12884, comment is 41, blank is 3017.
+yarn.lock, code is 12720, comment is 41, blank is 3004.
+===============================================================================

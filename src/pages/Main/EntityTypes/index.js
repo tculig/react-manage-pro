@@ -158,12 +158,9 @@ export default function EntityTypes() {
   }
 
   async function deleteEntityType() {
-    console.log("HE");
-    const response = await removeEntityTypeDB(getSelectedRow().id);
-    console.log(response);
+    await removeEntityTypeDB(getSelectedRow().id);
     loadDataFromDB();
   }
-
   const isShowingEntityTypeModal = modalState.isShowing;
 
   return (

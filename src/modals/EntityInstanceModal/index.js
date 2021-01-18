@@ -25,7 +25,7 @@ export default function EntityInstanceModal(props) {
     return arrayOut;
   }
 
-  const { entityTypeBasicInfo, validators } = props;
+  const { entityTypeBasicInfo, validators, loadID } = props;
 
   const [state, setState] = useReducer(modReducer, {
     entityTypeId: entityTypeBasicInfo.id,
@@ -33,6 +33,15 @@ export default function EntityInstanceModal(props) {
     fields: [],
     validatorMessage: ""
   });
+
+  useEffect(() => {
+    async function loadFromDB() {
+      console.log(loadID);
+    }
+    if (loadID) {
+      loadFromDB();
+    }
+  }, [loadID]);// eslint-disable-line
 
   useEffect(() => {
     async function loadFromDB() {

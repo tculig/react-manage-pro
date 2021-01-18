@@ -7,7 +7,7 @@ import { nullToUndefinedArray } from "../../../utils";
 
 export const MainContext = React.createContext({});
 
-export default function MainLayout() {
+export default function HomeView() {
   const dispatch = useDispatch();
   // STATE DECLARATIONS
   const [availableTemplates, setAvailableTemplates] = useState([]);
@@ -52,21 +52,23 @@ export default function MainLayout() {
   // VARIABLES
   const rootRef = useRef();
   const layout = useSelector(selectLayoutRedux);
-  const [width, height] = [
+  /* const [width, height] = [
     rootRef.current?.offsetWidth,
     rootRef.current?.offsetHeight,
-  ];
-  const cols = width / 10;
-  const rows = height / 10;
+  ]; */
+  const cols = 200;
+  const rows = 100;
+  const width = cols * 10;
+  const height = rows * 10;
 
   return (
     <div
       ref={rootRef}
       style={{
-        height: "calc(100vh - 56px)",
         border: "0px solid red",
         position: "relative",
-        overflow: "hidden",
+        overflow: "auto",
+        height: "100%"
       }}
     >
       <Gridlet
