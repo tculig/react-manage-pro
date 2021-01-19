@@ -16,6 +16,7 @@ import "./style.scss";
 import { CustomSelectStyles } from "../../../ui/ControlWidget/CustomSelectStyles";
 import InputValidator from "../../../validators/InputValidator";
 import EmptyFieldsValidator from "../../../validators/EmptyFieldsValidator";
+import DraggableRowRenderer from "../../../ui/GridUtils/DraggableRowRenderer";
 
 CustomSelectStyles.control = (provided) => ({
   ...provided,
@@ -279,6 +280,7 @@ export default function EntityInstances(props) {
           sortColumn={sortColumn}
           sortDirection={sortDirection}
           onSort={handleSort}
+          rowRenderer={p => <DraggableRowRenderer {...p} showingentity={state.showingEntity} />}
         />
       </div>
       {isShowingEntityModal && (

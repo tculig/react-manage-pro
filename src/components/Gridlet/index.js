@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from "react";
+import React, { useReducer, useContext, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import GridLayout from "react-grid-layout";
 import { Menu, Item, Submenu, useContextMenu } from "react-contexify";
@@ -11,13 +11,14 @@ import ActiveFieldsEditor from "../ActiveFieldsEditor";
 import { changeAttributeRedux, commitLayoutToDBRedux, selectLayoutId } from "../../redux/layoutSlice";
 import { modReducer } from "../../utils";
 import "react-contexify/dist/ReactContexify.css";
-import { createBlockDB } from "./dbcalls";
+import { createBlockDB, connectEntityToBlockDB } from "./dbcalls";
 import { MainContext } from "../../pages/Main/HomeView";
 
 /* eslint-disable */
 export default function Gridlet(props) {
   const dispatch = useDispatch();
   const mainContext = useContext(MainContext);
+  const [dropGlowing, setDropGlowing] = useState(-1);
   const { layout, cols, rows, scale, width, height, name, level, customContextMenu,
     availableTemplates, showColorEditor, showFontEditor, showActiveFieldsEditor } = props;
   const rowHeight = height / rows;
@@ -58,6 +59,7 @@ export default function Gridlet(props) {
           value: { fontConfiguration: newFontConfiguration },
         })
       );
+      commitLayoutToDB();
     }
   }
   function updateReduxElement(updatedAttribute) {
@@ -68,6 +70,7 @@ export default function Gridlet(props) {
           value: updatedAttribute,
         })
       );
+      commitLayoutToDB();
     }
   }
   function updateLayout(newElementData) {
@@ -82,6 +85,7 @@ export default function Gridlet(props) {
          },
       })
     );
+    commitLayoutToDB();
   }
 
   function commitLayoutToDB() {
@@ -92,22 +96,65 @@ export default function Gridlet(props) {
     console.log("cancel");
   }
 
+  async function takeDrop(blockId, e){
+    e.preventDefault();
+    var data = e.dataTransfer.getData("Text");
+    const received = JSON.parse(data);
+    await connectEntityToBlockDB(blockId, received.entityID);
+    mainContext.reloadLayout();
+  }
+
+  function glowDrop(id, isActive) {
+    if(isActive){
+      setDropGlowing(id);
+    }else{
+      setDropGlowing(-1);
+    }
+  }
+
   function makeGrid(el) {
     let middle;
+    let shadow = {};
+    if (el.id === dropGlowing){
+      shadow = {
+        boxShadow: "0px 0px 20px 8px royalblue"
+      }
+    }
     switch(el.type) {
       case "block":
         middle = (
           <div 
+           onDrop={(e) => {
+             takeDrop(el.id, e);
+             glowDrop(el.id, false);
+           }} 
+           onDragOver={
+             (e)=>{
+               e.preventDefault();
+               e.stopPropagation();
+             }
+           }
+           onDragEnter={() => glowDrop(el.id, true)}
+           onDragLeave={() => glowDrop(el.id, false)}
            key={el.id.toString()}
            style={{
-            display: "flex",
-            flexDirection: "column",
+            height: "100%",
             color: layoutElementGridletColor,
-            ...el.fontConfiguration
+            ...el.fontConfiguration,
+            ...shadow
             }}
           >
             {el.entityDataConfiguration.map(el => 
-              el.checked ? (<div key={ el.id }>{el.property_name}</div>): null)}
+              el.checked ? (
+                <div 
+                  key={ el.id }
+                  style= {{
+                    pointerEvents: "none"
+                  }}
+                >
+                  {el.property_name}
+                </div>
+              ): null)}
           </div>
         );
         break;
@@ -190,7 +237,6 @@ export default function Gridlet(props) {
         <ColorEditor
           onChange={(color) => {
             updateElementColor(color);
-            commitLayoutToDB();
           }}
           onCommit={commitLayoutToDB}
           onCommitCancel={cancelLayoutChange}

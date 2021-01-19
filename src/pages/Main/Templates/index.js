@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { first as _first } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
-import { selectLayoutRedux, storeLayoutRedux, resetRedux } from "../../../redux/layoutSlice";
+import FontPicker from "font-picker-react";
+import { selectLayoutRedux, storeLayoutRedux, resetRedux, storeLayoutData } from "../../../redux/layoutSlice";
 import { getLayoutWithPropertiesByID, getAvailableLayouts, removeLayoutDB,
   createLayoutDB, updateLayoutDB, fillEntityDataConfiguration } from "../HomeView/dbcalls";
 import { getAvailableEntityTypes } from "./dbcalls";
@@ -63,6 +64,10 @@ export default function Templates() {
     showingTemplate = nullToUndefinedArray(showingTemplate);
     showingTemplate = await fillEntityDataConfiguration(showingTemplate);
     dispatch(storeLayoutRedux(showingTemplate));
+    dispatch(storeLayoutData({
+      id: showingTemplate[0].id,
+      table: "template_properties"
+    }));
   }
   // UI FUNCTIONS
   function selectTemplateID(id) {
@@ -201,7 +206,7 @@ export default function Templates() {
           availableEntityTypes={availableEntityTypes}
           validators={[
             new EmptyFieldsValidator(),
-            new DuplicateValidator(selectOptionValues)
+            new DuplicateValidator(selectOptionValues),
           ]}
         />
       )}
@@ -213,6 +218,10 @@ export default function Templates() {
           close={() => setIsShowingDeleteConfirmModal(false)}
         />
       )}
+      <div style={{ display: "none" }}>
+        {/* This is needed to load the fonts via the api */}
+        <FontPicker apiKey="AIzaSyCH4ssHDe9Cd6iqYtvlzX9s75Qd6JCijM4" />
+      </div>
     </div>
   );
 }

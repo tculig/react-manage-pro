@@ -12,7 +12,7 @@ function processFromDBLayoutEntry(el) {
   };
 }
 
-function processToDBLayoutEntry(el) {
+export function processToDBLayoutEntry(el) {
   return {
     ...el,
     fontConfiguration: JSON.stringify(el.fontConfiguration),

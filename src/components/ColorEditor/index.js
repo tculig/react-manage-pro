@@ -68,6 +68,7 @@ export default function ColorEditor(props) {
             <SketchPicker
               color={color}
               onChange={handleChange}
+              onChangeComplete={handleChangeComplete}
               onAccept={handleChangeComplete}
               onCancel={handleCancel}
             />

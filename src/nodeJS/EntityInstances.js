@@ -1,6 +1,6 @@
 const utils = require("./utils");
 
-const debug = true;
+const debug = false;
 
 module.exports = function (app, connection) {
   app.get("/getEntityTypeProperties", function (req, res) {

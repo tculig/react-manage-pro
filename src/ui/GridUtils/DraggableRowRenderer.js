@@ -1,35 +1,29 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Row } from "react-data-grid";
-export default function DraggableRowRenderer({
-  rowIdx,
-  isRowSelected,
-  className,
-  ...props
-}) {
-  function startDrag(e, row) {
-    e.dataTransfer.setData(
-      "Text",
-      JSON.stringify({
-        entityTable: props.showingentity.label,
-        entityID: row.id,
-      })
-    );
+
+export default function DraggableRowRenderer(props) {
+  const { row } = props;
+
+  function startDrag(e) {
+    e.dataTransfer.setData("Text", JSON.stringify({ entityID: row.id }));
     e.stopPropagation();
   }
 
   return (
     <div
       draggable
-      onDragStart={(e) => {
-        startDrag(e, props.row);
-      }}
+      onDragStart={(e) => { startDrag(e); }}
     >
       <Row
-        rowIdx={rowIdx}
-        isRowSelected={isRowSelected}
-        className={className}
         {...props}
       />
     </div>
   );
 }
+
+DraggableRowRenderer.propTypes = {
+  row: PropTypes.shape({
+    id: PropTypes.number,
+  }).isRequired,
+};

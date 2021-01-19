@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { commitLayoutToDB } from "./dbcalls";
 
 function modifyLayout(layout, gridletId, value) {
   for (let i = 0; i < layout.length; i++) {
@@ -17,32 +18,35 @@ export const layoutSlice = createSlice({
   name: "layouts",
   initialState: {
     layout: [],
-    layoutId: null
+    layoutId: null,
+    layoutTable: null
   },
   reducers: {
     storeLayoutRedux: (state, action) => {
       state.layout = action.payload;
     },
-    storeLayoutId: (state, action) => {
-      state.layoutId = action.payload;
+    storeLayoutData: (state, action) => {
+      state.layoutId = action.payload.id;
+      state.layoutTable = action.payload.table;
     },
     changeAttributeRedux: (state, action) => {
       let { layout } = state;
       layout = modifyLayout(layout, action.payload.gridletId, action.payload.value);
       state.layout = layout;
     },
-    commitLayoutToDBRedux: () => {
+    commitLayoutToDBRedux: (state) => {
       console.log("save");
-      // const newConfig = entityDataConfiguration.filter(el => el.checked).map(el => el.id);
+      commitLayoutToDB(state.layoutTable, state.layout);
     },
     resetRedux: (state) => {
       state.layout = [];
       state.layoutId = null;
+      state.layoutTable = null;
     }
   },
 });
 
-export const { storeLayoutRedux, changeAttributeRedux, commitLayoutToDBRedux, storeLayoutId, resetRedux } = layoutSlice.actions;
+export const { storeLayoutRedux, changeAttributeRedux, commitLayoutToDBRedux, storeLayoutData, resetRedux } = layoutSlice.actions;
 
 export const selectLayoutRedux = (state) => state.layouts.layout;
 

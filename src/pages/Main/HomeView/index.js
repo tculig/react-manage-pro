@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import FontPicker from "font-picker-react";
 import Gridlet from "../../../components/Gridlet";
-import { selectLayoutRedux, storeLayoutRedux, storeLayoutId, resetRedux } from "../../../redux/layoutSlice";
+import { selectLayoutRedux, storeLayoutRedux, storeLayoutData, resetRedux } from "../../../redux/layoutSlice";
 import { fillTemplateData, getAvailableLayouts, getLayoutPropertiesByID, fillEntityDataConfiguration } from "./dbcalls";
 import { nullToUndefinedArray } from "../../../utils";
 
@@ -23,7 +24,10 @@ export default function HomeView() {
       defaultLayout = await fillEntityDataConfiguration(defaultLayout);
       dispatch(storeLayoutRedux(defaultLayout));
     }
-    dispatch(storeLayoutId(availableLayouts[0].id));
+    dispatch(storeLayoutData({
+      id: availableLayouts[0].id,
+      table: "layout_properties"
+    }));
   }
 
   async function loadAvailableTemplates() {
@@ -71,7 +75,7 @@ export default function HomeView() {
         border: "0px solid red",
         position: "relative",
         overflow: "auto",
-        height: "100%"
+        height: "100%",
       }}
     >
       <Gridlet
@@ -86,6 +90,12 @@ export default function HomeView() {
         availableTemplates={availableTemplates}
         customContextMenu
       />
+      <div style={{ display: "none" }}>
+        { /* This is needed to load the fonts via the api */ }
+        <FontPicker
+          apiKey="AIzaSyCH4ssHDe9Cd6iqYtvlzX9s75Qd6JCijM4"
+        />
+      </div>
     </div>
   );
 }

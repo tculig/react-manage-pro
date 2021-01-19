@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Draggable from "react-draggable";
 
-export default function MyDraggableTable(props) {
+export default function DraggableTable(props) {
   const {
     onChange,
     rowHeight,
@@ -228,7 +228,7 @@ export default function MyDraggableTable(props) {
   return html;
 }
 
-MyDraggableTable.propTypes = {
+DraggableTable.propTypes = {
   transitionSpeed: PropTypes.number,
   rowHeight: PropTypes.number,
   showRowCount: PropTypes.bool,
@@ -236,7 +236,7 @@ MyDraggableTable.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-MyDraggableTable.defaultProps = {
+DraggableTable.defaultProps = {
   transitionSpeed: 600,
   rowHeight: 55,
   showRowCount: true,
