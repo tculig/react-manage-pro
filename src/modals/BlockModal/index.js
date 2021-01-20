@@ -13,19 +13,19 @@ export default function BlockModal(props) {
     fields: []
   });
   const [modalState, setModalState] = useState({
-    visible: false,
-    obj: null
+    visible: false
   });
 
-  useEffect(() => {
-    async function loadFromDB() {
-      const entityReports = await getEntityReports(loadID);
-      if (entityReports !== null) {
-        setState({
-          fields: entityReports
-        });
-      }
+  async function loadFromDB() {
+    const entityReports = await getEntityReports(loadID);
+    if (entityReports !== null) {
+      setState({
+        fields: entityReports
+      });
     }
+  }
+
+  useEffect(() => {
     if (loadID) {
       loadFromDB();
     }
@@ -38,7 +38,10 @@ export default function BlockModal(props) {
   }
 
   function openReport(obj) {
-    console.log(obj);
+    setModalState({
+      visible: true,
+      loadID: obj.id
+    });
   }
 
   function generateField(stateObj, i) {
@@ -50,7 +53,7 @@ export default function BlockModal(props) {
           openReport(stateObj);
         }}
       >
-        <td style={{ textAlign: "center" }}>{i}</td>
+        <td style={{ textAlign: "center" }}>{i + 1}</td>
         <td>{stateObj.reportType}</td>
         <td>{stateObj.reportText}</td>
       </tr>
@@ -110,16 +113,19 @@ export default function BlockModal(props) {
   const { isShowing, close } = props;
   return isShowing
     ? ReactDOM.createPortal(
-      <Modal isOpen style={{ marginTop: "88px" }}>
+      <Modal isOpen style={{ marginTop: "88px" }} className="modal-lg">
         <ModalHeader>{header}</ModalHeader>
         <ModalBody>
           {message}
           {modalState.visible && (
           <ReportModal
+            entityId={loadID}
+            loadID={modalState.loadID}
             close={() => {
               setModalState({
                 visible: false
               });
+              loadFromDB();
             }}
           />
           )}

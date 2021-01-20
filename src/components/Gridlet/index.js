@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useState } from "react";
+import React, { useReducer, useContext, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import GridLayout from "react-grid-layout";
 import { Menu, Item, Submenu, useContextMenu } from "react-contexify";
@@ -43,6 +43,7 @@ export default function Gridlet(props) {
     showing: false,
     loadID: null
   });
+  const blockMoved = useRef(false);
 
   function updateElementColor(color) {
     dispatch(
@@ -84,6 +85,7 @@ export default function Gridlet(props) {
     }
   }
   function updateLayout(newElementData) {
+    blockMoved.current = true;
     dispatch(
       changeAttributeRedux({
         id: parseInt(newElementData.i, 10),
@@ -121,9 +123,8 @@ export default function Gridlet(props) {
   function openReportModal(el) {
     setBlockModalState({
       showing: true,
-      loadID: el.id
+      loadID: el.entity_id
     });
-    console.log(el);
   }
 
   function makeGrid(el) {
@@ -133,6 +134,9 @@ export default function Gridlet(props) {
     if (el.hasEntity) {
       additionalClasses.push("rukica");
       additionalClasses.push("hovershadow");
+    }
+    if (el.hasReports) {
+      additionalClasses.push("reddot");
     }
     if (el.id === dropGlowing) {
       shadow = {
@@ -154,10 +158,11 @@ export default function Gridlet(props) {
               }
             }
             onClick={() => {
-              if (el.hasEntity) {
+              if (el.hasEntity && !blockMoved.current) { // don't open the modal if the block has been dragged inside the grid
                 openReportModal(el);
               }
             }}
+            onMouseDown={() => { blockMoved.current = false; }}
             onDragEnter={() => glowDrop(el.id, true)}
             onDragLeave={() => glowDrop(el.id, false)}
             key={el.id.toString()}

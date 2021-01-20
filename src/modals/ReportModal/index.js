@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import React, { useEffect, useReducer } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, CustomInput, Input, Label, FormGroup } from "reactstrap";
 import ReactDOM from "react-dom";
-import { modReducer } from "../../utils";
-import { getReportById } from "./dbcalls";
+import { modReducer, getToday } from "../../utils";
+import { getReportById, createNewReport, updateReport } from "./dbcalls";
 import { ReportTypes } from "./ReportTypes";
 import "./style.scss";
 
 export default function ReportModal(props) {
-  const { loadID } = props;
+  const { loadID, entityId } = props;
   const [state, setState] = useReducer(modReducer, {
     reportType: "breakdown",
     reportText: ""
@@ -30,7 +30,19 @@ export default function ReportModal(props) {
   }, [loadID]); // eslint-disable-line
 
   function saveReportToDB() {
-    console.log("save");
+    if (loadID) {
+      updateReport({
+        ...state,
+        id: loadID
+      });
+    } else {
+      createNewReport({
+        ...state,
+        active: 1,
+        dateCreated: getToday(),
+        entityId
+      });
+    }
   }
 
   function handleRadioChange(changeEvent) {
@@ -167,9 +179,11 @@ export default function ReportModal(props) {
 ReportModal.propTypes = {
   loadID: PropTypes.number,
   close: PropTypes.func.isRequired,
-  isShowing: PropTypes.bool.isRequired,
+  isShowing: PropTypes.bool,
+  entityId: PropTypes.number.isRequired
 };
 
 ReportModal.defaultProps = {
   loadID: null,
+  isShowing: true
 };

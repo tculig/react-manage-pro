@@ -4,3 +4,16 @@
 .hovershadow:hover {
   box-shadow: 2px 2px 20px 2px grey;
 }
+
+.reddot:after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 20px;
+    top: 0px;
+    right: 0px;
+    background-image: radial-gradient(circle at center, firebrick 5px, transparent 5px);
+    background-size: 20px 20px;
+    background-position: top center;
+    background-repeat: no-repeat;
+}

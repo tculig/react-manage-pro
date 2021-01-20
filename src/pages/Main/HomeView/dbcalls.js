@@ -206,9 +206,38 @@ async function fillEntityDataConfigurationFromEntity(layout) {
   return layout;
 }
 
+async function fillHasReportsFromEntity(layout) {
+  const entityIds = [];
+  for (let i = 0; i < layout.length; i++) {
+    if (layout[i].entity_id) {
+      entityIds.push(layout[i].entity_id);
+    }
+  }
+  if (entityIds.length > 0) {
+    const result = await getBatchProperties(REACT_APP_MAIN_DATABASE, "reports", {
+      key: "entityId",
+      values: entityIds
+    });
+    if (result) {
+      const groupedResult = {};
+      for (let i = 0; i < result.length; i++) {
+        const el = result[i];
+        groupedResult[el.entityId] = true;
+      }
+      const filledLayout = layout.map((layoutEl) => {
+        layoutEl.hasReports = groupedResult[layoutEl.entity_id]; // a helper boolean
+        return layoutEl;
+      });
+      return filledLayout;
+    }
+  }
+  return layout;
+}
+
 export async function fillEntityDataConfiguration(layout) {
   layout = await fillEntityDataConfigurationFromTemplate(layout);
   layout = await fillEntityDataConfigurationFromEntity(layout);
+  layout = await fillHasReportsFromEntity(layout);
   return layout;
 }
 
