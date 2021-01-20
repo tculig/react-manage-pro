@@ -35,7 +35,6 @@ export const layoutSlice = createSlice({
       state.layout = layout;
     },
     commitLayoutToDBRedux: (state) => {
-      console.log("save");
       commitLayoutToDB(state.layoutTable, state.layout);
     },
     resetRedux: (state) => {

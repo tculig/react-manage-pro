@@ -14,13 +14,14 @@ import "react-contexify/dist/ReactContexify.css";
 import { createBlockDB, connectEntityToBlockDB } from "./dbcalls";
 import { MainContext } from "../../pages/Main/HomeView";
 
-/* eslint-disable */
 export default function Gridlet(props) {
   const dispatch = useDispatch();
   const mainContext = useContext(MainContext);
   const [dropGlowing, setDropGlowing] = useState(-1);
-  const { layout, cols, rows, scale, width, height, name, level, customContextMenu,
-    availableTemplates, showColorEditor, showFontEditor, showActiveFieldsEditor } = props;
+  const {
+    layout, cols, rows, scale, width, height, name, level, customContextMenu,
+    availableTemplates, showColorEditor, showFontEditor, showActiveFieldsEditor
+  } = props;
   const rowHeight = height / rows;
   const colHeight = width / cols;
   const scaleFactor = 1;
@@ -31,7 +32,6 @@ export default function Gridlet(props) {
   const layoutElementEntityTypeId = layoutCurrent[0]?.entityTypeId;
   const layoutElementGridletId = layoutCurrent[0]?.id;
   const layoutElementGridletColor = layoutCurrent[0]?.bgcolor;
-  
   const [state] = useReducer(modReducer, {
     showColorEditorState: showColorEditor,
     showFontEditorState: showFontEditor,
@@ -45,6 +45,10 @@ export default function Gridlet(props) {
         value: { bgcolor: color },
       })
     );
+  }
+
+  function commitLayoutToDB() {
+    dispatch(commitLayoutToDBRedux());
   }
 
   function updateReduxFontConfiguration(updatedAttribute) {
@@ -76,85 +80,90 @@ export default function Gridlet(props) {
   function updateLayout(newElementData) {
     dispatch(
       changeAttributeRedux({
-        id: parseInt(newElementData.i),
-        value: { 
+        id: parseInt(newElementData.i, 10),
+        value: {
           x: newElementData.x,
           y: newElementData.y,
           w: newElementData.w,
           h: newElementData.h
-         },
+        },
       })
     );
     commitLayoutToDB();
-  }
-
-  function commitLayoutToDB() {
-    dispatch(commitLayoutToDBRedux());
   }
 
   function cancelLayoutChange() {
     console.log("cancel");
   }
 
-  async function takeDrop(blockId, e){
+  async function takeDrop(blockId, e) {
     e.preventDefault();
-    var data = e.dataTransfer.getData("Text");
+    const data = e.dataTransfer.getData("Text");
     const received = JSON.parse(data);
     await connectEntityToBlockDB(blockId, received.entityID);
     mainContext.reloadLayout();
   }
 
   function glowDrop(id, isActive) {
-    if(isActive){
+    if (isActive) {
       setDropGlowing(id);
-    }else{
+    } else {
       setDropGlowing(-1);
     }
+  }
+
+  function openReportModal(el) {
+    console.log(el);
   }
 
   function makeGrid(el) {
     let middle;
     let shadow = {};
-    if (el.id === dropGlowing){
+    if (el.id === dropGlowing) {
       shadow = {
         boxShadow: "0px 0px 20px 8px royalblue"
-      }
+      };
     }
-    switch(el.type) {
+    switch (el.type) {
       case "block":
         middle = (
-          <div 
-           onDrop={(e) => {
-             takeDrop(el.id, e);
-             glowDrop(el.id, false);
-           }} 
-           onDragOver={
-             (e)=>{
-               e.preventDefault();
-               e.stopPropagation();
-             }
-           }
-           onDragEnter={() => glowDrop(el.id, true)}
-           onDragLeave={() => glowDrop(el.id, false)}
-           key={el.id.toString()}
-           style={{
-            height: "100%",
-            color: layoutElementGridletColor,
-            ...el.fontConfiguration,
-            ...shadow
+          <div
+            onDrop={(e) => {
+              takeDrop(el.id, e);
+              glowDrop(el.id, false);
+            }}
+            onDragOver={
+              (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }
+            }
+            onClick={() => {
+              if (el.hasEntity) {
+                openReportModal(el);
+              }
+            }}
+            onDragEnter={() => glowDrop(el.id, true)}
+            onDragLeave={() => glowDrop(el.id, false)}
+            key={el.id.toString()}
+            style={{
+              height: "100%",
+              color: layoutElementGridletColor,
+              ...el.fontConfiguration,
+              ...shadow
             }}
           >
-            {el.entityDataConfiguration.map(el => 
-              el.checked ? (
-                <div 
-                  key={ el.id }
-                  style= {{
+            {el.entityDataConfiguration.map(elEDC => (
+              elEDC.checked ? (
+                <div
+                  key={elEDC.id}
+                  style={{
                     pointerEvents: "none"
                   }}
                 >
-                  {el.property_name}
+                  {elEDC.value}
                 </div>
-              ): null)}
+              ) : null))}
           </div>
         );
         break;
@@ -173,7 +182,7 @@ export default function Gridlet(props) {
           />
         );
         break;
-      default: middle = (<div key={el.id.toString()}></div>);
+      default: middle = (<div key={el.id.toString()} />);
     }
     return (
       <div
@@ -194,33 +203,31 @@ export default function Gridlet(props) {
   }
 
   const layoutId = useSelector(selectLayoutId);
-  async function addBlock(templateId, gridletName, e){
+  async function addBlock(templateId, gridletName, e) {
     const event = e.triggerEvent;
-    let xPos = Math.round(event.offsetX/rowHeight); 
-    let yPos = Math.round(event.offsetY/colHeight); 
-    let layoutElement={
-      id:null,
-      parent:gridletName,
-      x:xPos,
-      y:yPos,
-      static:0
+    const xPos = Math.round(event.offsetX / rowHeight);
+    const yPos = Math.round(event.offsetY / colHeight);
+    const newLayoutElement = {
+      id: null,
+      parent: gridletName,
+      x: xPos,
+      y: yPos,
+      static: 0
     };
-    console.log(layoutElement.x+" "+layoutElement.y);
-    await createBlockDB(templateId, layoutId, layoutElement);
+    await createBlockDB(templateId, layoutId, newLayoutElement);
     mainContext.reloadLayout();
-  } 
+  }
 
   const { show } = useContextMenu({
     id: "contextMenu"
   });
-  
+
   const contextMenu = (
     <Menu id="contextMenu">
       <Submenu label="Insert template">
-        {availableTemplates.map(el => 
-          {
-            return <Item key={el.name} onClick={ (e) => addBlock(el.id, name, e) }>{el.name}</Item>
-          })}
+        {availableTemplates.map(el => {
+          return <Item key={el.name} onClick={(e) => addBlock(el.id, name, e)}>{el.name}</Item>;
+        })}
       </Submenu>
     </Menu>
   );
@@ -268,14 +275,15 @@ export default function Gridlet(props) {
           onCommitCancel={cancelLayoutChange}
           entityDataConfiguration={layoutElementEntityDataConfiguration}
           entityTypeId={layoutElementEntityTypeId}
-          entityTypeName={ layoutElementEntityDataConfiguration ? layoutElementEntityDataConfiguration[0]?.name: "" }
-          right={"20px"}
-          top={"100px"}
+          entityTypeName={layoutElementEntityDataConfiguration ? layoutElementEntityDataConfiguration[0]?.name : ""}
+          right="20px"
+          top="100px"
         />
       )}
-      <div 
-      onContextMenu={customContextMenu? show: null}
-      style={{border:"0px solid pink"}}>
+      <div
+        onContextMenu={customContextMenu ? show : null}
+        style={{ border: "0px solid pink" }}
+      >
         <GridLayout
           cols={cols}
           compactType={null}
@@ -286,8 +294,8 @@ export default function Gridlet(props) {
             e.stopPropagation();
           }}
           rowHeight={rowHeight}
-          onDragStop={(layout, oldDragItem, l, bnull, e, node) => { updateLayout(l); }}
-          onResizeStop={(layout, oldResizeItem, l, placeholder, e, node) => { updateLayout(l); }}
+          onDragStop={(nlayout, oldDragItem, l) => { updateLayout(l); }}
+          onResizeStop={(nlayout, oldResizeItem, l) => { updateLayout(l); }}
           containerPadding={[0, 0, 0, 0]}
           margin={[0, 0]}
           maxRows={rows}

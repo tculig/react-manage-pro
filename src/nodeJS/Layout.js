@@ -25,9 +25,9 @@ module.exports = function (app, connection) {
     });
   });
 
-  app.post("/getBatchTemplateProperties", function (req, res) {
+  app.post("/getBatchProperties", function (req, res) {
     utils.getPostData(req, (element) => {
-      const query = `SELECT * FROM ${element.database}.template_properties WHERE layout_id IN (${element.data.join(",")})`;
+      const query = `SELECT * FROM ${element.database}.${element.table} WHERE ${element.data.key} IN (${element.data.values.join(",")})`;
       if (debug) console.log(query);
       connection.query(query, function (error, results, fields) {
         if (error) console.log(error);

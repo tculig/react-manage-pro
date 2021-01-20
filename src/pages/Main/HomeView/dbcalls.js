@@ -1,7 +1,6 @@
-import { createElementDB, fetchURL, REACT_APP_MAIN_DATABASE, removeElementDB, getBatchJoinedEntityTypes,
-  getBatchTemplateProperties, selectAllDB, selectElementsDB, updateElementDB } from "../../../nodeJS/Interface";
+import { createElementDB, fetchURL, REACT_APP_MAIN_DATABASE, removeElementDB,
+  getBatchProperties, selectAllDB, selectElementsDB, updateElementDB } from "../../../nodeJS/Interface";
 import { getToday } from "../../../utils";
-import { propertyTypes } from "../../../utils/Constants";
 
 function processFromDBLayoutEntry(el) {
   return {
@@ -97,10 +96,10 @@ export async function fillTemplateData(layout) {
       templateIds.push(layout[i].template_id);
     }
   }
-  const result = await getBatchTemplateProperties(
-    REACT_APP_MAIN_DATABASE,
-    templateIds
-  );
+  const result = await getBatchProperties(REACT_APP_MAIN_DATABASE, "template_properties", {
+    key: "layout_id",
+    values: templateIds
+  });
   const objOfTemplates = {};
   for (let i = 0; i < result.length; i++) {
     const el = result[i];
@@ -109,7 +108,9 @@ export async function fillTemplateData(layout) {
   const filledLayout = layout.map((layoutEl) => {
     if (layoutEl.template_id === null) return layoutEl;
     const edc = objOfTemplates[layoutEl.template_id];
+    // take all the properties from layout element, overwrite overlaping ones with template, then revert to the specific ones from the layout element
     let mod = {
+      ...layoutEl,
       ...edc,
       x: layoutEl.x,
       y: layoutEl.y,
@@ -128,39 +129,87 @@ export async function fillTemplateData(layout) {
 }
 
 // Normally this would be handled by an ORM, but this project is too small for that
-export async function fillEntityDataConfiguration(layout) {
-  const entityIds = [];
+// runs through the entire layout and only fills in the ones that don't entity_id filled in
+// One very important concequence of the way this is setup is that, in order for the value to be displayed, the 'checked' property has to be set to true!
+async function fillEntityDataConfigurationFromTemplate(layout) {
+  const entityPropertyIds = [];
   for (let i = 0; i < layout.length; i++) {
-    if (!entityIds.includes(layout[i].entityTypeId)) {
-      entityIds.push(layout[i].entityTypeId);
+    const { entityDataConfiguration } = layout[i];
+    if (!layout[i].entity_id) {
+      for (let j = 0; j < entityDataConfiguration.length; j++) {
+        if (!entityPropertyIds.includes(entityDataConfiguration[j])) {
+          entityPropertyIds.push(entityDataConfiguration[j]);
+        }
+      }
     }
   }
-  const result = await getBatchJoinedEntityTypes(REACT_APP_MAIN_DATABASE, entityIds);
-  const groupedResult = {};
-  for (let i = 0; i < entityIds.length; i++) {
-    groupedResult[entityIds[i]] = [];
-  }
-  for (let i = 0; i < result.length; i++) {
-    const el = result[i];
-    // map property types
-    el.property_type = propertyTypes[el.property_type];
-    // group properties
-    groupedResult[el.entity_type_id].push(el);
-  }
-  const filledLayout = layout.map((layoutEl) => {
-    let edc = groupedResult[layoutEl.entityTypeId];
-    edc = edc.map((el) => {
-      if (layoutEl.entityDataConfiguration.includes(el.id)) {
-        el.checked = true;
-      } else {
-        el.checked = false;
-      }
-      return el;
+  if (entityPropertyIds.length > 0) {
+    const result = await getBatchProperties(REACT_APP_MAIN_DATABASE, "entity_type_properties", {
+      key: "id",
+      values: entityPropertyIds
     });
-    layoutEl.entityDataConfiguration = edc;
-    return layoutEl;
-  });
-  return filledLayout;
+    if (result) {
+      const groupedResult = {};
+      for (let i = 0; i < result.length; i++) {
+        const el = result[i];
+        el.value = el.property_name;
+        el.checked = true;
+        groupedResult[el.id] = el;
+      }
+      const filledLayout = layout.map((layoutEl) => {
+        layoutEl.entityDataConfiguration = layoutEl.entityDataConfiguration.map((el) => {
+          return groupedResult[el];
+        });
+        return layoutEl;
+      });
+      return filledLayout;
+    }
+  }
+  return layout;
+}
+// runs through the entire layout and only fills in the ones that have entity_id filled in
+async function fillEntityDataConfigurationFromEntity(layout) {
+  const entityPropertyIds = [];
+  for (let i = 0; i < layout.length; i++) {
+    const { entityDataConfiguration } = layout[i];
+    if (layout[i].entity_id) {
+      for (let j = 0; j < entityDataConfiguration.length; j++) {
+        if (!entityPropertyIds.includes(entityDataConfiguration[j])) {
+          entityPropertyIds.push(entityDataConfiguration[j]);
+        }
+      }
+    }
+  }
+  if (entityPropertyIds.length > 0) {
+    const result = await getBatchProperties(REACT_APP_MAIN_DATABASE, "entity_properties", {
+      key: "entity_type_property_id",
+      values: entityPropertyIds
+    });
+    if (result) {
+      const groupedResult = {};
+      for (let i = 0; i < result.length; i++) {
+        const el = result[i];
+        el.value = el.property_value;
+        el.checked = true;
+        groupedResult[el.entity_type_property_id] = el;
+      }
+      const filledLayout = layout.map((layoutEl) => {
+        layoutEl.entityDataConfiguration = layoutEl.entityDataConfiguration.map((el) => {
+          return groupedResult[el];
+        });
+        layoutEl.hasEntity = true; // a helper boolean
+        return layoutEl;
+      });
+      return filledLayout;
+    }
+  }
+  return layout;
+}
+
+export async function fillEntityDataConfiguration(layout) {
+  layout = await fillEntityDataConfigurationFromTemplate(layout);
+  layout = await fillEntityDataConfigurationFromEntity(layout);
+  return layout;
 }
 
 export async function removeLayoutDB(table, layoutID) {

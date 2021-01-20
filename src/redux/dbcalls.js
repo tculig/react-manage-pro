@@ -7,7 +7,6 @@ export async function commitLayoutToDB(table, layout) {
     if (element.modified) {
       element.entityDataConfiguration = element.entityDataConfiguration.filter(el => el.checked).map(el => el.id);
       element = processToDBLayoutEntry(element);
-      console.log(element);
       updateElementDB(REACT_APP_MAIN_DATABASE, table, element);
     }
   }

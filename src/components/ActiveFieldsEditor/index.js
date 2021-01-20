@@ -47,7 +47,7 @@ export default function ActiveFieldsEditor(props) {
           <Input value={stateObj.property_name} disabled />
         </div>
         <div className="myTd" style={{ width: "30%" }}>
-          <Input disabled value={stateObj.property_type.label} />
+          <Input disabled value={stateObj.property_type?.label} />
         </div>
         <div
           className="myTd"

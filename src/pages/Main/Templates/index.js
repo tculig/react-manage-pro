@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import FontPicker from "font-picker-react";
 import { selectLayoutRedux, storeLayoutRedux, resetRedux, storeLayoutData } from "../../../redux/layoutSlice";
 import { getLayoutWithPropertiesByID, getAvailableLayouts, removeLayoutDB,
-  createLayoutDB, updateLayoutDB, fillEntityDataConfiguration } from "../HomeView/dbcalls";
-import { getAvailableEntityTypes } from "./dbcalls";
+  createLayoutDB, updateLayoutDB } from "../HomeView/dbcalls";
+import { getAvailableEntityTypes, fillEntityDataConfigurationForTemplates } from "./dbcalls";
 import Gridlet from "../../../components/Gridlet";
 import ControlWidget from "../../../ui/ControlWidget";
 import DuplicateValidator from "../../../validators/DuplicateValidator";
@@ -62,7 +62,7 @@ export default function Templates() {
   async function loadTemplateDB(id) {
     let showingTemplate = await getLayoutWithPropertiesByID("template", id);
     showingTemplate = nullToUndefinedArray(showingTemplate);
-    showingTemplate = await fillEntityDataConfiguration(showingTemplate);
+    showingTemplate = await fillEntityDataConfigurationForTemplates(showingTemplate);
     dispatch(storeLayoutRedux(showingTemplate));
     dispatch(storeLayoutData({
       id: showingTemplate[0].id,

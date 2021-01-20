@@ -1,7 +1,6 @@
 const utils = require("./utils");
 
 const debug = false;
-//SELECT * FROM entity_type et LEFT JOIN (SELECT entity_type_id, count(*) as number_of_fields FROM entity_type_properties GROUP BY entity_type_id) etp ON etp.entity_type_id = et.id LEFT JOIN (SELECT entity_type_id, count(*) as active_entries FROM entity GROUP BY entity_type_id) etf ON etf.entity_type_id = et.id
 
 module.exports = function (app, connection) {
   app.get("/getAvailableEntityTypesWithFieldCount", function (req, res) {
