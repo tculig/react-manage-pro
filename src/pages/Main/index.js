@@ -20,7 +20,7 @@ const MainContainer = styled.main`
 export default function Main() {
   const [state, setState] = useState({
     sidebarExpanded: false,
-    sidebarSelected: "entityinstances",
+    sidebarSelected: "homeview",
     sidebarItems: [
       SidebarItem({
         eventKey: "homeview",

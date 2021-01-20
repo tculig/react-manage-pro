@@ -211,7 +211,6 @@ export default function EntityTypeModal(props) {
         close();
       }}
       className="modal-120w"
-      close={null}
     />
   );
 }

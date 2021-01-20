@@ -13,6 +13,8 @@ import { modReducer } from "../../utils";
 import "react-contexify/dist/ReactContexify.css";
 import { createBlockDB, connectEntityToBlockDB } from "./dbcalls";
 import { MainContext } from "../../pages/Main/HomeView";
+import BlockModal from "../../modals/BlockModal";
+import "./style.scss";
 
 export default function Gridlet(props) {
   const dispatch = useDispatch();
@@ -36,6 +38,10 @@ export default function Gridlet(props) {
     showColorEditorState: showColorEditor,
     showFontEditorState: showFontEditor,
     showActiveFieldsEditorState: showActiveFieldsEditor,
+  });
+  const [blockModalState, setBlockModalState] = useState({
+    showing: false,
+    loadID: null
   });
 
   function updateElementColor(color) {
@@ -113,12 +119,21 @@ export default function Gridlet(props) {
   }
 
   function openReportModal(el) {
+    setBlockModalState({
+      showing: true,
+      loadID: el.id
+    });
     console.log(el);
   }
 
   function makeGrid(el) {
     let middle;
     let shadow = {};
+    const additionalClasses = [];
+    if (el.hasEntity) {
+      additionalClasses.push("rukica");
+      additionalClasses.push("hovershadow");
+    }
     if (el.id === dropGlowing) {
       shadow = {
         boxShadow: "0px 0px 20px 8px royalblue"
@@ -152,6 +167,7 @@ export default function Gridlet(props) {
               ...el.fontConfiguration,
               ...shadow
             }}
+            className={additionalClasses.join(" ")}
           >
             {el.entityDataConfiguration.map(elEDC => (
               elEDC.checked ? (
@@ -307,6 +323,19 @@ export default function Gridlet(props) {
         </GridLayout>
       </div>
       {contextMenu}
+      {blockModalState.showing && (
+        <BlockModal
+          loadID={blockModalState.loadID}
+          isShowing
+          close={() => {
+            setBlockModalState({
+              showing: false,
+              loadID: null
+            });
+          }}
+          openReport={(e) => { console.log(e); }}
+        />
+      )}
     </div>
   );
 }
