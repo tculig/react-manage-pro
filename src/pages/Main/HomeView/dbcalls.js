@@ -222,7 +222,9 @@ async function fillHasReportsFromEntity(layout) {
       const groupedResult = {};
       for (let i = 0; i < result.length; i++) {
         const el = result[i];
-        groupedResult[el.entityId] = true;
+        if (el.active) {
+          groupedResult[el.entityId] = true;
+        }
       }
       const filledLayout = layout.map((layoutEl) => {
         layoutEl.hasReports = groupedResult[layoutEl.entity_id]; // a helper boolean

@@ -3,15 +3,16 @@ import React, { useEffect, useReducer } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, CustomInput, Input, Label, FormGroup } from "reactstrap";
 import ReactDOM from "react-dom";
 import { modReducer, getToday } from "../../utils";
-import { getReportById, createNewReport, updateReport } from "./dbcalls";
-import { ReportTypes } from "./ReportTypes";
+import { getReportById, createNewReport, updateReport, getReportTypes } from "./dbcalls";
 import "./style.scss";
 
 export default function ReportModal(props) {
   const { loadID, entityId } = props;
+  const existingReport = !!loadID;
   const [state, setState] = useReducer(modReducer, {
-    reportType: "breakdown",
-    reportText: ""
+    reportType: null,
+    reportTypesAvailable: [],
+    reportText: "",
   });
 
   useEffect(() => {
@@ -24,37 +25,53 @@ export default function ReportModal(props) {
         });
       }
     }
-    if (loadID) {
-      loadFromDB();
+
+    async function getReportTypesDB() {
+      const reportTypes = await getReportTypes(loadID);
+      if (reportTypes !== null) {
+        setState({
+          reportTypesAvailable: reportTypes,
+        });
+      }
+      if (loadID) {
+        loadFromDB();
+      }
     }
+    getReportTypesDB();
   }, [loadID]); // eslint-disable-line
 
   function saveReportToDB() {
-    if (loadID) {
-      updateReport({
-        ...state,
-        id: loadID
-      });
-    } else {
-      createNewReport({
-        ...state,
-        active: 1,
-        dateCreated: getToday(),
-        entityId
-      });
-    }
+    createNewReport({
+      reportType: state.reportType,
+      reportText: state.reportText,
+      active: 1,
+      dateCreated: getToday(),
+      entityId,
+    });
+  }
+  function updateReportDB() {
+    updateReport({
+      ...state,
+      id: loadID,
+    });
+  }
+  function dismissReportDB() {
+    updateReport({
+      active: 0,
+      id: loadID,
+    });
   }
 
   function handleRadioChange(changeEvent) {
     setState({
-      reportType: changeEvent.target.id
+      reportType: changeEvent.target.id,
     });
   }
 
   function inputHandler(e) {
     e.stopPropagation();
     setState({
-      reportText: e.target.value
+      reportText: e.target.value,
     });
   }
 
@@ -70,6 +87,20 @@ export default function ReportModal(props) {
       New report
     </div>
   );
+
+  function generateReportTypeInput(el) {
+    return (
+      <CustomInput
+        key={el.id}
+        type="radio"
+        id={el.id}
+        name="customRadio"
+        label={el.name}
+        checked={state.reportType === el.id}
+        onChange={handleRadioChange}
+      />
+    );
+  }
 
   const message = (
     <>
@@ -88,38 +119,7 @@ export default function ReportModal(props) {
             //  borderRadius:"4px"
           }}
         >
-          <CustomInput
-            type="radio"
-            id="breakdown"
-            name="customRadio"
-            label={ReportTypes.breakdown}
-            checked={state.reportType === "breakdown"}
-            onChange={handleRadioChange}
-          />
-          <CustomInput
-            type="radio"
-            id="service"
-            name="customRadio"
-            label="Service"
-            checked={state.reportType === "service"}
-            onChange={handleRadioChange}
-          />
-          <CustomInput
-            type="radio"
-            id="toolchange"
-            name="customRadio"
-            label="Tool change"
-            checked={state.reportType === "toolchange"}
-            onChange={handleRadioChange}
-          />
-          <CustomInput
-            type="radio"
-            id="calibration"
-            name="customRadio"
-            label="Calibration"
-            checked={state.reportType === "calibration"}
-            onChange={handleRadioChange}
-          />
+          {state.reportTypesAvailable.map((el) => generateReportTypeInput(el))}
         </div>
       </FormGroup>
       <FormGroup>
@@ -147,27 +147,58 @@ export default function ReportModal(props) {
               display: "flex",
               flexDirection: "row",
               width: "100%",
-              justifyContent: "flex-end"
+              justifyContent: "flex-end",
             }}
           >
-            <Button
-              color="success"
-              onClick={() => {
-                saveReportToDB();
-                close();
-              }}
-              style={{
-                marginRight: "10px"
-              }}
-            >
-              Submit
-            </Button>
-            <Button
-              color="danger"
-              onClick={close}
-            >
-              Close
-            </Button>
+            {existingReport ? (
+              <>
+                <Button
+                  color="primary"
+                  onClick={() => {
+                    dismissReportDB();
+                    close();
+                  }}
+                  style={{
+                    marginRight: "10px",
+                  }}
+                >
+                  Dismiss report
+                </Button>
+                <Button
+                  color="success"
+                  onClick={() => {
+                    updateReportDB();
+                    close();
+                  }}
+                  style={{
+                    marginRight: "10px",
+                  }}
+                >
+                  Update
+                </Button>
+                <Button color="danger" onClick={close}>
+                  Close
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  color="success"
+                  onClick={() => {
+                    saveReportToDB();
+                    close();
+                  }}
+                  style={{
+                    marginRight: "10px",
+                  }}
+                >
+                  Submit
+                </Button>
+                <Button color="danger" onClick={close}>
+                  Close
+                </Button>
+              </>
+            )}
           </div>
         </ModalFooter>
       </Modal>,

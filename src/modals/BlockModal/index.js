@@ -18,6 +18,7 @@ export default function BlockModal(props) {
 
   async function loadFromDB() {
     const entityReports = await getEntityReports(loadID);
+    console.log(entityReports);
     if (entityReports !== null) {
       setState({
         fields: entityReports
@@ -54,7 +55,7 @@ export default function BlockModal(props) {
         }}
       >
         <td style={{ textAlign: "center" }}>{i + 1}</td>
-        <td>{stateObj.reportType}</td>
+        <td>{stateObj.reportTypeName}</td>
         <td>{stateObj.reportText}</td>
       </tr>
     );

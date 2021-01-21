@@ -1,5 +1,5 @@
 const utils = require("./utils");
-const debug = true;
+const debug = false;
 
 module.exports = function (app, connection) {
   app.post("/createElement", function (req, res) {
