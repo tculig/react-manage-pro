@@ -1,59 +1,64 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import { Container, FormGroup, Input, Label, Table } from "reactstrap";
-import * as dbCalls from "../../databaseCalls/dbCalls";
-import { ReportTypes } from "../../Dialogs/ReportTypes";
+import { getReportsByType, getReportTypes } from "./dbcalls";
+import { modReducer } from "../../utils";
+import "./style.scss";
 
-export default function TablicaRoot(props) {
-  const [state, setState] = useState({
-    checkboxes: (() => {
-      let array = [];
-      Object.keys(ReportTypes).map(function (key, index) {
-        array.push({
-          id: key,
-          checked: false,
-          kategorija: ReportTypes[key],
-        });
-      });
-      return array;
-    })(),
-    // {id:"id1",checked:false,kategorija:"Breakdown"}
-    tablicaContent: [],
-    modalChildren: [],
+export default function TablicaRoot() {
+  const [state, setState] = useReducer(modReducer, {
+    reportTypeCheckboxes: [],
+    showingReports: [],
   });
 
-  function showData(data) {
-    setState({
-      ...state,
-      tablicaContent: data,
-    });
-  }
+  useEffect(() => {
+    async function fillReportTypes() {
+      let reportTypes = await getReportTypes();
+      reportTypes = reportTypes.map((el) => {
+        el.checked = false;
+        return el;
+      });
+      setState({
+        reportTypeCheckboxes: reportTypes,
+      });
+    }
+    fillReportTypes();
+  }, []);
 
   useEffect(() => {
-    dbCalls.getReports(state.checkboxes, "hsvisum", "reports", showData);
-  }, [state.checkboxes]);
+    async function getReportyForType() {
+      const reports = await getReportsByType(state.reportTypeCheckboxes);
+      console.log(reports);
+      setState({
+        tablicaContent: reports,
+      });
+    }
+    if (state.reportTypeCheckboxes.length > 0) {
+      getReportyForType();
+    }
+  }, [state.reportTypeCheckboxes]);
 
   function toggleCheckbox(e) {
-    const id = e.target.id;
+    const id = parseInt(e.target.id, 10);
     setState({
-      ...state,
-      checkboxes: state.checkboxes.map((obj) => {
-        if (obj.id == id) {
+      reportTypeCheckboxes: state.reportTypeCheckboxes.map((obj) => {
+        if (obj.id === id) {
           return {
             ...obj,
             checked: !obj.checked,
           };
-        } else {
-          return obj;
         }
+        return obj;
       }),
     });
   }
+
   function showPrijava(f) {
     console.log(f);
   }
+
   function generateTablica() {
     let counter = 0;
-    let tablicaHTML = state.tablicaContent.map((f) => {
+    const tablicaHTML = state.showingReports.map((f) => {
       counter++;
       return (
         <tr
@@ -65,8 +70,8 @@ export default function TablicaRoot(props) {
         >
           <td>{counter}</td>
           <td>{f.entityName}</td>
-          <td>{f.entityTable}</td>
-          <td>{f.reportType}</td>
+          <td>{f.entityType}</td>
+          <td>{f.reportTypeName}</td>
           <td style={{ textAlign: "left" }}>{f.reportText}</td>
         </tr>
       );
@@ -74,23 +79,23 @@ export default function TablicaRoot(props) {
     return tablicaHTML;
   }
 
-  let generatedCheckboxes = [];
-  for (let i = 0; i < state.checkboxes.length; i++) {
-    generatedCheckboxes.push(
+  function generateCheckbox(el) {
+    return (
       <FormGroup
         check
         inline
         style={{ paddingLeft: "6px", paddingRight: "6px", margin: "10px" }}
-        key={state.checkboxes[i].id}
+        key={el.id}
       >
         <Label check>
           <Input
             type="checkbox"
-            id={state.checkboxes[i].id}
-            checked={state.checkboxes[i].checked}
+            id={el.id}
+            checked={el.checked}
             onChange={toggleCheckbox}
-          />{" "}
-          {state.checkboxes[i].kategorija}
+          />
+          {" "}
+          {el.name}
         </Label>
       </FormGroup>
     );
@@ -133,7 +138,7 @@ export default function TablicaRoot(props) {
                     <Label>Show:</Label>
                   </FormGroup>
                   <div style={{ display: "inline-block" }}>
-                    {generatedCheckboxes}
+                    {state.reportTypeCheckboxes.map((el) => generateCheckbox(el))}
                   </div>
                   <div
                     style={{
@@ -141,7 +146,7 @@ export default function TablicaRoot(props) {
                       textAlign: "right",
                       border: "0px solid red",
                     }}
-                  ></div>
+                  />
                 </Container>
                 <Container
                   className="TitiContainer maloGoreDole"
@@ -177,9 +182,7 @@ export default function TablicaRoot(props) {
       <div
         className="modal-footer"
         style={{ display: "flex", justifyContent: "center" }}
-      >
-        {state.modalChildren}
-      </div>
+      />
     </div>
   );
 }
