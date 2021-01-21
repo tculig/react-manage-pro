@@ -38,7 +38,6 @@ export default function EntityInstanceModal(props) {
     async function loadFromDB() {
       const entityTypeProperties = await getEntityTypeProperties(entityTypeBasicInfo.id);
       if (entityTypeProperties) {
-        console.log(entityTypeProperties);
         setState({
           fields: mapPropertyTypes(entityTypeProperties)
         });

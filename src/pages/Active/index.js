@@ -1,13 +1,17 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { Container, FormGroup, Input, Label, Table } from "reactstrap";
 import { getReportsByType, getReportTypes } from "./dbcalls";
 import { modReducer } from "../../utils";
+import ReportModal from "../../modals/ReportModal";
 import "./style.scss";
 
 export default function TablicaRoot() {
   const [state, setState] = useReducer(modReducer, {
     reportTypeCheckboxes: [],
     showingReports: [],
+  });
+  const [modalState, setModalState] = useState({
+    visible: false
   });
 
   useEffect(() => {
@@ -24,16 +28,16 @@ export default function TablicaRoot() {
     fillReportTypes();
   }, []);
 
+  async function getReportsForTypes(reportTypeCheckboxes) {
+    const reports = await getReportsByType(reportTypeCheckboxes);
+    setState({
+      showingReports: reports,
+    });
+  }
+
   useEffect(() => {
-    async function getReportyForType() {
-      const reports = await getReportsByType(state.reportTypeCheckboxes);
-      console.log(reports);
-      setState({
-        tablicaContent: reports,
-      });
-    }
     if (state.reportTypeCheckboxes.length > 0) {
-      getReportyForType();
+      getReportsForTypes(state.reportTypeCheckboxes);
     }
   }, [state.reportTypeCheckboxes]);
 
@@ -52,8 +56,11 @@ export default function TablicaRoot() {
     });
   }
 
-  function showPrijava(f) {
-    console.log(f);
+  function openReport(id) {
+    setModalState({
+      visible: true,
+      loadID: id
+    });
   }
 
   function generateTablica() {
@@ -65,14 +72,14 @@ export default function TablicaRoot() {
           key={f.id}
           className="rukica hovergrey"
           onClick={() => {
-            showPrijava(f);
+            openReport(f.id);
           }}
         >
           <td>{counter}</td>
           <td>{f.entityName}</td>
           <td>{f.entityType}</td>
           <td>{f.reportTypeName}</td>
-          <td style={{ textAlign: "left" }}>{f.reportText}</td>
+          <td style={{ textAlign: "center" }}>{f.reportText}</td>
         </tr>
       );
     });
@@ -183,6 +190,17 @@ export default function TablicaRoot() {
         className="modal-footer"
         style={{ display: "flex", justifyContent: "center" }}
       />
+      {modalState.visible && (
+      <ReportModal
+        loadID={modalState.loadID}
+        close={() => {
+          setModalState({
+            visible: false
+          });
+          getReportsForTypes();
+        }}
+      />
+      )}
     </div>
   );
 }

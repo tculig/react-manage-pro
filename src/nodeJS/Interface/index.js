@@ -61,6 +61,6 @@ export async function getBatchJoinedEntityTypes(database, data) {
 export async function getBatchProperties(database, table, data) {
   return forwardPost(database, table, "/getBatchProperties", data);
 }
-export async function getReportsByTypes(database, data) {
-  return forwardPost(database, null, "/getReportsByTypes", data);
+export async function getJoinedReportsByTypes(database, data) {
+  return forwardPost(database, null, "/getJoinedReportsByTypes", data);
 }

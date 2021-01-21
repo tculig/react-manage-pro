@@ -211,10 +211,11 @@ ReportModal.propTypes = {
   loadID: PropTypes.number,
   close: PropTypes.func.isRequired,
   isShowing: PropTypes.bool,
-  entityId: PropTypes.number.isRequired
+  entityId: PropTypes.number
 };
 
 ReportModal.defaultProps = {
   loadID: null,
-  isShowing: true
+  isShowing: true,
+  entityId: null
 };

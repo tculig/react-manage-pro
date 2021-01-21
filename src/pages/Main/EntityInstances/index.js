@@ -93,7 +93,8 @@ export default function EntityInstances(props) {
   }
 
   async function createEntityInstance(modalInternalState) {
-    await createEntityInstanceDB(modalInternalState);
+    const entityName = modalInternalState.fields.filter(el => el.property_name === "Name")[0]?.property_value;
+    await createEntityInstanceDB(entityName, modalInternalState);
     loadEntityTypeEntriesDB(selectState.value.value);
   }
 
@@ -280,7 +281,7 @@ export default function EntityInstances(props) {
           sortColumn={sortColumn}
           sortDirection={sortDirection}
           onSort={handleSort}
-          rowRenderer={p => <DraggableRowRenderer {...p} showingentity={state.showingEntity} />}
+          rowRenderer={p => <DraggableRowRenderer {...p} />}
         />
       </div>
       {isShowingEntityModal && (

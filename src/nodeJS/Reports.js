@@ -13,9 +13,13 @@ module.exports = function (app, connection) {
     });
   });
 
-  app.post("/getReportsByTypes", function (req, res) {
+  app.post("/getJoinedReportsByTypes", function (req, res) {
     utils.getPostData(req, (element) => {
-      const query = `SELECT * FROM ${element.database}.reports WHERE reportType IN (${element.data.values.join(",")}) AND active = 1`;
+      const query = `SELECT etp.id, ete.name as entityName, etet.name as entityType, et.name as reportTypeName, etp.reportText FROM
+      (SELECT * FROM ${element.database}.reports WHERE reportType IN (${element.data.values.join(",")}) AND active = 1) etp 
+      LEFT JOIN ${element.database}.report_types et on et.id=etp.reportType 
+      LEFT JOIN ${element.database}.entity ete on etp.entityId=ete.id 
+      LEFT JOIN ${element.database}.entity_type etet on ete.entity_type_id=etet.id`;
       if (debug) console.log(query);
       connection.query(query, function (error, results, fields) {
         if (error) console.log(error);
